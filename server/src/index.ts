@@ -10,7 +10,7 @@ if (config.isProduction && !existsSync(clientIndex)) {
 }
 
 const server = app.listen(config.port, () => {
-  console.log(`Archdle server listening on http://localhost:${config.port}`);
+  console.log(`Arqdle server listening on http://localhost:${config.port}`);
   console.log(
     `${buildings.length} buildings · daily epoch ${config.epoch} · time zone ${config.timezone}`,
   );

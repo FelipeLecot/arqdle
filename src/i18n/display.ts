@@ -170,6 +170,7 @@ export function localizedCellSub(cell: GuessCell, lang: Lang): string | undefine
   if (cell.key === 'type') return localizedFormFamily(cell.sub, lang);
   if (cell.sub === 'same family') return 'misma familia';
   if (cell.sub === 'shares one') return 'comparte uno';
+  if (cell.sub === 'partial match') return 'coincidencia parcial';
   return cell.sub;
 }
 

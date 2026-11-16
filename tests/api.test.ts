@@ -97,4 +97,20 @@ describe('API', () => {
     const body = (await response.json()) as { error: { code: string } };
     expect(body.error.code).toBe('not_found');
   });
+
+  it('serves robots.txt and sitemap.xml', async () => {
+    const robots = await fetch(`${baseUrl}/robots.txt`);
+    expect(robots.status).toBe(200);
+    expect(robots.headers.get('content-type')).toContain('text/plain');
+    const robotsText = await robots.text();
+    expect(robotsText).toContain('Sitemap: http://127.0.0.1');
+    expect(robotsText).toContain('Disallow: /api/');
+
+    const sitemap = await fetch(`${baseUrl}/sitemap.xml`);
+    expect(sitemap.status).toBe(200);
+    expect(sitemap.headers.get('content-type')).toContain('application/xml');
+    const sitemapText = await sitemap.text();
+    expect(sitemapText).toContain('<urlset');
+    expect(sitemapText).toContain('http://127.0.0.1');
+  });
 });

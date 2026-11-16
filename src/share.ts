@@ -20,8 +20,8 @@ export function buildShareText(game: ShareGame, lang: Lang = 'en'): string {
     game.status === 'won' ? `${game.guesses.length}/${game.maxGuesses}` : `X/${game.maxGuesses}`;
   const label =
     game.mode === 'daily' && game.dayNumber
-      ? `ARCHDLE #${String(game.dayNumber).padStart(3, '0')}`
-      : `ARCHDLE ${lang === 'es' ? 'práctica' : 'practice'}`;
+      ? `ARQDLE #${String(game.dayNumber).padStart(3, '0')}`
+      : `ARQDLE ${lang === 'es' ? 'práctica' : 'practice'}`;
   const rows = game.guesses.map((guess) =>
     guess.cells.map((cell) => SQUARES[cell.status]).join(''),
   );

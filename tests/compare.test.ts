@@ -58,6 +58,7 @@ describe('building comparison', () => {
     expect(cells.get('built')?.direction).toBe('older');
     expect(cells.get('style')?.status).toBe('red');
     expect(cells.get('material')?.status).toBe('yellow');
+    expect(cells.get('material')?.sub).toBe('partial match');
   });
 
   it('uses style families for a close match', () => {

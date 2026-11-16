@@ -548,6 +548,13 @@ export function App() {
           </a>
           .
         </p>
+        <p className="footer__credit">
+          {t('footerCreditPrefix')}{' '}
+          <a href="https://www.felipelecot.com" target="_blank" rel="noreferrer">
+            Felipe Lecot
+          </a>
+          .
+        </p>
       </footer>
 
       <HowToPlay open={helpOpen} onClose={() => setHelpOpen(false)} />

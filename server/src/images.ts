@@ -4,7 +4,7 @@ const SUCCESS_TTL_MS = 24 * 60 * 60 * 1000;
 const FAILURE_TTL_MS = 10 * 60 * 1000;
 const USER_AGENT =
   process.env.WIKIMEDIA_USER_AGENT?.trim() ||
-  'Archdle/1.0 (self-hosted architecture guessing game)';
+  'Arqdle/1.0 (self-hosted architecture guessing game)';
 const MIN_REQUEST_INTERVAL_MS = 300;
 const BAD_FILE_PATTERN =
   /logo|wordmark|(?:^|[_\s-])map(?:[_\s-]|$)|diagram|(?:^|[_\s-])plan(?:[_\s-]|$)|seal|coat[_\s-]?of[_\s-]?arms|icon|flag|locator|montage|collage|drawing|sketch|blueprint|poster|stamp|banner|emblem|symbol|chart|graph|signature|construction/i;

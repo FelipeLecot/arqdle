@@ -264,7 +264,7 @@ export function compareBuilding(target: Building, guess: Building): GuessCell[] 
                 : `Shares the ${sharedFamilies.join(' and ')} material family.`
             }`
           : `Material: ${guess.materials.join(', ')}. No match.`,
-      materialStatus === 'yellow' ? { sub: 'same family' } : {},
+      materialStatus === 'yellow' ? { sub: 'partial match' } : {},
     ),
     cell(
       'architect',

@@ -14,7 +14,7 @@ import {
   type TranslationKey,
 } from './translations';
 
-const LANG_KEY = 'archdle:v1:lang';
+const LANG_KEY = 'arqdle:v1:lang';
 
 function initialLang(): Lang {
   if (typeof window === 'undefined') return 'en';

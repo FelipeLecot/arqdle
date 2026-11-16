@@ -1100,6 +1100,16 @@ a:hover {
   margin: 4px 0;
 }
 
+.footer__credit {
+  margin-top: 8px !important;
+  color: var(--muted);
+  font-size: 9.5px;
+}
+
+.footer__credit a {
+  color: var(--ink);
+}
+
 .footer a {
   color: var(--ink);
 }

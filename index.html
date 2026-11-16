@@ -4,22 +4,181 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#ffffff" />
+    <meta name="color-scheme" content="light" />
+    <meta name="application-name" content="Arqdle" />
+    <meta name="apple-mobile-web-app-title" content="Arqdle" />
+    <meta name="author" content="Felipe Lecot" />
     <meta
       name="description"
-      content="Archdle is a daily architecture guessing game. Find the building from clues about its continent, age, style, materials, and more."
+      content="Arqdle is a free daily architecture guessing game. Guess the building in six tries from clues about country, era, style, type, materials, architect and more. Play in English or Spanish."
     />
-    <meta property="og:title" content="Archdle — guess the building" />
+    <meta
+      name="keywords"
+      content="Arqdle, architecture game, daily architecture game, guess the building, architecture quiz, landmark game, Wordle architecture, building guessing game"
+    />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="googlebot" content="index, follow" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <link rel="canonical" href="%SITE_URL%/" />
+    <!-- HREFLANG_LINKS -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png" />
+    <link rel="apple-touch-icon" sizes="512x512" href="/icon-512.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="preconnect" href="https://thumb.wikimedia.org" crossorigin />
+    <link rel="preconnect" href="https://upload.wikimedia.org" crossorigin />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Arqdle" />
+    <meta property="og:title" content="Arqdle — Daily Architecture Guessing Game" />
     <meta
       property="og:description"
-      content="A daily architecture guessing game. Six guesses. One landmark."
+      content="Guess the building in six tries. Compare eight clues about country, era, style, type, materials, architect and more. A new building every day."
     />
-    <meta property="og:type" content="website" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>Archdle — guess the building</title>
+    <meta property="og:url" content="%SITE_URL%/" />
+    <meta property="og:image" content="%SITE_URL%/og-image.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Arqdle — Guess the building. One landmark at a time."
+    />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale:alternate" content="es_ES" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Arqdle — Daily Architecture Guessing Game" />
+    <meta
+      name="twitter:description"
+      content="Guess the building in six tries. Eight clues. A new building every day. English and Spanish."
+    />
+    <meta name="twitter:image" content="%SITE_URL%/og-image.png" />
+
+    <title>Arqdle — Daily Architecture Guessing Game</title>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "%SITE_URL%/#website",
+            "url": "%SITE_URL%/",
+            "name": "Arqdle",
+            "description": "A free daily architecture guessing game. Guess the hidden building in six tries from eight clues. English and Spanish.",
+            "inLanguage": ["en", "es"]
+          },
+          {
+            "@type": "WebApplication",
+            "@id": "%SITE_URL%/#game",
+            "name": "Arqdle",
+            "alternateName": "Arqdle — daily architecture guessing game",
+            "url": "%SITE_URL%/",
+            "description": "Guess the hidden building in six tries. Compare country, era, style, type, use, materials, architect and more. A new building every day.",
+            "applicationCategory": "GameApplication",
+            "applicationSubCategory": "Puzzle game",
+            "operatingSystem": "Any",
+            "browserRequirements": "Requires JavaScript",
+            "inLanguage": ["en", "es"],
+            "isAccessibleForFree": true,
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "USD"
+            },
+            "creator": {
+              "@type": "Person",
+              "name": "Felipe Lecot",
+              "url": "https://www.felipelecot.com"
+            }
+          }
+        ]
+      }
+    </script>
+
+    <style>
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+        background: #ffffff;
+        color: #171717;
+      }
+      body {
+        font-family:
+          Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+          Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      .boot {
+        max-width: 660px;
+        margin: 0 auto;
+        padding: 80px 24px;
+      }
+      .boot__brand {
+        color: #171717;
+        margin-bottom: 38px;
+      }
+      .boot__eyebrow {
+        margin: 0 0 12px;
+        color: #6d685f;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+      .boot h1 {
+        margin: 0;
+        font-size: clamp(42px, 7vw, 78px);
+        font-weight: 800;
+        letter-spacing: -0.05em;
+        line-height: 0.95;
+      }
+      .boot__lead {
+        margin: 24px 0 0;
+        font-size: 20px;
+        line-height: 1.45;
+        letter-spacing: -0.015em;
+      }
+      .boot__body {
+        margin: 14px 0 0;
+        color: #5f5a52;
+        font-size: 14px;
+        line-height: 1.55;
+      }
+      .boot__note {
+        margin: 22px 0 0;
+        color: #6d685f;
+        font-size: 11px;
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
-    <noscript>Archdle needs JavaScript to play.</noscript>
+    <div id="root">
+      <main class="boot">
+        <div class="boot__brand" aria-hidden="true">
+          <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 20V11a8 8 0 0 1 16 0v9" />
+            <path d="M9 20v-7a3 3 0 0 1 6 0v7" />
+            <path d="M2 20h20" />
+          </svg>
+        </div>
+        <p class="boot__eyebrow">Daily architecture guessing game</p>
+        <h1>Arqdle</h1>
+        <p class="boot__lead">
+          Guess the hidden building in six tries. Compare eight clues about country, era,
+          style, type, use, materials, architect and more.
+        </p>
+        <p class="boot__body">
+          A new building every day, with a photo and a short history after you solve it. Play
+          in English or Spanish.
+        </p>
+        <p class="boot__note"><noscript>Enable JavaScript to play.</noscript></p>
+      </main>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

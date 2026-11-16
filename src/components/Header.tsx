@@ -14,7 +14,7 @@ export function Header({ onHelp, onStats }: HeaderProps) {
       <div className="header__inner">
         <div className="brand">
           <ArchMark className="brand__mark" />
-          <h1 className="brand__name">ARCHDLE</h1>
+          <h1 className="brand__name">ARQDLE</h1>
         </div>
         <nav className="header__actions" aria-label={t('gameInformation')}>
           <button

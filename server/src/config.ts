@@ -14,6 +14,10 @@ function readPort(value: string | undefined): number {
 }
 
 const isProduction = process.env.NODE_ENV === 'production';
+const siteUrl = process.env.SITE_URL?.trim().replace(/\/+$/, '') || '';
+if (siteUrl && !/^https?:\/\//.test(siteUrl)) {
+  throw new Error(`Invalid SITE_URL, expected http(s) origin: ${siteUrl}`);
+}
 const suppliedSecret = process.env.PUZZLE_SECRET?.trim();
 const weakSecret =
   suppliedSecret === 'change-me-to-a-long-random-string' ||
@@ -25,7 +29,7 @@ const secret =
   suppliedSecret ||
   (isProduction
     ? crypto.randomBytes(32).toString('hex')
-    : 'archdle-development-secret-do-not-use-in-production');
+    : 'arqdle-development-secret-do-not-use-in-production');
 
 const timezone = process.env.PUZZLE_TIMEZONE?.trim() || 'America/Montevideo';
 try {
@@ -55,8 +59,9 @@ export const config = {
   secretWasGenerated: !suppliedSecret,
   timezone,
   epoch,
-  dailySeed: process.env.DAILY_SEED?.trim() || 'archdle-2026',
+  dailySeed: process.env.DAILY_SEED?.trim() || 'arqdle-2026',
   maxGuesses: 6,
+  siteUrl,
   dailySchedulePath,
   clientDirectory: path.resolve(process.cwd(), 'dist/client'),
 } as const;

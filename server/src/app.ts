@@ -1,4 +1,4 @@
-import express, { type ErrorRequestHandler } from 'express';
+import express, { type ErrorRequestHandler, type Request } from 'express';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
 import type { BuildingOption, Mode } from '../../shared/types';
@@ -11,6 +11,7 @@ import { createPuzzle, resolveGuess } from './puzzle';
 export const app = express();
 
 app.disable('x-powered-by');
+app.set('trust proxy', 1);
 app.use((_req, res, next) => {
   res.setHeader('X-Content-Type-Options', 'nosniff');
   res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
@@ -21,6 +22,35 @@ app.use(express.json({ limit: '16kb' }));
 
 app.get('/api/health', (_req, res) => {
   res.json({ ok: true, buildings: buildings.length });
+});
+
+function requestOrigin(req: Request): string {
+  if (config.siteUrl) return config.siteUrl;
+  const forwarded = req.get('x-forwarded-proto')?.split(',')[0]?.trim();
+  return `${forwarded || req.protocol}://${req.get('host') ?? 'localhost'}`;
+}
+
+app.get('/robots.txt', (req, res) => {
+  const origin = requestOrigin(req);
+  res.type('text/plain').send(
+    `User-agent: *\nAllow: /\nDisallow: /api/\n\nSitemap: ${origin}/sitemap.xml\n`,
+  );
+});
+
+app.get('/sitemap.xml', (req, res) => {
+  const origin = requestOrigin(req);
+  const lastmod = new Date().toISOString().slice(0, 10);
+  res.type('application/xml').send(
+    `<?xml version="1.0" encoding="UTF-8"?>\n` +
+      `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
+      `  <url>\n` +
+      `    <loc>${origin}/</loc>\n` +
+      `    <lastmod>${lastmod}</lastmod>\n` +
+      `    <changefreq>daily</changefreq>\n` +
+      `    <priority>1.0</priority>\n` +
+      `  </url>\n` +
+      `</urlset>\n`,
+  );
 });
 
 app.get('/api/buildings', (_req, res) => {

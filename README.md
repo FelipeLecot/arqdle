@@ -1,4 +1,4 @@
-# Archdle
+# Arqdle
 
 A Wordle-style daily architecture guessing game. Type a building name, pick it from
 the autocomplete list, and compare eight clues against the hidden building. Green is
@@ -56,9 +56,10 @@ invalid.
 | `PUZZLE_SECRET` | Random in production | Encrypts puzzle tokens. Use a long random value and keep it stable. Changing it invalidates saved games. |
 | `PUZZLE_TIMEZONE` | `America/Montevideo` | Time zone used to decide when the daily puzzle changes. |
 | `DAILY_EPOCH` | `2026-11-16` | Day 1 of the daily sequence. |
-| `DAILY_SEED` | `archdle-2026` | Seed for the deterministic daily order. |
+| `DAILY_SEED` | `arqdle-2026` | Seed for the deterministic daily order. |
 | `DAILY_SCHEDULE` | `server/data/daily.json` | Optional JSON file that pins answers to dates. |
-| `WIKIMEDIA_USER_AGENT` | `Archdle/1.0 (self-hosted architecture guessing game)` | Descriptive User-Agent for Wikimedia image requests. Add a contact URL or email for a public deployment. |
+| `WIKIMEDIA_USER_AGENT` | `Arqdle/1.0 (self-hosted architecture guessing game)` | Descriptive User-Agent for Wikimedia image requests. Add a contact URL or email for a public deployment. |
+| `SITE_URL` | empty | Public site origin for canonical, Open Graph and sitemap URLs. Example: `https://your-domain.example`. No trailing slash. |
 
 In production, a missing `PUZZLE_SECRET` makes the server generate a temporary
 secret and print a warning. Saved games will stop working after a restart, so set a
@@ -234,6 +235,24 @@ tests/               Vitest unit and API tests
 server/data/         optional daily schedule
 ```
 
+## SEO and metadata
+
+Set `SITE_URL` before a production build. It fills the canonical URL, Open Graph and
+Twitter image URLs, and the JSON-LD site URL.
+
+The build includes:
+
+- a descriptive title, meta description, keywords, robots meta, canonical link and
+  English/Spanish `hreflang` alternates
+- Open Graph and Twitter card metadata with a 1200 × 630 social image
+- JSON-LD for `WebSite` and `WebApplication`
+- a web app manifest and 192/512 px icons
+- a static HTML fallback with a readable heading and description for crawlers
+- `/robots.txt` and `/sitemap.xml`, generated from `SITE_URL` or the request origin
+
+The server sets `trust proxy` so the request protocol is correct behind a reverse
+proxy.
+
 ## Notes
 
 - No accounts and no database. Daily and practice progress, plus stats, are stored
@@ -251,6 +270,10 @@ server/data/         optional daily schedule
 
 Open `/?reset=daily` to remove the saved daily game from this browser. The page then
 starts a fresh daily game. Stats are kept, and the daily answer is unchanged.
+
+## Credits
+
+Developed for Kimberly Salvo, with love, by [Felipe Lecot](https://www.felipelecot.com).
 
 ## License
 

@@ -1,4 +1,4 @@
-const DAILY_KEY_PREFIX = 'archdle:v1:daily:';
+const DAILY_KEY_PREFIXES = ['arqdle:v1:daily:', 'archdle:v1:daily:'];
 
 /**
  * Development utility: opening /?reset=daily clears the saved daily game in this
@@ -13,7 +13,9 @@ export function resetDailyIfRequested(): void {
   try {
     for (let index = window.localStorage.length - 1; index >= 0; index -= 1) {
       const key = window.localStorage.key(index);
-      if (key?.startsWith(DAILY_KEY_PREFIX)) window.localStorage.removeItem(key);
+      if (key && DAILY_KEY_PREFIXES.some((prefix) => key.startsWith(prefix))) {
+        window.localStorage.removeItem(key);
+      }
     }
   } catch {
     // Ignore storage errors.
