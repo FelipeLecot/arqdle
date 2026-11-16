@@ -1,12 +1,25 @@
+import type { Me } from '../../shared/types';
 import { useI18n } from '../i18n/I18nProvider';
+import { AccountMenu } from './AccountMenu';
 import { ArchMark, HelpIcon, StatsIcon } from './Icon';
 
 interface HeaderProps {
   onHelp: () => void;
   onStats: () => void;
+  me: Me | null;
+  onSignOut: () => void;
+  onDeleteAccount: () => void;
+  exportUrl: string;
 }
 
-export function Header({ onHelp, onStats }: HeaderProps) {
+export function Header({
+  onHelp,
+  onStats,
+  me,
+  onSignOut,
+  onDeleteAccount,
+  exportUrl,
+}: HeaderProps) {
   const { lang, setLang, t } = useI18n();
 
   return (
@@ -33,6 +46,12 @@ export function Header({ onHelp, onStats }: HeaderProps) {
             <StatsIcon />
             <span className="icon-button__label">{t('stats')}</span>
           </button>
+          <AccountMenu
+            me={me}
+            onSignOut={onSignOut}
+            onDeleteAccount={onDeleteAccount}
+            exportUrl={exportUrl}
+          />
         </nav>
       </div>
     </header>

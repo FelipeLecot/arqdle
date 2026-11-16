@@ -7,29 +7,35 @@ an exact match, yellow is close, and red is a miss. You get six guesses.
 The interface and building copy are available in English and Spanish. Use the
 `ES` / `EN` button in the header, or open `?lang=es`.
 
-After a daily game ends, a countdown shows the time until the next daily building.
-
-The daily answer stays on the server. The browser receives the public autocomplete
-list and comparison results until a game ends. The Spanish display copy is bundled
-in the client so language changes apply instantly, including to saved games.
+Profiles, games, guesses, daily results and stats live in Postgres. Anonymous
+visitors get a database-backed guest profile. Google sign-in upgrades that guest, or
+merges it into an existing account, so progress follows the player across devices.
 
 ## Run it locally
 
-Requires Node 22.12 or newer.
+Requires Node 22.12 or newer and Docker with Compose.
 
 ```sh
 npm install
 cp .env.example .env
-# Put a random value in PUZZLE_SECRET. For example:
-# openssl rand -hex 32
+
+# Start the development Postgres database.
+docker compose up -d db
+
+# The server also runs migrations on boot. This command is available for manual runs.
+npm run db:migrate
+
 npm run dev
 ```
 
-Open <http://localhost:5173>. The Vite dev server proxies API requests to the
-Express server (port 3001 by default).
+Open <http://localhost:5173>. The Vite dev server proxies API requests to the Express
+server on port 3001.
 
 For an unlimited development game, switch to the **Practice** tab, or open
 <http://localhost:5173/?mode=practice>. Add `&lang=es` for Spanish.
+
+The Docker Compose file starts Postgres only. The app runs with `npm` so server and
+client changes reload quickly.
 
 ## Production
 
@@ -37,48 +43,144 @@ For an unlimited development game, switch to the **Practice** tab, or open
 npm ci
 npm run build
 cp .env.example .env
-# Set a stable random PUZZLE_SECRET in .env (openssl rand -hex 32).
+# Set DATABASE_URL to the EC2 Postgres instance and configure SSL.
+# Set SITE_URL, and add Google OAuth credentials if accounts are enabled.
 npm start
 ```
 
-`npm start` sets `NODE_ENV=production`. The Express server serves the built client
-from `dist/client` and the API from the same origin, so one process is enough.
+`npm start` sets `NODE_ENV=production`, runs pending SQL migrations, and serves the
+built client from `dist/client` plus the API from the same origin.
 
-A `.env` file is loaded automatically. Do not commit it. Keep the same
-`PUZZLE_SECRET` across restarts and instances, or saved puzzle tokens will become
-invalid.
+The app does not need Docker in production. Point `DATABASE_URL` at the existing
+Postgres instance. Keep the database port closed to the public internet and allow
+only the application host through the security group.
 
-### Environment variables
+### Production database checklist
+
+- Use a dedicated PostgreSQL role. It needs `CONNECT`, `USAGE` on schema `public`,
+  and `SELECT`, `INSERT`, `UPDATE`, `DELETE` on the application tables. The migration
+  runner also needs `CREATE` on the schema.
+- Use `DATABASE_SSL=verify-full` and `DATABASE_CA_CERT=/path/to/ca.pem` when the
+  provider gives you a CA. `require` encrypts the connection without verifying the
+  certificate.
+- Back up the database. A daily `pg_dump` plus provider snapshots is enough for this
+  app.
+- Run `npm run db:cleanup-guests` periodically to remove old empty guest profiles.
+- Keep `ADMIN_EMAILS` and `ADMIN_TOKEN` private. Analytics are never public.
+
+## Environment variables
 
 | Variable | Default | Purpose |
 | --- | --- | --- |
 | `PORT` | `3001` | Port for the API and the production site. |
-| `PUZZLE_SECRET` | Random in production | Encrypts puzzle tokens. Use a long random value and keep it stable. Changing it invalidates saved games. |
+| `SITE_URL` | empty | Public origin for canonical, Open Graph, sitemap and default OAuth redirect URLs. No trailing slash. |
+| `DATABASE_URL` | required | PostgreSQL connection string, for example `postgres://arqdle:password@host:5432/arqdle`. |
+| `DATABASE_SSL` | `disable` on localhost, `require` elsewhere | `disable`, `require`, or `verify-full`. |
+| `DATABASE_CA_CERT` | empty | PEM certificate or path to the CA used by `verify-full`. |
+| `DB_AUTO_MIGRATE` | `true` | Run pending migrations when the server starts. |
+| `SESSION_TTL_DAYS` | `30` | Session lifetime. Active sessions slide forward. |
+| `COOKIE_SECURE` | `true` in production | Set `false` only when the site is served over plain HTTP. |
+| `COOKIE_DOMAIN` | empty | Optional cookie domain for a parent domain. |
+| `GOOGLE_CLIENT_ID` | empty | Google OAuth web client ID. |
+| `GOOGLE_CLIENT_SECRET` | empty | Google OAuth web client secret. |
+| `GOOGLE_REDIRECT_URI` | `${SITE_URL}/api/auth/google/callback` | Must match the Google Cloud redirect URI exactly. |
+| `ADMIN_EMAILS` | empty | Comma-separated Google account emails that can read analytics. |
+| `ADMIN_TOKEN` | empty | Optional bearer token for scripted analytics and CSV exports. |
 | `PUZZLE_TIMEZONE` | `America/Montevideo` | Time zone used to decide when the daily puzzle changes. |
 | `DAILY_EPOCH` | `2026-11-16` | Day 1 of the daily sequence. |
 | `DAILY_SEED` | `arqdle-2026` | Seed for the deterministic daily order. |
 | `DAILY_SCHEDULE` | `server/data/daily.json` | Optional JSON file that pins answers to dates. |
-| `WIKIMEDIA_USER_AGENT` | `Arqdle/1.0 (self-hosted architecture guessing game)` | Descriptive User-Agent for Wikimedia image requests. Add a contact URL or email for a public deployment. |
-| `SITE_URL` | empty | Public site origin for canonical, Open Graph and sitemap URLs. Example: `https://your-domain.example`. No trailing slash. |
+| `WIKIMEDIA_USER_AGENT` | `Arqdle/1.0 (self-hosted architecture guessing game)` | Descriptive User-Agent for Wikimedia image requests. |
+| `GUEST_RETENTION_DAYS` | `90` | Age limit used by `npm run db:cleanup-guests`. |
 
-In production, a missing `PUZZLE_SECRET` makes the server generate a temporary
-secret and print a warning. Saved games will stop working after a restart, so set a
-stable secret. A supplied secret shorter than 24 characters is rejected in
-production.
+`WIKIMEDIA_IMAGES=off` disables photo lookups. The test suite uses it to avoid
+network calls.
+
+## Google sign-in
+
+Create a **Web application** OAuth client in Google Cloud Console:
+
+1. Configure the OAuth consent screen. The app only needs `openid`, `email`, and
+   `profile`.
+2. Add authorized redirect URIs:
+   - `http://localhost:3001/api/auth/google/callback`
+   - `https://your-domain.example/api/auth/google/callback`
+3. Put the client ID and secret in `.env`:
+   ```sh
+   GOOGLE_CLIENT_ID=...
+   GOOGLE_CLIENT_SECRET=...
+   GOOGLE_REDIRECT_URI=https://your-domain.example/api/auth/google/callback
+   ```
+4. Restart the server. The sign-in button appears for guests.
+
+Leave both credentials empty to disable sign-in. The button is hidden and
+`/api/auth/google/start` returns `503 google_not_configured`.
+
+The flow uses state, PKCE S256, and a nonce. The ID token signature is verified
+against Google's JWKS, and the email must be verified. The app links the stable
+Google subject to a local user. It does **not** store Google access or refresh
+tokens.
+
+### Guest upgrade and account recovery
+
+- A visitor without a session gets a guest row and an HttpOnly session cookie.
+- The first Google sign-in upgrades that guest in place when the Google account is
+  new.
+- If the Google account already exists, guest progress is merged into it.
+- A winning daily result beats a loss. If both results are wins, the one with fewer
+  attempts wins. Practice games are always kept.
+- The guest row is deleted after a successful merge.
+
+Session tokens are random, stored only as SHA-256 hashes, and rotated on sign-in.
+Cookies are `HttpOnly`, `SameSite=Lax`, and `Secure` in production.
+
+## Database and migrations
+
+SQL migrations live in `server/sql/migrations/` and run in filename order. The
+runner records a checksum in `schema_migrations`, so an applied migration must not
+be edited. Add a new migration instead.
+
+```sh
+npm run db:up             # start local Postgres
+npm run db:migrate        # apply migrations from source
+npm run db:migrate:prod   # apply migrations from the production build
+npm run db:down           # stop local Postgres
+npm run db:reset          # delete the local volume and recreate the database
+npm run db:cleanup-guests # delete old empty guest profiles
+npm run db:cleanup-guests:prod # same, from the production build
+```
+
+Tables:
+
+| Table | Purpose |
+| --- | --- |
+| `users` | Guest and Google profiles, imported legacy stats, timestamps. |
+| `oauth_accounts` | Google subject to local user link. |
+| `sessions` | Hashed session tokens and expiry. |
+| `oauth_states` | Short-lived OAuth state, PKCE verifier and nonce. |
+| `daily_puzzles` | One row per date with the answer snapshot. |
+| `games` | Daily and practice games, server-owned state. |
+| `guesses` | Every submitted guess with its comparison cells. |
+| `daily_results` | Finished daily games. Stats derive from this table. |
+
+The browser never receives the daily target before the game ends. It receives the
+public building list and comparison results only.
 
 ## How the daily answer works
 
 The game ships 224 buildings in `server/src/data/`. The English dataset is bundled
-into the server only. Spanish display copy for the same buildings lives in
-`src/i18n/esData.ts` so the language toggle can update saved games immediately.
+into the server only. Spanish display copy lives in `src/i18n/esData.ts`.
 
 - `server/src/daily.ts` computes the day number from `DAILY_EPOCH`.
 - The answer order is a deterministic shuffle seeded by `DAILY_SEED` and the cycle
   number. Each building appears once per cycle.
 - `server/data/daily.json` can pin a building to a date. This overrides the
   deterministic choice. The file is validated at startup.
+- The first request for a date writes a `daily_puzzles` row with the full answer
+  snapshot. Later catalog or schedule changes do not rewrite that day's answer or
+  its past comparisons.
 
-Example:
+Example schedule:
 
 ```json
 {
@@ -89,10 +191,6 @@ Example:
 
 Keys are dates in `PUZZLE_TIMEZONE`; values are building IDs from the dataset.
 Restart the server after editing the schedule.
-
-Each puzzle gets an AES-256-GCM encrypted token containing the target building ID
-and the number of guesses used. The client cannot read the target or forge a token.
-The API returns `answer` data only after a win or after the sixth wrong guess.
 
 ## Rules
 
@@ -114,6 +212,136 @@ the answer: `↓ older` or `↑ newer`. The first century BC and the first centu
 treated as neighbouring centuries.
 
 Practice is unlimited, does not affect stats, and never picks today's daily answer.
+
+## Stats and legacy import
+
+Stats derive from `daily_results`. Wins, win rate, current streak, maximum streak and
+the guess distribution are computed from the user's finished daily games. Practice is
+ignored.
+
+On the first load after upgrading from the browser-only build, the client sends the
+old `localStorage` stats and the latest saved daily game to `POST /api/me/import`.
+The server records the aggregate once and replays the current daily guesses against
+the stored answer. Historical per-day rows from before the database are not
+recreated; their totals are preserved in `users.legacy_stats`. The stats modal notes
+when imported stats are included.
+
+Local storage is no longer the source of truth. It is used only for the one-time
+import and for the “how to play” flag.
+
+## Analytics for posts
+
+Analytics are private. Access requires either a signed-in Google account listed in
+`ADMIN_EMAILS`, or `Authorization: Bearer $ADMIN_TOKEN`.
+
+- `GET /api/admin/analytics?from=YYYY-MM-DD&to=YYYY-MM-DD` returns totals, daily rows,
+  attempt distribution, top guessed buildings, top wrong guesses and signups by day.
+- `GET /api/admin/reports/daily.csv` returns one row per daily puzzle.
+- `GET /api/admin/reports/guesses.csv` returns building popularity and wrong-guess
+  counts.
+- `GET /api/admin/reports/attempts.csv` returns wins by attempt count per day.
+
+SQL reports are in `server/sql/reports/`:
+
+```sh
+psql "$DATABASE_URL" -v from=2026-11-01 -v to=2026-11-30 \
+  -f server/sql/reports/daily-summary.sql
+```
+
+The reports cover daily win rates, guess popularity, attempt distributions and
+seven-day retention. No endpoint exposes emails, individual guesses, or a public
+analytics page.
+
+## API
+
+All API responses are JSON. Errors look like:
+
+```json
+{ "error": { "code": "game_over", "message": "This game is already over." } }
+```
+
+### Public
+
+- `GET /api/buildings` returns the autocomplete list: `id`, `name`, `hint`, `city`,
+  `country`, `countryCode`, and optional aliases. No attributes or answers.
+- `GET /api/health` returns server status, building count and database status.
+- `GET /robots.txt` and `GET /sitemap.xml`.
+
+### Profile
+
+- `GET /api/me` creates a guest session when needed and returns the profile, stats
+  and whether Google sign-in is enabled.
+- `POST /api/me/import` imports legacy browser stats and the current daily game once.
+- `GET /api/me/export` downloads the profile, games, guesses and daily results as
+  JSON.
+- `DELETE /api/me` deletes the profile and all related data.
+
+### Games
+
+- `GET /api/games/daily` returns the current daily game. It creates the daily puzzle
+  snapshot and the user's game on first use.
+- `GET /api/games/practice` returns the newest unfinished practice game, or creates
+  one. Use `?new=1` for a new building and `&exclude=<id>` to avoid a repeat.
+- `POST /api/games/:gameId/guess` with body `{ "buildingId": "colosseum" }`.
+
+A game response contains `id`, `mode`, `status`, `maxGuesses`, `attempts`, submitted
+`guesses` (building, cells, correct flag), daily metadata, and the `answer` only after
+a win or loss.
+
+### Authentication
+
+- `GET /api/auth/google/start` starts the OAuth flow.
+- `GET /api/auth/google/callback` completes it.
+- `POST /api/auth/logout` deletes the current session.
+
+### Admin
+
+The analytics and CSV endpoints are listed above. They return `404` when no admin
+access is configured, and `403` for a non-admin account.
+
+## Photos
+
+The reveal photo is fetched server-side from the English Wikipedia page media list.
+The code skips logos, maps, diagrams and construction images, then asks Wikimedia
+Commons for a 1400 px thumbnail and its attribution metadata. The photo, author,
+license and Commons file link are shown in the reveal panel. Results are cached in
+memory for 24 hours; if the lookup fails, the panel shows a drawn placeholder.
+
+Photos require outbound access to `en.wikipedia.org`, `commons.wikimedia.org`,
+`upload.wikimedia.org`, and `thumb.wikimedia.org` from the server. The rest of the
+game works without network access.
+
+## Project structure
+
+```text
+src/                    React client
+  components/           header, account menu, board, input, reveal, modals
+  i18n/                 English/Spanish UI strings and Spanish building copy
+  api.ts                API client
+  storage.ts            one-time legacy import and intro flag
+  share.ts              emoji result text and clipboard
+server/src/             Express server
+  data/                 building dataset (server-only)
+  compare.ts            clue comparison rules
+  daily.ts              deterministic daily selection and schedule
+  puzzles.ts            daily puzzle snapshots and daily games
+  games.ts              server-owned game state and guess submission
+  users.ts              profiles, stats, legacy import, export, delete
+  oauth.ts              Google OAuth and account linking
+  merge.ts              transactional guest merge
+  admin.ts              private analytics, CSV and auth guard
+  session.ts            cookie sessions
+  db.ts                 Postgres pool and transactions
+  migrate.ts            SQL migration runner
+  images.ts             Wikimedia photo lookup and attribution
+  app.ts                routes and static file serving
+server/sql/             migrations and SQL reports
+shared/types.ts         types and constants shared by client and server
+shared/stats.ts         legacy stats helpers
+tests/                  Vitest unit and database tests
+server/data/            optional daily schedule
+compose.yaml            development Postgres only
+```
 
 ## Adding or editing a building
 
@@ -141,13 +369,11 @@ npm test
 ```
 
 The tests check unique IDs and names, valid enum values, known material names,
-self-comparison (every building must be all green against itself), daily selection,
-the next-midnight calculation, token validation, the HTTP API, and complete English
-and Spanish translation coverage.
+self-comparison, daily selection, date handling, snapshots, stats, account merges,
+legacy import, the HTTP API, and complete English and Spanish translation coverage.
 
 Dates are completion, consecration, or opening dates, depending on the building.
-Use `yearNote` when a single year needs context (for example, a rebuilt pavilion or
-a cathedral finished centuries after it began).
+Use `yearNote` when a single year needs context.
 
 ## Data sources
 
@@ -165,80 +391,10 @@ Facts are written in our own words. Photos are fetched from Wikimedia and credit
 at reveal time. Before adding a building, verify its date, country, style, type,
 materials and architect against an official or heritage source.
 
-## API
-
-All responses are JSON. Errors look like:
-
-```json
-{ "error": { "code": "invalid_token", "message": "This game session is no longer valid. Start a new game." } }
-```
-
-### `GET /api/buildings`
-
-Returns the public autocomplete list: `id`, `name`, `hint` (city and country),
-`city`, `country`, `countryCode`, and optional aliases. It does not include the full
-attributes.
-
-### `GET /api/puzzle?mode=daily|practice&exclude=<id>`
-
-Starts a game and returns `token`, `mode`, `maxGuesses`, and for daily games
-`date`, `dateLabel`, `nextDailyAt`, and `dayNumber`. The target is not included.
-`exclude` is optional for practice and avoids repeating the previous answer.
-
-### `POST /api/guess`
-
-Body:
-
-```json
-{ "token": "…", "guessId": "colosseum" }
-```
-
-Returns the guess, eight cells with `status`, display values and an accessible note,
-the new token, attempts, status (`playing`, `won`, or `lost`), and the answer on a
-win or loss.
-
-### `GET /api/health`
-
-Returns the server status and building count.
-
-## Photos
-
-The reveal photo is fetched server-side from the English Wikipedia page media list.
-The code skips logos, maps, diagrams and construction images, then asks Wikimedia
-Commons for a 1400 px thumbnail and its attribution metadata. The photo, author,
-license and Commons file link are shown in the reveal panel. Results are cached in
-memory for 24 hours; if the lookup fails, the panel shows a drawn placeholder.
-
-Photos require outbound access to `en.wikipedia.org`, `commons.wikimedia.org`,
-`upload.wikimedia.org`, and `thumb.wikimedia.org` from the server. The rest of the
-game works without network access.
-
-## Project structure
-
-```text
-src/                 React client
-  components/        header, board, input, reveal, modals, countdown
-  i18n/              English/Spanish UI strings and Spanish building copy
-  api.ts             API client
-  storage.ts         local daily/practice state and stats
-  share.ts           emoji result text and clipboard
-server/src/          Express server
-  data/              building dataset (server-only)
-  compare.ts         clue comparison rules
-  daily.ts           deterministic daily selection and schedule
-  puzzle.ts          encrypted puzzle tokens and guess resolution
-  images.ts          Wikimedia photo lookup and attribution
-  app.ts             routes and static file serving
-shared/types.ts      types and constants shared by client and server
-shared/stats.ts      pure daily stats update logic
-tests/               Vitest unit and API tests
-server/data/         optional daily schedule
-```
-
 ## SEO and metadata
 
 Set `SITE_URL` before a production build. It fills the canonical URL, Open Graph and
-Twitter image URLs, and the JSON-LD site URL.
+Twitter image URLs, OAuth defaults, and the JSON-LD site URL.
 
 The build includes:
 
@@ -253,23 +409,50 @@ The build includes:
 The server sets `trust proxy` so the request protocol is correct behind a reverse
 proxy.
 
+## Tests
+
+```sh
+npm run typecheck
+npm test
+```
+
+Without `TEST_DATABASE_URL`, the database suite is skipped and the pure unit tests
+still run. To run everything, point it at a disposable database whose name ends in
+`_test`:
+
+```sh
+TEST_DATABASE_URL=postgres://arqdle:arqdle_dev_password@localhost:5432/arqdle_test \
+  npm test
+```
+
+The test runner refuses a `TEST_DATABASE_URL` that does not end in `_test`, then
+recreates the schema before the database suite.
+
+## Privacy and data retention
+
+- Guests are anonymous database rows. The app does not store IP addresses or
+  user-agent strings.
+- Session tokens are stored as hashes. The cookie is HttpOnly and Secure in
+  production.
+- Google sign-in stores the Google subject, email, name, picture URL and locale. It
+  does not store access or refresh tokens.
+- Guesses and daily results are stored to produce stats and aggregate analytics.
+- Players can export or delete their data from the account menu.
+- Only aggregate analytics are available, and only to configured admins.
+- `npm run db:cleanup-guests` removes guest profiles older than
+  `GUEST_RETENTION_DAYS` that have no games or results.
+
 ## Notes
 
-- No accounts and no database. Daily and practice progress, plus stats, are stored
-  in the browser's `localStorage`.
+- `PUZZLE_SECRET` is no longer used. Saved browser games and stats are imported once;
+  after that the database is the source of truth.
+- Rate limits are in memory. A single app instance is assumed. For multiple
+  instances, move rate limiting to a shared store or the reverse proxy.
+- Running `npm start` applies migrations before listening. The runner takes a
+  PostgreSQL advisory lock, so two instances starting together do not apply the same
+  migration twice.
 - Stats count daily games only. Practice results are ignored.
-- The daily generation and tokens are stateless, so multiple server instances work
-  if they share the same `PUZZLE_SECRET`, `DAILY_SEED`, `DAILY_EPOCH`, and daily
-  schedule.
-- The game is casual: clearing browser storage or requesting a new daily token can
-  reset a local game. The server still never sends the answer before it is earned.
-- For a public deployment, run behind HTTPS and a reverse proxy, set a stable
-  `PUZZLE_SECRET`, and configure the desired `PUZZLE_TIMEZONE`.
-
-## Reset a local daily game
-
-Open `/?reset=daily` to remove the saved daily game from this browser. The page then
-starts a fresh daily game. Stats are kept, and the daily answer is unchanged.
+- The daily answer is never sent before a win or the sixth wrong guess.
 
 ## Credits
 

@@ -1,12 +1,44 @@
-import express, { type ErrorRequestHandler, type Request } from 'express';
+import express, { type ErrorRequestHandler } from 'express';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
-import type { BuildingOption, Mode } from '../../shared/types';
+import type { BuildingOption } from '../../shared/types';
+import {
+  attemptsCsv,
+  dailyCsv,
+  getAnalytics,
+  guessesCsv,
+  parseDateRange,
+  requireAdmin,
+} from './admin';
 import { config } from './config';
 import { buildings } from './data';
+import { checkDatabase, isDatabaseUnavailable } from './db';
 import { ApiError } from './errors';
-import { getWikipediaImage } from './images';
-import { createPuzzle, resolveGuess } from './puzzle';
+import { getDailyGame, getPracticeGame, submitGuess } from './games';
+import { requestOrigin, sameOriginOnly } from './http';
+import {
+  buildGoogleAuthorizationUrl,
+  consumeOAuthState,
+  createOAuthState,
+  exchangeGoogleCode,
+  isGoogleConfigured,
+  safeRedirect,
+  signInWithGoogleIdentity,
+} from './oauth';
+import { rateLimit } from './rate-limit';
+import {
+  attachSession,
+  clearSessionCookie,
+  deleteSessionByToken,
+  ensureUser,
+  rotateSessionForUser,
+} from './session';
+import {
+  buildMe,
+  deleteUser,
+  exportUserData,
+  importLegacy,
+} from './users';
 
 export const app = express();
 
@@ -18,17 +50,212 @@ app.use((_req, res, next) => {
   res.setHeader('X-Frame-Options', 'DENY');
   next();
 });
-app.use(express.json({ limit: '16kb' }));
+app.use(express.json({ limit: '32kb' }));
 
-app.get('/api/health', (_req, res) => {
-  res.json({ ok: true, buildings: buildings.length });
+app.get('/api/health', async (_req, res) => {
+  const db = await checkDatabase();
+  res.status(db ? 200 : 503).json({
+    ok: db,
+    buildings: buildings.length,
+    db,
+  });
 });
 
-function requestOrigin(req: Request): string {
-  if (config.siteUrl) return config.siteUrl;
-  const forwarded = req.get('x-forwarded-proto')?.split(',')[0]?.trim();
-  return `${forwarded || req.protocol}://${req.get('host') ?? 'localhost'}`;
+function withAuthResult(target: string, result: 'ok' | 'error'): string {
+  const url = new URL(safeRedirect(target), 'http://arqdle.local');
+  url.searchParams.set('auth', result);
+  return `${url.pathname}${url.search}${url.hash}`;
 }
+
+app.use('/api', sameOriginOnly);
+app.use('/api', (_req, res, next) => {
+  res.setHeader('Cache-Control', 'no-store');
+  next();
+});
+app.use('/api', attachSession);
+
+app.get('/api/buildings', (_req, res) => {
+  const options: BuildingOption[] = buildings.map((building) => ({
+    id: building.id,
+    name: building.name,
+    hint:
+      building.city === building.country
+        ? building.city
+        : `${building.city}, ${building.country}`,
+    city: building.city,
+    country: building.country,
+    countryCode: building.countryCode,
+    aliases: building.aliases,
+  }));
+  res.json(options);
+});
+
+app.get('/api/me', ensureUser, async (req, res) => {
+  res.json(await buildMe(req.user!));
+});
+
+app.post(
+  '/api/me/import',
+  rateLimit('import', 5, 60 * 60 * 1000),
+  ensureUser,
+  async (req, res) => {
+    const { user } = await importLegacy(req.user!, req.body);
+    res.json(await buildMe(user));
+  },
+);
+
+app.get('/api/me/export', ensureUser, async (req, res) => {
+  const data = await exportUserData(req.user!);
+  const stamp = new Date().toISOString().slice(0, 10);
+  res.setHeader(
+    'Content-Disposition',
+    `attachment; filename="arqdle-export-${stamp}.json"`,
+  );
+  res.json(data);
+});
+
+app.delete('/api/me', ensureUser, async (req, res) => {
+  await deleteUser(req.user!.id);
+  clearSessionCookie(res);
+  res.json({ ok: true });
+});
+
+app.post('/api/auth/logout', async (req, res) => {
+  if (req.sessionToken) await deleteSessionByToken(req.sessionToken);
+  clearSessionCookie(res);
+  res.json({ ok: true });
+});
+
+app.get(
+  '/api/auth/google/start',
+  rateLimit('auth-start', 20, 10 * 60 * 1000),
+  ensureUser,
+  async (req, res) => {
+    if (!isGoogleConfigured()) {
+      throw new ApiError(
+        503,
+        'google_not_configured',
+        'Google sign-in is not configured on this server.',
+      );
+    }
+    const { state, codeChallenge, nonce } = await createOAuthState(
+      req.user!.id,
+      typeof req.query.next === 'string' ? req.query.next : '/',
+    );
+    res.redirect(302, buildGoogleAuthorizationUrl(state, codeChallenge, nonce));
+  },
+);
+
+app.get(
+  '/api/auth/google/callback',
+  rateLimit('auth-callback', 30, 10 * 60 * 1000),
+  async (req, res) => {
+    if (!isGoogleConfigured()) {
+      throw new ApiError(
+        503,
+        'google_not_configured',
+        'Google sign-in is not configured on this server.',
+      );
+    }
+
+    const state = typeof req.query.state === 'string' ? req.query.state : '';
+    const code = typeof req.query.code === 'string' ? req.query.code : '';
+    if (!state || !code) {
+      res.redirect('/?auth=error&reason=missing');
+      return;
+    }
+
+    let stored;
+    try {
+      stored = await consumeOAuthState(state);
+    } catch (error) {
+      console.error('[auth] could not read state', (error as Error).message);
+      res.redirect('/?auth=error&reason=state');
+      return;
+    }
+    if (!stored) {
+      res.redirect('/?auth=error&reason=state');
+      return;
+    }
+
+    try {
+      const identity = await exchangeGoogleCode(code, stored.code_verifier, stored.nonce);
+      const user = await signInWithGoogleIdentity(identity, stored.user_id);
+      if (req.sessionToken) await deleteSessionByToken(req.sessionToken);
+      await rotateSessionForUser(res, user.id);
+      res.redirect(withAuthResult(stored.redirect_to ?? '/', 'ok'));
+    } catch (error) {
+      console.error(
+        '[auth] Google sign-in failed',
+        error instanceof Error ? error.message : error,
+      );
+      res.redirect(withAuthResult(stored.redirect_to ?? '/', 'error'));
+    }
+  },
+);
+
+app.get('/api/games/daily', ensureUser, async (req, res) => {
+  res.json(await getDailyGame(req.user!.id));
+});
+
+app.get('/api/games/practice', ensureUser, async (req, res) => {
+  const newGame = req.query.new === '1' || req.query.new === 'true';
+  const excludeId = typeof req.query.exclude === 'string' ? req.query.exclude : undefined;
+  res.json(await getPracticeGame(req.user!.id, { newGame, excludeId }));
+});
+
+app.post(
+  '/api/games/:gameId/guess',
+  rateLimit('guess', 120, 60 * 1000),
+  ensureUser,
+  async (req, res) => {
+    const body = req.body as { buildingId?: unknown } | null;
+    if (!body || typeof body.buildingId !== 'string' || body.buildingId.length > 120) {
+      throw new ApiError(400, 'invalid_request', 'A building id is required.');
+    }
+    const gameId = Array.isArray(req.params.gameId)
+      ? req.params.gameId[0]
+      : req.params.gameId;
+    res.json(await submitGuess(req.user!.id, gameId, body.buildingId));
+  },
+);
+
+app.use('/api/admin', requireAdmin);
+
+app.get('/api/admin/analytics', async (req, res) => {
+  const range = parseDateRange(req.query.from, req.query.to);
+  res.json(await getAnalytics(range));
+});
+
+app.get('/api/admin/reports/daily.csv', async (req, res) => {
+  const range = parseDateRange(req.query.from, req.query.to);
+  const analytics = await getAnalytics(range);
+  res.setHeader(
+    'Content-Disposition',
+    `attachment; filename="arqdle-daily-${range.from}-${range.to}.csv"`,
+  );
+  res.type('text/csv; charset=utf-8').send(dailyCsv(analytics));
+});
+
+app.get('/api/admin/reports/guesses.csv', async (req, res) => {
+  const range = parseDateRange(req.query.from, req.query.to);
+  const analytics = await getAnalytics(range);
+  res.setHeader(
+    'Content-Disposition',
+    `attachment; filename="arqdle-guesses-${range.from}-${range.to}.csv"`,
+  );
+  res.type('text/csv; charset=utf-8').send(guessesCsv(analytics));
+});
+
+app.get('/api/admin/reports/attempts.csv', async (req, res) => {
+  const range = parseDateRange(req.query.from, req.query.to);
+  const analytics = await getAnalytics(range);
+  res.setHeader(
+    'Content-Disposition',
+    `attachment; filename="arqdle-attempts-${range.from}-${range.to}.csv"`,
+  );
+  res.type('text/csv; charset=utf-8').send(attemptsCsv(analytics));
+});
 
 app.get('/robots.txt', (req, res) => {
   const origin = requestOrigin(req);
@@ -51,63 +278,6 @@ app.get('/sitemap.xml', (req, res) => {
       `  </url>\n` +
       `</urlset>\n`,
   );
-});
-
-app.get('/api/buildings', (_req, res) => {
-  const options: BuildingOption[] = buildings.map((building) => ({
-    id: building.id,
-    name: building.name,
-    hint:
-      building.city === building.country
-        ? building.city
-        : `${building.city}, ${building.country}`,
-    city: building.city,
-    country: building.country,
-    countryCode: building.countryCode,
-    aliases: building.aliases,
-  }));
-  res.setHeader('Cache-Control', 'no-store');
-  res.json(options);
-});
-
-app.get('/api/puzzle', (req, res) => {
-  const requested = typeof req.query.mode === 'string' ? req.query.mode : 'daily';
-  if (requested !== 'daily' && requested !== 'practice') {
-    throw new ApiError(400, 'invalid_mode', 'Mode must be daily or practice.');
-  }
-  const exclude =
-    requested === 'practice' && typeof req.query.exclude === 'string'
-      ? req.query.exclude
-      : undefined;
-
-  res.setHeader('Cache-Control', 'no-store');
-  res.json(createPuzzle(requested as Mode, exclude));
-});
-
-app.post('/api/guess', async (req, res) => {
-  const body = req.body as { token?: unknown; guessId?: unknown } | null;
-  if (
-    !body ||
-    typeof body.token !== 'string' ||
-    typeof body.guessId !== 'string' ||
-    body.token.length < 20 ||
-    body.token.length > 2000 ||
-    body.guessId.length < 1 ||
-    body.guessId.length > 100
-  ) {
-    throw new ApiError(400, 'invalid_request', 'A puzzle token and a building id are required.');
-  }
-
-  const resolution = resolveGuess(body.token, body.guessId);
-  if (resolution.answerBuilding && resolution.result.answer) {
-    resolution.result.answer.image = await getWikipediaImage(
-      resolution.answerBuilding.wikiTitle,
-      resolution.answerBuilding.name,
-    );
-  }
-
-  res.setHeader('Cache-Control', 'no-store');
-  res.json(resolution.result);
 });
 
 app.use('/api', (_req, res) => {
@@ -147,6 +317,16 @@ const errorHandler: ErrorRequestHandler = (error, _req, res, next) => {
   if (error instanceof SyntaxError && 'body' in error) {
     res.status(400).json({
       error: { code: 'invalid_json', message: 'Request body is not valid JSON.' },
+    });
+    return;
+  }
+  if (isDatabaseUnavailable(error)) {
+    console.error('[db] request failed', error);
+    res.status(503).json({
+      error: {
+        code: 'database_unavailable',
+        message: 'The database is not available. Try again later.',
+      },
     });
     return;
   }

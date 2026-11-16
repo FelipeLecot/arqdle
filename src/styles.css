@@ -159,12 +159,194 @@ a:hover {
   color: var(--ink);
 }
 
+/* ---------------------------------------------------------------- account */
+
+.account {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.account--signin {
+  gap: 7px;
+  min-height: 36px;
+  padding: 7px 10px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  color: var(--ink);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.account--signin:hover {
+  border-color: var(--line-strong);
+  background: var(--surface);
+}
+
+.account__google {
+  flex: 0 0 auto;
+}
+
+.account__trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 36px;
+  max-width: 190px;
+  padding: 5px 8px;
+  border: 0;
+  border-radius: 3px;
+  background: transparent;
+  color: var(--muted);
+}
+
+.account__trigger:hover {
+  background: var(--surface);
+  color: var(--ink);
+}
+
+.account__avatar {
+  display: block;
+  flex: 0 0 auto;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.account__avatar--letter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ink);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.account__label {
+  max-width: 120px;
+  overflow: hidden;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.account__chevron {
+  font-size: 9px;
+  transition: transform 140ms ease;
+}
+
+.account__chevron--open {
+  transform: rotate(180deg);
+}
+
+.account__menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 50;
+  width: 220px;
+  padding: 6px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: var(--shadow);
+}
+
+.account__head {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 4px;
+  padding: 8px 9px 9px;
+  border-bottom: 1px solid var(--line);
+}
+
+.account__menu-name {
+  overflow: hidden;
+  font-size: 12px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.account__menu-email {
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 10.5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.account__item {
+  display: block;
+  width: 100%;
+  padding: 8px 9px;
+  border: 0;
+  border-radius: 3px;
+  background: transparent;
+  color: var(--ink);
+  font-size: 11px;
+  text-align: left;
+  text-decoration: none;
+}
+
+.account__item:hover {
+  background: var(--surface);
+}
+
+.account__item--danger {
+  color: var(--red);
+}
+
 /* ------------------------------------------------------------------ main */
 
 .main {
   width: min(1120px, calc(100% - 32px));
   margin: 0 auto;
   padding: 28px 0 0;
+}
+
+.app-notice {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 0 16px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.app-notice--ok {
+  border-color: #b9d3b3;
+  background: var(--green-soft);
+  color: var(--green);
+}
+
+.app-notice--error {
+  border-color: #e2c0bd;
+  background: var(--red-soft);
+  color: var(--red);
+}
+
+.app-notice__close {
+  flex: 0 0 auto;
+  padding: 0 2px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-size: 17px;
+  line-height: 1;
 }
 
 .game-head {
@@ -1596,6 +1778,32 @@ a:hover {
 
   .icon-button__label {
     display: none;
+  }
+
+  .account__label {
+    display: none;
+  }
+
+  .account__trigger {
+    min-width: 44px;
+    min-height: 44px;
+    justify-content: center;
+    padding: 10px;
+  }
+
+  .account--signin {
+    min-width: 44px;
+    min-height: 44px;
+    justify-content: center;
+    padding: 10px;
+  }
+
+  .account--signin span {
+    display: none;
+  }
+
+  .account__menu {
+    right: -4px;
   }
 
   .main {

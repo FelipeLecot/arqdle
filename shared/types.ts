@@ -88,29 +88,50 @@ export interface BuildingOption {
   aliases?: string[];
 }
 
-export interface PuzzleStart {
-  token: string;
+export type GameStatus = 'playing' | 'won' | 'lost';
+
+export interface GameView {
+  id: string;
   mode: Mode;
+  status: GameStatus;
   maxGuesses: number;
+  attempts: number;
+  guesses: GuessRecord[];
   dayNumber?: number;
   date?: string;
   dateLabel?: string;
   nextDailyAt?: string;
+  answer?: Answer;
 }
 
-export type GameStatus = 'playing' | 'won' | 'lost';
+export interface Profile {
+  id: string;
+  kind: 'guest' | 'google';
+  name: string | null;
+  email: string | null;
+  pictureUrl: string | null;
+  createdAt: string;
+  stats: Stats;
+  legacyImported: boolean;
+}
 
-export interface GuessResponse {
-  token: string | null;
-  status: GameStatus;
-  guess: {
-    id: string;
-    name: string;
+export interface Me {
+  profile: Profile;
+  auth: {
+    googleEnabled: boolean;
+    signInUrl: string;
   };
-  cells: GuessCell[];
-  attempts: number;
-  maxGuesses: number;
-  answer?: Answer;
+  canImportLegacy: boolean;
+}
+
+export interface LegacyDailyGame {
+  date: string;
+  guesses: Array<{ id: string }>;
+}
+
+export interface LegacyImportRequest {
+  stats?: Stats;
+  daily?: LegacyDailyGame;
 }
 
 export interface ApiErrorBody {

@@ -1,9 +1,9 @@
 import type {
   ApiErrorBody,
   BuildingOption,
-  GuessResponse,
-  Mode,
-  PuzzleStart,
+  GameView,
+  LegacyImportRequest,
+  Me,
 } from '../shared/types';
 
 export class ApiError extends Error {
@@ -63,15 +63,42 @@ export function loadBuildings(): Promise<BuildingOption[]> {
   return buildingsPromise;
 }
 
-export function startPuzzle(mode: Mode, excludeId?: string): Promise<PuzzleStart> {
-  const params = new URLSearchParams({ mode });
-  if (mode === 'practice' && excludeId) params.set('exclude', excludeId);
-  return request<PuzzleStart>(`/api/puzzle?${params.toString()}`);
+export function loadMe(): Promise<Me> {
+  return request<Me>('/api/me');
 }
 
-export function submitGuess(token: string, guessId: string): Promise<GuessResponse> {
-  return request<GuessResponse>('/api/guess', {
+export function importLegacy(payload: LegacyImportRequest): Promise<Me> {
+  return request<Me>('/api/me/import', {
     method: 'POST',
-    body: JSON.stringify({ token, guessId }),
+    body: JSON.stringify(payload),
   });
 }
+
+export function loadDailyGame(): Promise<GameView> {
+  return request<GameView>('/api/games/daily');
+}
+
+export function loadPracticeGame(newGame = false, excludeId?: string): Promise<GameView> {
+  const params = new URLSearchParams();
+  if (newGame) params.set('new', '1');
+  if (excludeId) params.set('exclude', excludeId);
+  const query = params.toString();
+  return request<GameView>(`/api/games/practice${query ? `?${query}` : ''}`);
+}
+
+export function submitGameGuess(gameId: string, buildingId: string): Promise<GameView> {
+  return request<GameView>(`/api/games/${encodeURIComponent(gameId)}/guess`, {
+    method: 'POST',
+    body: JSON.stringify({ buildingId }),
+  });
+}
+
+export async function signOut(): Promise<void> {
+  await request<{ ok: boolean }>('/api/auth/logout', { method: 'POST' });
+}
+
+export async function deleteAccount(): Promise<void> {
+  await request<{ ok: boolean }>('/api/me', { method: 'DELETE' });
+}
+
+export const exportDataUrl = '/api/me/export';

@@ -1,16 +1,24 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   MAX_GUESSES,
-  type Answer,
   type BuildingOption,
-  type GameStatus,
-  type GuessRecord,
+  type GameView,
+  type Me,
   type Mode,
-  type PuzzleStart,
-  type Stats,
 } from '../shared/types';
-import { recordDailyResult } from '../shared/stats';
-import { ApiError, loadBuildings, startPuzzle, submitGuess } from './api';
+import { emptyStats } from '../shared/stats';
+import {
+  ApiError,
+  deleteAccount,
+  exportDataUrl,
+  importLegacy,
+  loadBuildings,
+  loadDailyGame,
+  loadMe,
+  loadPracticeGame,
+  signOut,
+  submitGameGuess,
+} from './api';
 import { GuessBoard } from './components/GuessBoard';
 import { GuessInput } from './components/GuessInput';
 import { Header } from './components/Header';
@@ -23,29 +31,18 @@ import { useI18n } from './i18n/I18nProvider';
 import { localizedErrorMessage } from './i18n/errors';
 import { buildShareText, copyText } from './share';
 import {
-  clearDaily,
-  clearPractice,
+  clearLegacyGames,
+  collectLegacyImport,
   hasSeenIntro,
-  loadDaily,
-  loadPractice,
-  loadStats,
   markIntroSeen,
-  pruneDaily,
-  saveDaily,
-  savePractice,
-  saveStats,
-  type StoredGame,
+  markLegacyImported,
 } from './storage';
 
 interface GameState {
   phase: 'idle' | 'loading' | 'ready' | 'error';
   error: string | null;
   submitError: string | null;
-  token: string | null;
-  puzzle: PuzzleStart | null;
-  guesses: GuessRecord[];
-  status: GameStatus;
-  answer?: Answer;
+  game: GameView | null;
   submitting: boolean;
 }
 
@@ -61,22 +58,8 @@ function emptyGame(): GameState {
     phase: 'idle',
     error: null,
     submitError: null,
-    token: null,
-    puzzle: null,
-    guesses: [],
-    status: 'playing',
+    game: null,
     submitting: false,
-  };
-}
-
-function syntheticPuzzle(mode: Mode, stored: StoredGame): PuzzleStart {
-  return {
-    token: stored.token,
-    mode,
-    maxGuesses: MAX_GUESSES,
-    dayNumber: stored.dayNumber,
-    date: stored.date,
-    dateLabel: stored.dateLabel,
   };
 }
 
@@ -93,81 +76,25 @@ function useGame(mode: Mode, enabled: boolean): GameController {
     setState(next);
   }, []);
 
-  const persist = useCallback(
-    (game: GameState) => {
-      if (!game.token) return;
-      const stored: StoredGame = {
-        token: game.token,
-        guesses: game.guesses,
-        status: game.status,
-        answer: game.answer,
-        dayNumber: game.puzzle?.dayNumber,
-        date: game.puzzle?.date,
-        dateLabel: game.puzzle?.dateLabel,
-      };
-      if (mode === 'daily') {
-        if (game.puzzle?.date) saveDaily(game.puzzle.date, stored);
-      } else {
-        savePractice(stored);
-      }
-    },
-    [mode],
-  );
-
-  const start = useCallback(
-    async (forceNew: boolean, excludeId?: string) => {
+  const load = useCallback(
+    async (newGame: boolean, excludeId?: string) => {
       const requestId = requestRef.current + 1;
       requestRef.current = requestId;
       apply({ ...emptyGame(), phase: 'loading' });
 
       try {
-        if (mode === 'practice' && !forceNew) {
-          const stored = loadPractice();
-          if (stored) {
-            apply({
-              phase: 'ready',
-              error: null,
-              submitError: null,
-              token: stored.token,
-              puzzle: syntheticPuzzle(mode, stored),
-              guesses: stored.guesses,
-              status: stored.status,
-              answer: stored.answer,
-              submitting: false,
-            });
-            return;
-          }
-        }
-
-        const puzzle = await startPuzzle(mode, mode === 'practice' ? excludeId : undefined);
+        const game =
+          mode === 'daily'
+            ? await loadDailyGame()
+            : await loadPracticeGame(newGame, excludeId);
         if (requestRef.current !== requestId) return;
-
-        if (mode === 'daily' && puzzle.date) {
-          const stored = loadDaily(puzzle.date);
-          if (stored) {
-            apply({
-              phase: 'ready',
-              error: null,
-              submitError: null,
-              token: stored.token,
-              puzzle,
-              guesses: stored.guesses,
-              status: stored.status,
-              answer: stored.answer,
-              submitting: false,
-            });
-            return;
-          }
-        }
-
-        const ready: GameState = {
-          ...emptyGame(),
+        apply({
           phase: 'ready',
-          token: puzzle.token,
-          puzzle,
-        };
-        apply(ready);
-        persist(ready);
+          error: null,
+          submitError: null,
+          game,
+          submitting: false,
+        });
       } catch (error) {
         if (requestRef.current !== requestId) return;
         apply({
@@ -177,69 +104,55 @@ function useGame(mode: Mode, enabled: boolean): GameController {
         });
       }
     },
-    [apply, lang, mode, persist],
+    [apply, lang, mode],
   );
 
   useEffect(() => {
     if (!enabled || startedRef.current) return;
     startedRef.current = true;
-    void start(false);
-  }, [enabled, start]);
+    void load(false);
+  }, [enabled, load]);
 
   const submit = useCallback(
     async (buildingId: string): Promise<boolean> => {
       const current = stateRef.current;
+      const game = current.game;
       if (
         current.phase !== 'ready' ||
-        !current.token ||
-        current.status !== 'playing' ||
+        !game ||
+        game.status !== 'playing' ||
         current.submitting
       ) {
         return false;
       }
-      if (current.guesses.some((guess) => guess.id === buildingId)) {
+      if (game.guesses.some((guess) => guess.id === buildingId)) {
         apply({ ...current, submitError: t('alreadyGuessedError') });
         return false;
       }
 
-      const token = current.token;
+      const gameId = game.id;
       apply({ ...current, submitting: true, submitError: null });
 
       try {
-        const result = await submitGuess(token, buildingId);
+        const updated = await submitGameGuess(gameId, buildingId);
         const latest = stateRef.current;
-        if (latest.token !== token) return false;
-
-        const record: GuessRecord = {
-          id: result.guess.id,
-          name: result.guess.name,
-          cells: result.cells,
-          correct: result.status === 'won',
-        };
-        const next: GameState = {
+        if (latest.game?.id !== gameId) return false;
+        apply({
           ...latest,
           submitting: false,
           submitError: null,
-          token: result.token ?? latest.token,
-          guesses: [...latest.guesses, record],
-          status: result.status,
-          answer: result.answer ?? latest.answer,
-        };
-        apply(next);
-        persist(next);
+          game: updated,
+        });
         return true;
       } catch (error) {
         const latest = stateRef.current;
-        if (latest.token !== token) return false;
+        if (latest.game?.id !== gameId) return false;
 
-        if (error instanceof ApiError && error.code === 'invalid_token') {
-          if (mode === 'daily') {
-            if (latest.puzzle?.date) clearDaily(latest.puzzle.date);
-          } else {
-            clearPractice();
-          }
-          apply({ ...emptyGame(), phase: 'loading' });
-          void start(false);
+        if (
+          error instanceof ApiError &&
+          (error.code === 'game_not_found' || error.code === 'daily_closed')
+        ) {
+          void load(false);
           return false;
         }
 
@@ -251,20 +164,19 @@ function useGame(mode: Mode, enabled: boolean): GameController {
         return false;
       }
     },
-    [apply, lang, mode, persist, start, t],
+    [apply, lang, load, t],
   );
 
   const retry = useCallback(() => {
-    void start(false);
-  }, [start]);
+    void load(false);
+  }, [load]);
 
   const startNew = useCallback(() => {
     if (mode !== 'practice') return;
-    const previous =
-      stateRef.current.answer?.id ?? stateRef.current.guesses.at(-1)?.id ?? undefined;
-    clearPractice();
-    void start(true, previous);
-  }, [mode, start]);
+    const current = stateRef.current.game;
+    const previous = current?.answer?.id ?? current?.guesses.at(-1)?.id;
+    void load(true, previous);
+  }, [load, mode]);
 
   return { state, submit, retry, startNew };
 }
@@ -276,21 +188,78 @@ function initialMode(): Mode {
     : 'daily';
 }
 
+let bootstrapPromise: Promise<Me> | null = null;
+
+async function bootstrapProfile(): Promise<Me> {
+  let current = await loadMe();
+  if (current.canImportLegacy) {
+    const payload = collectLegacyImport();
+    if (payload) {
+      try {
+        current = await importLegacy(payload);
+        markLegacyImported();
+        clearLegacyGames();
+      } catch (error) {
+        if (
+          error instanceof ApiError &&
+          error.status >= 400 &&
+          error.status < 500 &&
+          error.code !== 'rate_limited'
+        ) {
+          markLegacyImported();
+        }
+      }
+    }
+  }
+  return current;
+}
+
 export function App() {
   const { lang, t } = useI18n();
   const [mode, setMode] = useState<Mode>(initialMode);
-  const daily = useGame('daily', true);
-  const practice = useGame('practice', mode === 'practice');
+  const [me, setMe] = useState<Me | null>(null);
+  const [bootstrapError, setBootstrapError] = useState<string | null>(null);
+  const [bootstrapDone, setBootstrapDone] = useState(false);
+  const [authNotice, setAuthNotice] = useState<'ok' | 'error' | null>(null);
+
+  const daily = useGame('daily', bootstrapDone);
+  const practice = useGame('practice', bootstrapDone && mode === 'practice');
   const game = mode === 'daily' ? daily : practice;
 
   const [options, setOptions] = useState<BuildingOption[]>([]);
   const [optionsError, setOptionsError] = useState<string | null>(null);
   const [helpOpen, setHelpOpen] = useState(false);
   const [statsOpen, setStatsOpen] = useState(false);
-  const [stats, setStats] = useState<Stats>(loadStats);
   const [shareMessage, setShareMessage] = useState<string | null>(null);
   const [suggestionsOpen, setSuggestionsOpen] = useState(false);
   const shareTimer = useRef<number | null>(null);
+  const refreshedGame = useRef<string | null>(null);
+
+  const refreshMe = useCallback(async () => {
+    const next = await loadMe();
+    setMe(next);
+    return next;
+  }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+    if (!bootstrapPromise) bootstrapPromise = bootstrapProfile();
+    void bootstrapPromise
+      .then((profile) => {
+        if (!cancelled) setMe(profile);
+      })
+      .catch((error: unknown) => {
+        if (!cancelled) setBootstrapError(localizedErrorMessage(error, lang));
+      })
+      .finally(() => {
+        if (!cancelled) setBootstrapDone(true);
+      });
+    return () => {
+      cancelled = true;
+    };
+    // The promise is shared across React StrictMode's development remount.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -309,24 +278,26 @@ export function App() {
   }, []);
 
   useEffect(() => {
-    saveStats(stats);
-  }, [stats]);
+    const url = new URL(window.location.href);
+    const auth = url.searchParams.get('auth');
+    if (auth === 'ok' || auth === 'error') {
+      setAuthNotice(auth);
+      url.searchParams.delete('auth');
+      url.searchParams.delete('reason');
+      window.history.replaceState({}, '', url);
+    }
+  }, []);
 
-  const currentDailyDate = daily.state.puzzle?.date;
+  const dailyGame = daily.state.game;
+  const dailyStatus = dailyGame?.status;
   useEffect(() => {
-    if (currentDailyDate) pruneDaily(currentDailyDate);
-  }, [currentDailyDate]);
-
-  const dailyPhase = daily.state.phase;
-  const dailyStatus = daily.state.status;
-  const dailyAttempts = daily.state.guesses.length;
-  const dailyDay = daily.state.puzzle?.dayNumber;
-
-  useEffect(() => {
-    if (dailyPhase !== 'ready' || dailyStatus === 'playing' || dailyAttempts === 0) return;
-    if (!dailyDay) return;
-    setStats((current) => recordDailyResult(current, dailyDay, dailyStatus, dailyAttempts));
-  }, [dailyPhase, dailyStatus, dailyAttempts, dailyDay]);
+    if (!dailyGame || (dailyStatus !== 'won' && dailyStatus !== 'lost')) return;
+    if (refreshedGame.current === dailyGame.id) return;
+    refreshedGame.current = dailyGame.id;
+    void refreshMe().catch(() => {
+      // The result is saved. Stats refresh can wait for the next page load.
+    });
+  }, [dailyGame, dailyStatus, refreshMe]);
 
   const readyForIntro = daily.state.phase === 'ready' || practice.state.phase === 'ready';
   useEffect(() => {
@@ -344,12 +315,12 @@ export function App() {
 
   useEffect(() => {
     document.title =
-      mode === 'daily' && daily.state.puzzle?.dayNumber
-        ? t('pageTitleDaily', { number: padDay(daily.state.puzzle.dayNumber) })
+      mode === 'daily' && dailyGame?.dayNumber
+        ? t('pageTitleDaily', { number: padDay(dailyGame.dayNumber) })
         : t('pageTitle');
     const meta = document.querySelector('meta[name="description"]');
     meta?.setAttribute('content', t('metaDescription'));
-  }, [daily.state.puzzle?.dayNumber, lang, mode, t]);
+  }, [dailyGame?.dayNumber, lang, mode, t]);
 
   useEffect(() => {
     setShareMessage(null);
@@ -382,16 +353,35 @@ export function App() {
     setHelpOpen(true);
   };
 
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+      window.location.reload();
+    } catch {
+      setBootstrapError(t('accountError'));
+    }
+  };
+
+  const handleDeleteAccount = async () => {
+    if (!window.confirm(t('deleteAccountConfirm'))) return;
+    try {
+      await deleteAccount();
+      window.location.href = '/';
+    } catch {
+      setBootstrapError(t('accountError'));
+    }
+  };
+
   const handleShare = async () => {
-    const current = game.state;
-    if (!current.answer) return;
+    const current = game.state.game;
+    if (!current?.answer) return;
     const text = buildShareText(
       {
         mode,
-        dayNumber: current.puzzle?.dayNumber,
+        dayNumber: current.dayNumber,
         guesses: current.guesses,
         status: current.status,
-        maxGuesses: current.puzzle?.maxGuesses ?? MAX_GUESSES,
+        maxGuesses: current.maxGuesses,
       },
       lang,
     );
@@ -401,13 +391,13 @@ export function App() {
     shareTimer.current = window.setTimeout(() => setShareMessage(null), 2600);
   };
 
-  const maxGuesses = game.state.puzzle?.maxGuesses ?? MAX_GUESSES;
-  const usedGuesses = game.state.guesses.length;
-  const dailyDateLabel = daily.state.puzzle?.date
-    ? formatDateLabel(daily.state.puzzle.date, lang)
-    : daily.state.puzzle?.dateLabel;
-  const dailyMeta = daily.state.puzzle?.dayNumber
-    ? `${t('dailyNumber', { number: padDay(daily.state.puzzle.dayNumber) })}${
+  const maxGuesses = game.state.game?.maxGuesses ?? MAX_GUESSES;
+  const usedGuesses = game.state.game?.guesses.length ?? 0;
+  const dailyDateLabel = dailyGame?.date
+    ? formatDateLabel(dailyGame.date, lang)
+    : dailyGame?.dateLabel;
+  const dailyMeta = dailyGame?.dayNumber
+    ? `${t('dailyNumber', { number: padDay(dailyGame.dayNumber) })}${
         dailyDateLabel ? ` · ${dailyDateLabel}` : ''
       }`
     : t('dailyPuzzle');
@@ -418,15 +408,21 @@ export function App() {
     if (current.phase === 'idle' || current.phase === 'loading') {
       return <GameSkeleton />;
     }
-    if (current.phase === 'error') {
-      return <ErrorCard message={current.error ?? t('loadErrorFallback')} onRetry={game.retry} />;
+    if (current.phase === 'error' || !current.game) {
+      return (
+        <ErrorCard
+          message={current.error ?? t('loadErrorFallback')}
+          onRetry={game.retry}
+        />
+      );
     }
 
+    const view = current.game;
     const currentGuessNumber =
-      current.status === 'playing'
-        ? Math.min(usedGuesses + 1, maxGuesses)
-        : usedGuesses;
-    const guessLabel = t(current.status === 'playing' ? 'guessLabel' : 'guessesLabel');
+      view.status === 'playing'
+        ? Math.min(view.guesses.length + 1, maxGuesses)
+        : view.guesses.length;
+    const guessLabel = t(view.status === 'playing' ? 'guessLabel' : 'guessesLabel');
 
     return (
       <>
@@ -448,26 +444,26 @@ export function App() {
           </span>
         </div>
 
-        <GuessBoard guesses={current.guesses} />
+        <GuessBoard guesses={view.guesses} />
 
-        {current.status === 'playing' ? (
+        {view.status === 'playing' ? (
           <GuessInput
             key={mode}
             options={options}
-            guesses={current.guesses}
+            guesses={view.guesses}
             onSubmit={game.submit}
             error={optionsError ?? current.submitError}
             submitting={current.submitting}
             disabled={current.phase !== 'ready'}
             onOpenChange={setSuggestionsOpen}
           />
-        ) : current.answer ? (
+        ) : view.answer ? (
           <RevealPanel
-            answer={current.answer}
-            status={current.status === 'won' ? 'won' : 'lost'}
-            attempts={usedGuesses}
+            answer={view.answer}
+            status={view.status === 'won' ? 'won' : 'lost'}
+            attempts={view.guesses.length}
             mode={mode}
-            nextDailyAt={daily.state.puzzle?.nextDailyAt}
+            nextDailyAt={dailyGame?.nextDailyAt}
             shareMessage={shareMessage}
             onShare={handleShare}
             onNewPractice={handleNewPractice}
@@ -492,16 +488,54 @@ export function App() {
 
   return (
     <div className="app">
-      <Header onHelp={handleHelp} onStats={() => setStatsOpen(true)} />
+      <Header
+        onHelp={handleHelp}
+        onStats={() => setStatsOpen(true)}
+        me={me}
+        onSignOut={handleSignOut}
+        onDeleteAccount={handleDeleteAccount}
+        exportUrl={exportDataUrl}
+      />
 
       <main className="main">
+        {authNotice && (
+          <div
+            className={`app-notice app-notice--${authNotice === 'ok' ? 'ok' : 'error'}`}
+            role="status"
+          >
+            <span>{t(authNotice === 'ok' ? 'authSuccess' : 'authError')}</span>
+            <button
+              type="button"
+              className="app-notice__close"
+              onClick={() => setAuthNotice(null)}
+              aria-label={t('close')}
+            >
+              ×
+            </button>
+          </div>
+        )}
+
+        {bootstrapError && (
+          <div className="app-notice app-notice--error" role="alert">
+            <span>{bootstrapError}</span>
+            <button
+              type="button"
+              className="app-notice__close"
+              onClick={() => setBootstrapError(null)}
+              aria-label={t('close')}
+            >
+              ×
+            </button>
+          </div>
+        )}
+
         <div className="game-head">
           <ModeTabs mode={mode} onChange={handleModeChange} />
           <div className="game-meta-row">
             <p className="game-meta">{mode === 'daily' ? dailyMeta : t('practiceMeta')}</p>
             {mode === 'practice' &&
               practice.state.phase === 'ready' &&
-              practice.state.status === 'playing' && (
+              practice.state.game?.status === 'playing' && (
                 <button type="button" className="text-button" onClick={handleNewPractice}>
                   {t('newBuilding')}
                 </button>
@@ -558,7 +592,12 @@ export function App() {
       </footer>
 
       <HowToPlay open={helpOpen} onClose={() => setHelpOpen(false)} />
-      <StatsModal open={statsOpen} onClose={() => setStatsOpen(false)} stats={stats} />
+      <StatsModal
+        open={statsOpen}
+        onClose={() => setStatsOpen(false)}
+        stats={me?.profile.stats ?? emptyStats()}
+        legacyImported={me?.profile.legacyImported ?? false}
+      />
     </div>
   );
 }

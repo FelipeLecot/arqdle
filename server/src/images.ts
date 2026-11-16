@@ -248,6 +248,7 @@ export async function getWikipediaImage(
   wikiTitle: string,
   name: string,
 ): Promise<AnswerImage | undefined> {
+  if (process.env.WIKIMEDIA_IMAGES === 'off') return undefined;
   const cached = cache.get(wikiTitle);
   if (cached && cached.expires > Date.now()) return cached.value;
 

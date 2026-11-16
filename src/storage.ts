@@ -1,14 +1,10 @@
-import type { Answer, GameStatus, GuessRecord, Stats } from '../shared/types';
+import type { Answer, GameStatus, GuessRecord, LegacyImportRequest, Stats } from '../shared/types';
 import { emptyStats } from '../shared/stats';
 
 const PREFIX = 'arqdle:v1';
 const LEGACY_PREFIX = 'archdle:v1';
 // Increment when the catalog changes in a way that changes daily answers.
 const DAILY_KEY_VERSION = 'v2';
-
-function dailyKey(date: string): string {
-  return `${PREFIX}:daily:${DAILY_KEY_VERSION}:${date}`;
-}
 
 export function migrateLegacyStorage(): void {
   try {
@@ -30,8 +26,8 @@ export function migrateLegacyStorage(): void {
   }
 }
 
-export interface StoredGame {
-  token: string;
+interface StoredGame {
+  token?: string;
   guesses: GuessRecord[];
   status: GameStatus;
   answer?: Answer;
@@ -52,15 +48,7 @@ function write(key: string, value: string): void {
   try {
     window.localStorage.setItem(key, value);
   } catch {
-    // Storage can be unavailable in private mode. The game still works in memory.
-  }
-}
-
-function remove(key: string): void {
-  try {
-    window.localStorage.removeItem(key);
-  } catch {
-    // Ignore.
+    // Storage can be unavailable in private mode.
   }
 }
 
@@ -68,8 +56,6 @@ function isStoredGame(value: unknown): value is StoredGame {
   if (!value || typeof value !== 'object') return false;
   const game = value as Partial<StoredGame>;
   return (
-    typeof game.token === 'string' &&
-    game.token.length > 0 &&
     Array.isArray(game.guesses) &&
     game.guesses.every(
       (guess) =>
@@ -90,45 +76,6 @@ function parseGame(raw: string | null): StoredGame | null {
   } catch {
     return null;
   }
-}
-
-export function loadDaily(date: string): StoredGame | null {
-  return parseGame(read(dailyKey(date)));
-}
-
-export function saveDaily(date: string, game: StoredGame): void {
-  write(dailyKey(date), JSON.stringify(game));
-}
-
-export function clearDaily(date: string): void {
-  remove(dailyKey(date));
-}
-
-export function pruneDaily(keepDate: string): void {
-  try {
-    const prefix = `${PREFIX}:daily:`;
-    const keepKey = dailyKey(keepDate);
-    for (let index = window.localStorage.length - 1; index >= 0; index -= 1) {
-      const key = window.localStorage.key(index);
-      if (key && key.startsWith(prefix) && key !== keepKey) {
-        window.localStorage.removeItem(key);
-      }
-    }
-  } catch {
-    // Ignore storage errors.
-  }
-}
-
-export function loadPractice(): StoredGame | null {
-  return parseGame(read(`${PREFIX}:practice`));
-}
-
-export function savePractice(game: StoredGame): void {
-  write(`${PREFIX}:practice`, JSON.stringify(game));
-}
-
-export function clearPractice(): void {
-  remove(`${PREFIX}:practice`);
 }
 
 export function loadStats(): Stats {
@@ -153,8 +100,69 @@ export function loadStats(): Stats {
   }
 }
 
-export function saveStats(stats: Stats): void {
-  write(`${PREFIX}:stats`, JSON.stringify(stats));
+function latestDailyGame(): { date: string; game: StoredGame } | null {
+  try {
+    let latest: { date: string; game: StoredGame } | null = null;
+    const prefix = `${PREFIX}:daily:${DAILY_KEY_VERSION}:`;
+    for (let index = 0; index < window.localStorage.length; index += 1) {
+      const key = window.localStorage.key(index);
+      if (!key?.startsWith(prefix)) continue;
+      const date = key.slice(prefix.length);
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) continue;
+      const game = parseGame(window.localStorage.getItem(key));
+      if (game && (!latest || date > latest.date)) latest = { date, game };
+    }
+    return latest;
+  } catch {
+    return null;
+  }
+}
+
+function hasStats(stats: Stats): boolean {
+  return (
+    stats.played > 0 ||
+    stats.wins > 0 ||
+    stats.currentStreak > 0 ||
+    stats.maxStreak > 0 ||
+    stats.distribution.some((value) => value > 0)
+  );
+}
+
+/** Read the old browser-only progress so the server can import it once. */
+export function collectLegacyImport(): LegacyImportRequest | null {
+  if (read(`${PREFIX}:legacy-imported`) !== null) return null;
+
+  const stats = loadStats();
+  const daily = latestDailyGame();
+  const payload: LegacyImportRequest = {};
+  if (hasStats(stats)) payload.stats = stats;
+  if (daily) {
+    payload.daily = {
+      date: daily.date,
+      guesses: daily.game.guesses.map((guess) => ({ id: guess.id })),
+    };
+  }
+
+  return payload.stats || payload.daily ? payload : null;
+}
+
+export function markLegacyImported(): void {
+  write(`${PREFIX}:legacy-imported`, new Date().toISOString());
+}
+
+export function clearLegacyGames(): void {
+  try {
+    const prefix = `${PREFIX}:daily:${DAILY_KEY_VERSION}:`;
+    const keys: string[] = [];
+    for (let index = 0; index < window.localStorage.length; index += 1) {
+      const key = window.localStorage.key(index);
+      if (key && key.startsWith(prefix)) keys.push(key);
+    }
+    for (const key of keys) window.localStorage.removeItem(key);
+    window.localStorage.removeItem(`${PREFIX}:practice`);
+  } catch {
+    // Ignore storage errors.
+  }
 }
 
 export function hasSeenIntro(): boolean {

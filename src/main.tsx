@@ -2,12 +2,10 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { App } from './App';
 import { I18nProvider } from './i18n/I18nProvider';
-import { resetDailyIfRequested } from './reset';
 import { migrateLegacyStorage } from './storage';
 import './styles.css';
 
 migrateLegacyStorage();
-resetDailyIfRequested();
 
 const root = document.getElementById('root');
 if (!root) throw new Error('Root element not found');

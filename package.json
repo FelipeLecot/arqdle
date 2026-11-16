@@ -10,12 +10,19 @@
     "dev:client": "vite",
     "build": "npm run build:client && npm run build:server",
     "build:client": "vite build",
-    "build:server": "esbuild server/src/index.ts --bundle --platform=node --format=esm --outfile=dist/server/index.js --packages=external && mkdir -p dist/server/data && cp server/data/daily.json dist/server/data/daily.json",
+    "build:server": "esbuild server/src/index.ts --bundle --platform=node --format=esm --outfile=dist/server/index.js --packages=external && esbuild server/src/migrate-cli.ts --bundle --platform=node --format=esm --outfile=dist/server/migrate.js --packages=external && esbuild server/src/cleanup-guests.ts --bundle --platform=node --format=esm --outfile=dist/server/cleanup-guests.js --packages=external && rm -rf dist/server/sql && cp -R server/sql dist/server/sql && mkdir -p dist/server/data && cp server/data/daily.json dist/server/data/daily.json",
     "start": "NODE_ENV=production node dist/server/index.js",
     "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.server.json",
     "test": "vitest run",
     "test:watch": "vitest",
-    "preview": "npm run build && npm start"
+    "preview": "npm run build && npm start",
+    "db:up": "docker compose up -d db",
+    "db:down": "docker compose down",
+    "db:reset": "docker compose down -v && docker compose up -d db",
+    "db:migrate": "tsx server/src/migrate-cli.ts",
+    "db:migrate:prod": "node dist/server/migrate.js",
+    "db:cleanup-guests": "tsx server/src/cleanup-guests.ts",
+    "db:cleanup-guests:prod": "node dist/server/cleanup-guests.js"
   },
   "engines": {
     "node": ">=22.12"
@@ -23,12 +30,15 @@
   "dependencies": {
     "dotenv": "^18.0.10",
     "express": "^5.3.0",
+    "jose": "^6.2.17",
+    "pg": "^8.23.1",
     "react": "^19.3.1",
     "react-dom": "^19.3.1"
   },
   "devDependencies": {
     "@types/express": "^5.0.6",
     "@types/node": "^26.6.6",
+    "@types/pg": "^8.23.1",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^6.3.0",
