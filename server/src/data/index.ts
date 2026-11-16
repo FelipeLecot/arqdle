@@ -1,17 +1,32 @@
 import type { Building } from '../types';
 import { africa } from './africa';
+import { africaExtra } from './africa-extra';
 import { americas } from './americas';
+import { americasExtra } from './americas-extra';
 import { asia } from './asia';
+import { asiaExtra } from './asia-extra';
 import { europe } from './europe';
+import { europeExtra } from './europe-extra';
+import { moreBuildings } from './more';
 import { antarctica, oceania } from './oceania';
+import { antarcticaExtra, oceaniaExtra } from './oceania-extra';
+import { southAmericaExtra } from './south-america-extra';
 
 export const buildings: Building[] = [
   ...europe,
+  ...europeExtra,
   ...americas,
+  ...americasExtra,
+  ...southAmericaExtra,
   ...africa,
+  ...africaExtra,
   ...asia,
+  ...asiaExtra,
   ...oceania,
+  ...oceaniaExtra,
   ...antarctica,
+  ...antarcticaExtra,
+  ...moreBuildings,
 ].sort((a, b) => a.name.localeCompare(b.name, 'en'));
 
 const byId = new Map<string, Building>();

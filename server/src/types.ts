@@ -31,12 +31,14 @@ export const FORM_FAMILIES = [
   'Commemorative',
   'Residential',
   'Governmental',
+  'Commercial',
   'High-rise',
   'Cultural',
   'Educational',
   'Spectacle',
   'Fortification',
   'Infrastructure',
+  'Transport',
   'Tower',
   'Settlement',
   'Ceremonial',
@@ -61,6 +63,7 @@ export const USE_CATEGORIES = [
   'Mixed use',
   'Research',
   'Ceremonial',
+  'Transport',
 ] as const;
 
 export type UseCategory = (typeof USE_CATEGORIES)[number];

@@ -18,7 +18,7 @@ function addDays(dateKey: string, days: number): string {
 
 describe('building data', () => {
   it('contains a useful number of buildings', () => {
-    expect(buildings.length).toBeGreaterThanOrEqual(60);
+    expect(buildings.length).toBeGreaterThan(200);
   });
 
   it('has unique ids and names', () => {

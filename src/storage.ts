@@ -2,6 +2,12 @@ import type { Answer, GameStatus, GuessRecord, Stats } from '../shared/types';
 import { emptyStats } from '../shared/stats';
 
 const PREFIX = 'archdle:v1';
+// Increment when the catalog changes in a way that changes daily answers.
+const DAILY_KEY_VERSION = 'v2';
+
+function dailyKey(date: string): string {
+  return `${PREFIX}:daily:${DAILY_KEY_VERSION}:${date}`;
+}
 
 export interface StoredGame {
   token: string;
@@ -66,23 +72,24 @@ function parseGame(raw: string | null): StoredGame | null {
 }
 
 export function loadDaily(date: string): StoredGame | null {
-  return parseGame(read(`${PREFIX}:daily:${date}`));
+  return parseGame(read(dailyKey(date)));
 }
 
 export function saveDaily(date: string, game: StoredGame): void {
-  write(`${PREFIX}:daily:${date}`, JSON.stringify(game));
+  write(dailyKey(date), JSON.stringify(game));
 }
 
 export function clearDaily(date: string): void {
-  remove(`${PREFIX}:daily:${date}`);
+  remove(dailyKey(date));
 }
 
 export function pruneDaily(keepDate: string): void {
   try {
     const prefix = `${PREFIX}:daily:`;
+    const keepKey = dailyKey(keepDate);
     for (let index = window.localStorage.length - 1; index >= 0; index -= 1) {
       const key = window.localStorage.key(index);
-      if (key && key.startsWith(prefix) && key !== `${prefix}${keepDate}`) {
+      if (key && key.startsWith(prefix) && key !== keepKey) {
         window.localStorage.removeItem(key);
       }
     }

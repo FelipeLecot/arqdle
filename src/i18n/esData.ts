@@ -1,3 +1,5 @@
+import { buildingExtraEs } from './esExtra';
+
 export interface BuildingCopyEs {
   name: string;
   city: string;
@@ -39,6 +41,54 @@ export const countriesEs: Record<string, string> = {
   Australia: 'Australia',
   'New Zealand': 'Nueva Zelanda',
   Antarctica: 'Antártida',
+  Ireland: 'Irlanda',
+  Czechia: 'Chequia',
+  Hungary: 'Hungría',
+  Poland: 'Polonia',
+  Croatia: 'Croacia',
+  Belgium: 'Bélgica',
+  Netherlands: 'Países Bajos',
+  Norway: 'Noruega',
+  Sweden: 'Suecia',
+  Finland: 'Finlandia',
+  Switzerland: 'Suiza',
+  Portugal: 'Portugal',
+  Austria: 'Austria',
+  Guatemala: 'Guatemala',
+  Cuba: 'Cuba',
+  Ecuador: 'Ecuador',
+  Colombia: 'Colombia',
+  Argentina: 'Argentina',
+  Uruguay: 'Uruguay',
+  Chile: 'Chile',
+  Bolivia: 'Bolivia',
+  Paraguay: 'Paraguay',
+  Tunisia: 'Túnez',
+  Mali: 'Malí',
+  Tanzania: 'Tanzania',
+  Sudan: 'Sudán',
+  'South Africa': 'Sudáfrica',
+  'Ivory Coast': 'Costa de Marfil',
+  Nigeria: 'Nigeria',
+  Rwanda: 'Ruanda',
+  Iran: 'Irán',
+  Iraq: 'Irak',
+  Syria: 'Siria',
+  Qatar: 'Catar',
+  'Saudi Arabia': 'Arabia Saudita',
+  Pakistan: 'Pakistán',
+  Bangladesh: 'Bangladés',
+  'Sri Lanka': 'Sri Lanka',
+  Nepal: 'Nepal',
+  Myanmar: 'Myanmar',
+  Thailand: 'Tailandia',
+  Laos: 'Laos',
+  Vietnam: 'Vietnam',
+  Philippines: 'Filipinas',
+  'South Korea': 'Corea del Sur',
+  Singapore: 'Singapur',
+  Micronesia: 'Micronesia',
+  'New Caledonia': 'Nueva Caledonia',
 };
 
 export const continentsEs: Record<string, string> = {
@@ -91,6 +141,49 @@ export const stylesEs: Record<string, string> = {
   'Russian Orthodox': 'Ortodoxo ruso',
   Shona: 'Shona',
   'Structural Expressionism': 'Expresionismo estructural',
+  'Gothic Revival': 'Neogótico',
+  Mudéjar: 'Mudéjar',
+  Manueline: 'Manuelino',
+  'Neo-Baroque': 'Neobarroco',
+  'Space Age': 'Era espacial',
+  'Neo-Renaissance': 'Neorrenacentista',
+  'National Romanticism': 'Romanticismo nacional',
+  Romanticism: 'Romanticismo',
+  'Beaux-Arts': 'Beaux-Arts',
+  Georgian: 'Georgiano',
+  'Mediterranean Revival': 'Neomediterráneo',
+  'Prairie School': 'Escuela de la Pradera',
+  Châteauesque: 'Estilo château',
+  'Second Empire': 'Segundo Imperio',
+  'Flemish Renaissance': 'Renacimiento flamenco',
+  Ottoman: 'Otomano',
+  'Ancient Persian': 'Persa antiguo',
+  Safavid: 'Safaví',
+  Qajar: 'Qayarí',
+  Abbasid: 'Abasí',
+  Umayyad: 'Omeya',
+  Rajput: 'Rajput',
+  'Indo-Saracenic': 'Indosarraceno',
+  Dravidian: 'Dravídico',
+  Kalinga: 'Kalinga',
+  Buddhist: 'Budista',
+  'Bengal Sultanate': 'Sultanato de Bengala',
+  Sinhalese: 'Cingalés',
+  Burmese: 'Birmano',
+  Thai: 'Tailandés',
+  Lao: 'Lao',
+  Nguyen: 'Nguyen',
+  Korean: 'Coreano',
+  Tibetan: 'Tibetano',
+  'Javanese Hindu': 'Hindú javanés',
+  Vernacular: 'Vernáculo',
+  'Sudano-Sahelian': 'Sudanosaheliano',
+  Swahili: 'Suajili',
+  Nubian: 'Nubio',
+  Italianate: 'Italianizante',
+  'Micronesian': 'Micronesio',
+  'Hawaiian Renaissance': 'Renacimiento hawaiano',
+  Tudor: 'Tudor',
 };
 
 export const formFamiliesEs: Record<string, string> = {
@@ -109,6 +202,8 @@ export const formFamiliesEs: Record<string, string> = {
   Settlement: 'Asentamiento',
   Ceremonial: 'Ceremonial',
   Research: 'Investigación',
+  Commercial: 'Comercial',
+  Transport: 'Transporte',
 };
 
 export const typesEs: Record<string, string> = {
@@ -151,6 +246,22 @@ export const typesEs: Record<string, string> = {
   'Temple pyramid': 'Pirámide-templo',
   Tomb: 'Tumba',
   Villa: 'Villa',
+  Fortress: 'Fortaleza',
+  Monastery: 'Monasterio',
+  'City gate': 'Puerta de la ciudad',
+  'Office building': 'Edificio de oficinas',
+  'City hall': 'Ayuntamiento',
+  'Railway station': 'Estación de ferrocarril',
+  'Airport terminal': 'Terminal aeroportuaria',
+  'Government building': 'Edificio gubernamental',
+  Hotel: 'Hotel',
+  Theatre: 'Teatro',
+  Stupa: 'Estupa',
+  Pagoda: 'Pagoda',
+  'Exhibition building': 'Pabellón de exposiciones',
+  'Fortified village': 'Aldea fortificada',
+  Monument: 'Monumento',
+  Tower: 'Torre',
 };
 
 export const usesEs: Record<string, string> = {
@@ -169,6 +280,7 @@ export const usesEs: Record<string, string> = {
   Research: 'Investigación',
   Residential: 'Residencial',
   Tourism: 'Turismo',
+  Transport: 'Transporte',
 };
 
 export const materialsEs: Record<string, string> = {
@@ -207,9 +319,14 @@ export const materialsEs: Record<string, string> = {
   Tuff: 'Toba',
   Wood: 'Madera',
   'Wrought iron': 'Hierro forjado',
+  Copper: 'Cobre',
+  Aluminium: 'Aluminio',
+  Adobe: 'Adobe',
+  Mudbrick: 'Ladrillo de barro',
+  'Coral stone': 'Piedra coral',
 };
 
-export const buildingEs: Record<string, BuildingCopyEs> = {
+const buildingEsBase: Record<string, BuildingCopyEs> = {
   'petra-treasury': {
     name: 'Al-Khazneh',
     city: 'Petra',
@@ -815,4 +932,9 @@ export const buildingEs: Record<string, BuildingCopyEs> = {
       'Se ha reconstruido y ampliado muchas veces, incluso después de que las tropas británicas la incendiaran en 1814.',
     aliases: ['La Casa Blanca'],
   },
+};
+
+export const buildingEs: Record<string, BuildingCopyEs> = {
+  ...buildingEsBase,
+  ...buildingExtraEs,
 };

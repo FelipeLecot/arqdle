@@ -36,8 +36,12 @@ const MATERIAL_FAMILIES: Record<string, string> = {
   stucco: 'ceramic',
   plaster: 'ceramic',
   tile: 'ceramic',
+  adobe: 'earth',
+  mudbrick: 'earth',
   wood: 'timber',
   timber: 'timber',
+  copper: 'metal',
+  'coral stone': 'stone',
   'composite panels': 'synthetic',
   plastic: 'synthetic',
 };

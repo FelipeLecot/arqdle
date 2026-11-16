@@ -67,7 +67,7 @@ production.
 
 ## How the daily answer works
 
-The game ships 72 buildings in `server/src/data/`. The English dataset is bundled
+The game ships 224 buildings in `server/src/data/`. The English dataset is bundled
 into the server only. Spanish display copy for the same buildings lives in
 `src/i18n/esData.ts` so the language toggle can update saved games immediately.
 
@@ -123,6 +123,8 @@ Buildings live in:
 - `server/src/data/africa.ts`
 - `server/src/data/asia.ts`
 - `server/src/data/oceania.ts`
+- `server/src/data/*-extra.ts`
+- `server/src/data/more.ts`
 
 Each entry implements `Building` in `server/src/types.ts`. Required fields include
 the name, city, country and ISO code, continent, signed year (negative for BC),
@@ -145,6 +147,22 @@ and Spanish translation coverage.
 Dates are completion, consecration, or opening dates, depending on the building.
 Use `yearNote` when a single year needs context (for example, a rebuilt pavilion or
 a cathedral finished centuries after it began).
+
+## Data sources
+
+The catalog was assembled from public sources and checked building by building. The
+main sources are:
+
+- Wikidata (CC0) for structured candidates and identifiers
+- Wikipedia and Wikimedia Commons for article titles, history and photos
+- UNESCO World Heritage List for global and underrepresented sites
+- National heritage registers, including English, French, Spanish, Italian, US,
+  Canadian, Australian and New Zealand lists
+- Aga Khan Award for Architecture and Docomomo for modern and non-Western work
+
+Facts are written in our own words. Photos are fetched from Wikimedia and credited
+at reveal time. Before adding a building, verify its date, country, style, type,
+materials and architect against an official or heritage source.
 
 ## API
 
