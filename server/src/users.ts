@@ -40,7 +40,6 @@ export async function buildMe(user: UserRow): Promise<Me> {
       pictureUrl: user.picture_url,
       createdAt: user.created_at.toISOString(),
       stats,
-      legacyImported: user.legacy_imported_at !== null,
     },
     auth: {
       googleEnabled: config.google.enabled,

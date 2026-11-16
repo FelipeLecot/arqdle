@@ -112,7 +112,6 @@ export interface Profile {
   pictureUrl: string | null;
   createdAt: string;
   stats: Stats;
-  legacyImported: boolean;
 }
 
 export interface Me {

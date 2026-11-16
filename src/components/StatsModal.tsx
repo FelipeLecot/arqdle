@@ -6,10 +6,9 @@ interface StatsModalProps {
   open: boolean;
   onClose: () => void;
   stats: Stats;
-  legacyImported?: boolean;
 }
 
-export function StatsModal({ open, onClose, stats, legacyImported }: StatsModalProps) {
+export function StatsModal({ open, onClose, stats }: StatsModalProps) {
   const { t } = useI18n();
   const winPercent = stats.played === 0 ? 0 : Math.round((stats.wins / stats.played) * 100);
   const max = Math.max(...stats.distribution, 1);
@@ -37,7 +36,6 @@ export function StatsModal({ open, onClose, stats, legacyImported }: StatsModalP
 
       <h3 className="stats__subtitle">{t('statsDistribution')}</h3>
       <p className="stats__note">{t('statsDailyOnly')}</p>
-      {legacyImported && <p className="stats__note">{t('statsLegacyNote')}</p>}
 
       <div className="distribution" aria-label={t('statsDistribution')}>
         {stats.distribution.map((count, index) => (

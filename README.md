@@ -223,8 +223,7 @@ On the first load after upgrading from the browser-only build, the client sends 
 old `localStorage` stats and the latest saved daily game to `POST /api/me/import`.
 The server records the aggregate once and replays the current daily guesses against
 the stored answer. Historical per-day rows from before the database are not
-recreated; their totals are preserved in `users.legacy_stats`. The stats modal notes
-when imported stats are included.
+recreated; their totals are preserved in `users.legacy_stats`.
 
 Local storage is no longer the source of truth. It is used only for the one-time
 import and for the “how to play” flag.

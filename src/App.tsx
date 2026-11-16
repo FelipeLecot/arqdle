@@ -596,7 +596,6 @@ export function App() {
         open={statsOpen}
         onClose={() => setStatsOpen(false)}
         stats={me?.profile.stats ?? emptyStats()}
-        legacyImported={me?.profile.legacyImported ?? false}
       />
     </div>
   );
