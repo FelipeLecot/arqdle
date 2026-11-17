@@ -63,6 +63,7 @@ Production runs on the shared K3s cluster behind CloudFront at <https://arqdle.c
   to ECR with GitHub Actions (`.github/workflows/deploy.yml`). The workflow uses
   GitHub OIDC and assumes `github-arqdle-main`; no long-lived AWS keys are stored.
   Add the `AWS_ROLE_ARN` repository secret before the first run.
+- The image is built for `linux/arm64`, matching the `t4g` K3s nodes.
 - Argo CD Image Updater writes the new tag into
   `shared-argocd/charts/arqdle/values-prod.yaml`. Argo CD then runs the pre-deploy
   migration Job (`node dist/server/migrate.js`) and rolls the Deployment.

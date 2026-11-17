@@ -74,6 +74,9 @@ jobs:
         id: ecr
         uses: aws-actions/amazon-ecr-login@v2
 
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
@@ -82,6 +85,8 @@ jobs:
         with:
           context: .
           push: true
+          # The K3s nodes are ARM64 (t4g instances).
+          platforms: linux/arm64
           build-args: |
             SITE_URL=${{ env.SITE_URL }}
           tags: ${{ steps.ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ steps.tag.outputs.value }}
