@@ -55,6 +55,26 @@ The app does not need Docker in production. Point `DATABASE_URL` at the existing
 Postgres instance. Keep the database port closed to the public internet and allow
 only the application host through the security group.
 
+### Deploying to the shared cluster
+
+Production runs on the shared K3s cluster behind CloudFront at <https://arqdle.com>.
+
+- Pushing to `main` builds and publishes `shared-infra-prod-containers-ecr/arqdle:main-<sha>`
+  to ECR with GitHub Actions (`.github/workflows/deploy.yml`). The workflow uses
+  GitHub OIDC and assumes `github-arqdle-main`; no long-lived AWS keys are stored.
+  Add the `AWS_ROLE_ARN` repository secret before the first run.
+- Argo CD Image Updater writes the new tag into
+  `shared-argocd/charts/arqdle/values-prod.yaml`. Argo CD then runs the pre-deploy
+  migration Job (`node dist/server/migrate.js`) and rolls the Deployment.
+- `DB_AUTO_MIGRATE=false` in production. The migration Job is the only migrator.
+- The EC2 Postgres host has no TLS listener, so the cluster sets
+  `DATABASE_SSL=disable`. Traffic stays inside the VPC.
+- CloudFront caches `/assets/*` for a year and the root images for a shorter
+  window. `/api/*` is not cached, and the origin also sends
+  `Cache-Control: no-store` on API responses.
+- The full runbook (certificate, DNS, secrets, first deploy) lives in
+  `shared-infra/docs/arqdle-setup.md`.
+
 ### Production database checklist
 
 - Use a dedicated PostgreSQL role. It needs `CONNECT`, `USAGE` on schema `public`,

@@ -111,8 +111,19 @@ function readDatabaseSsl(): DatabaseSsl {
 
 const databaseSsl = readDatabaseSsl();
 
-const googleClientId = process.env.GOOGLE_CLIENT_ID?.trim() || '';
-const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET?.trim() || '';
+/**
+ * Treat Secrets Manager placeholders as unset. The CDK stack creates the Google
+ * secrets with a PLACEHOLDER value so the ExternalSecret can resolve before the
+ * real OAuth client exists. Without this guard the sign-in button would appear
+ * and fail at Google.
+ */
+function readOptionalSecret(value: string | undefined): string {
+  const trimmed = value?.trim() || '';
+  return trimmed.startsWith('PLACEHOLDER') ? '' : trimmed;
+}
+
+const googleClientId = readOptionalSecret(process.env.GOOGLE_CLIENT_ID);
+const googleClientSecret = readOptionalSecret(process.env.GOOGLE_CLIENT_SECRET);
 if (Boolean(googleClientId) !== Boolean(googleClientSecret)) {
   throw new Error('Set both GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET, or neither.');
 }
