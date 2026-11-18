@@ -7,8 +7,8 @@ export default defineConfig(({ mode }) => {
   const siteUrl = (env.SITE_URL || '').trim().replace(/\/+$/, '');
   const hreflangLinks = siteUrl
     ? [
-        `<link rel="alternate" hreflang="en" href="${siteUrl}/" />`,
-        `<link rel="alternate" hreflang="es" href="${siteUrl}/?lang=es" />`,
+        `<link rel="alternate" hreflang="en" href="${siteUrl}/?lang=en" />`,
+        `<link rel="alternate" hreflang="es" href="${siteUrl}/" />`,
         `<link rel="alternate" hreflang="x-default" href="${siteUrl}/" />`,
       ].join('\n    ')
     : '';

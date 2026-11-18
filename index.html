@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,7 +10,7 @@
     <meta name="author" content="Felipe Lecot" />
     <meta
       name="description"
-      content="Arqdle is a free daily architecture guessing game. Guess the building in six tries from clues about country, era, style, type, materials, architect and more. Play in English or Spanish."
+      content="Arqdle es un juego diario de arquitectura. Adivina el edificio en seis intentos con pistas sobre país, época, estilo, tipo, materiales, arquitecto y más."
     />
     <meta
       name="keywords"
@@ -32,10 +32,10 @@
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Arqdle" />
-    <meta property="og:title" content="Arqdle — Daily Architecture Guessing Game" />
+    <meta property="og:title" content="Arqdle — Juego diario de adivinanzas de arquitectura" />
     <meta
       property="og:description"
-      content="Guess the building in six tries. Compare eight clues about country, era, style, type, materials, architect and more. A new building every day."
+      content="Adivina el edificio en seis intentos. Compara ocho pistas sobre país, época, estilo, tipo, materiales, arquitecto y más. Un edificio nuevo cada día."
     />
     <meta property="og:url" content="%SITE_URL%/" />
     <meta property="og:image" content="%SITE_URL%/og-image.png" />
@@ -44,20 +44,20 @@
     <meta property="og:image:height" content="630" />
     <meta
       property="og:image:alt"
-      content="Arqdle — Guess the building. One landmark at a time."
+      content="Arqdle — Adivina el edificio. Un monumento a la vez."
     />
-    <meta property="og:locale" content="en_US" />
-    <meta property="og:locale:alternate" content="es_ES" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:locale:alternate" content="en_US" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Arqdle — Daily Architecture Guessing Game" />
+    <meta name="twitter:title" content="Arqdle — Juego diario de adivinanzas de arquitectura" />
     <meta
       name="twitter:description"
-      content="Guess the building in six tries. Eight clues. A new building every day. English and Spanish."
+      content="Adivina el edificio en seis intentos. Ocho pistas. Un edificio nuevo cada día. Español e inglés."
     />
     <meta name="twitter:image" content="%SITE_URL%/og-image.png" />
 
-    <title>Arqdle — Daily Architecture Guessing Game</title>
+    <title>Arqdle — Juego diario de adivinanzas de arquitectura</title>
 
     <script type="application/ld+json">
       {
@@ -143,11 +143,20 @@
         line-height: 1.45;
         letter-spacing: -0.015em;
       }
-      .boot__body {
-        margin: 14px 0 0;
-        color: #5f5a52;
-        font-size: 14px;
-        line-height: 1.55;
+      .boot__cta {
+        display: inline-block;
+        margin: 28px 0 0;
+        padding: 12px 28px;
+        border-radius: 4px;
+        background: #171717;
+        color: #ffffff;
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 1;
+        text-decoration: none;
+      }
+      .boot__cta:hover {
+        background: #000000;
       }
       .boot__note {
         margin: 22px 0 0;
@@ -166,17 +175,11 @@
             <path d="M2 20h20" />
           </svg>
         </div>
-        <p class="boot__eyebrow">Daily architecture guessing game</p>
+        <p class="boot__eyebrow">Juego diario de arquitectura</p>
         <h1>Arqdle</h1>
-        <p class="boot__lead">
-          Guess the hidden building in six tries. Compare eight clues about country, era,
-          style, type, use, materials, architect and more.
-        </p>
-        <p class="boot__body">
-          A new building every day, with a photo and a short history after you solve it. Play
-          in English or Spanish.
-        </p>
-        <p class="boot__note"><noscript>Enable JavaScript to play.</noscript></p>
+        <p class="boot__lead">Adivina el edificio del día en seis intentos.</p>
+        <a class="boot__cta" href="/?mode=daily&amp;lang=es">Jugar</a>
+        <p class="boot__note"><noscript>Activa JavaScript para jugar.</noscript></p>
       </main>
     </div>
     <script type="module" src="/src/main.tsx"></script>

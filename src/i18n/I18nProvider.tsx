@@ -17,7 +17,7 @@ import {
 const LANG_KEY = 'arqdle:v1:lang';
 
 function initialLang(): Lang {
-  if (typeof window === 'undefined') return 'en';
+  if (typeof window === 'undefined') return 'es';
   try {
     const param = new URLSearchParams(window.location.search).get('lang');
     if (param === 'es' || param === 'en') return param;
@@ -30,7 +30,8 @@ function initialLang(): Lang {
   } catch {
     // Ignore storage errors.
   }
-  return navigator.language.toLowerCase().startsWith('es') ? 'es' : 'en';
+  // Spanish is the default. ?lang=en or a stored choice switches back.
+  return 'es';
 }
 
 interface I18nValue {
@@ -52,7 +53,7 @@ export function I18nProvider({ children }: { children: ReactNode }) {
       // Ignore storage errors.
     }
     const url = new URL(window.location.href);
-    if (lang === 'es') url.searchParams.set('lang', 'es');
+    if (lang === 'en') url.searchParams.set('lang', 'en');
     else url.searchParams.delete('lang');
     window.history.replaceState({}, '', url);
   }, [lang]);
