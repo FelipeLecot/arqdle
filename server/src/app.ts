@@ -1,5 +1,5 @@
 import express, { type ErrorRequestHandler } from 'express';
-import { existsSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import type { BuildingOption } from '../../shared/types';
 import {
@@ -15,6 +15,7 @@ import { buildings } from './data';
 import { checkDatabase, isDatabaseUnavailable } from './db';
 import { ApiError } from './errors';
 import { getDailyGame, getPracticeGame, submitGuess } from './games';
+import { localizeHtml, resolveHtmlLang } from './html';
 import { requestOrigin, sameOriginOnly } from './http';
 import {
   buildGoogleAuthorizationUrl,
@@ -288,6 +289,11 @@ app.use('/api', (_req, res) => {
 
 const clientIndex = path.join(config.clientDirectory, 'index.html');
 if (existsSync(clientIndex)) {
+  app.get('/index.html', (req, res) => {
+    const queryStart = req.url.indexOf('?');
+    const query = queryStart >= 0 ? req.url.slice(queryStart) : '';
+    res.redirect(301, `/${query}`);
+  });
   app.use(
     express.static(config.clientDirectory, {
       index: false,
@@ -299,7 +305,17 @@ if (existsSync(clientIndex)) {
     if (req.path.startsWith('/api/')) return next();
     if (path.extname(req.path) && !req.path.endsWith('.html')) return next();
     if (!req.accepts('html')) return next();
-    res.sendFile(clientIndex);
+
+    try {
+      const html = readFileSync(clientIndex, 'utf8');
+      const lang = resolveHtmlLang(req.query.lang, req.get('accept-language'));
+      res.vary('Accept-Language');
+      res.setHeader('Content-Language', lang);
+      res.setHeader('Cache-Control', 'no-cache');
+      res.type('html').send(localizeHtml(html, lang, requestOrigin(req)));
+    } catch (error) {
+      next(error);
+    }
   });
 }
 

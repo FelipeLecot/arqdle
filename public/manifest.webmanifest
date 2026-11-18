@@ -1,8 +1,8 @@
 {
-  "name": "Arqdle — Daily Architecture Guessing Game",
+  "name": "Arqdle — Juego diario de adivinanzas de arquitectura",
   "short_name": "Arqdle",
-  "description": "Guess the hidden building in six tries from eight clues about country, era, style, materials, architect and more. A new building every day. English and Spanish.",
-  "lang": "en",
+  "description": "Adivina el edificio oculto en diez intentos con ocho pistas sobre país, época, estilo, materiales, arquitecto y más. Un edificio nuevo cada día. Español e inglés.",
+  "lang": "es",
   "dir": "ltr",
   "start_url": "/",
   "scope": "/",

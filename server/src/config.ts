@@ -151,7 +151,7 @@ export const config = {
   timezone,
   epoch,
   dailySeed: process.env.DAILY_SEED?.trim() || 'arqdle-2026',
-  maxGuesses: 6,
+  maxGuesses: 10,
   siteUrl,
   dailySchedulePath,
   clientDirectory: path.resolve(process.cwd(), 'dist/client'),

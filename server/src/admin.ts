@@ -1,5 +1,6 @@
 import crypto from 'node:crypto';
 import type { NextFunction, Request, Response } from 'express';
+import { MAX_GUESSES } from '../../shared/types';
 import { config } from './config';
 import type { UserRow } from './db-types';
 import { isValidDateKey } from './dates';
@@ -275,8 +276,12 @@ export async function getAnalytics(range: DateRange): Promise<Analytics> {
 
   const distributionByDate = new Map<string, number[]>();
   for (const row of attemptDistribution.rows) {
-    const distribution = distributionByDate.get(row.puzzle_date) ?? [0, 0, 0, 0, 0, 0];
-    distribution[Math.min(Math.max(row.attempts - 1, 0), 5)] += num(row.count);
+    const distribution =
+      distributionByDate.get(row.puzzle_date) ??
+      Array.from({ length: MAX_GUESSES }, () => 0);
+    distribution[Math.min(Math.max(row.attempts - 1, 0), MAX_GUESSES - 1)] += num(
+      row.count,
+    );
     distributionByDate.set(row.puzzle_date, distribution);
   }
 
@@ -295,7 +300,9 @@ export async function getAnalytics(range: DateRange): Promise<Analytics> {
       winRate: players === 0 ? 0 : wins / players,
       firstTryWins: num(row.first_try_wins),
       avgAttempts: numericOrNull(row.avg_attempts),
-      distribution: distributionByDate.get(row.puzzle_date) ?? [0, 0, 0, 0, 0, 0],
+      distribution:
+        distributionByDate.get(row.puzzle_date) ??
+        Array.from({ length: MAX_GUESSES }, () => 0),
     };
   });
 
@@ -370,12 +377,7 @@ export function dailyCsv(analytics: Analytics): string {
       'win_rate',
       'first_try_wins',
       'avg_attempts',
-      'attempt_1_wins',
-      'attempt_2_wins',
-      'attempt_3_wins',
-      'attempt_4_wins',
-      'attempt_5_wins',
-      'attempt_6_wins',
+      ...Array.from({ length: MAX_GUESSES }, (_, index) => `attempt_${index + 1}_wins`),
     ],
     analytics.days.map((day) => [
       day.date,

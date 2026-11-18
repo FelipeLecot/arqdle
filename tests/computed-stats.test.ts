@@ -26,13 +26,16 @@ const legacy: Stats = {
 
 describe('computed stats', () => {
   it('derives wins and the distribution from daily results', () => {
-    const stats = computeStats([result(1, 'won', 3), result(2, 'lost', 6), result(3, 'won', 1)], null);
+    const stats = computeStats(
+      [result(1, 'won', 3), result(2, 'lost', 10), result(3, 'won', 1)],
+      null,
+    );
     expect(stats.played).toBe(3);
     expect(stats.wins).toBe(2);
     expect(stats.currentStreak).toBe(1);
     expect(stats.maxStreak).toBe(1);
     expect(stats.lastDay).toBe(3);
-    expect(stats.distribution).toEqual([1, 0, 1, 0, 0, 0]);
+    expect(stats.distribution).toEqual([1, 0, 1, 0, 0, 0, 0, 0, 0, 0]);
   });
 
   it('adds the legacy aggregate and continues a matching streak', () => {
@@ -42,7 +45,7 @@ describe('computed stats', () => {
     expect(stats.currentStreak).toBe(3);
     expect(stats.maxStreak).toBe(3);
     expect(stats.lastDay).toBe(5);
-    expect(stats.distribution).toEqual([2, 1, 1, 0, 0, 0]);
+    expect(stats.distribution).toEqual([2, 1, 1, 0, 0, 0, 0, 0, 0, 0]);
   });
 
   it('does not continue a legacy streak across a gap', () => {
@@ -53,7 +56,10 @@ describe('computed stats', () => {
     expect(stats.wins).toBe(4);
   });
 
-  it('returns the legacy stats when there are no database results', () => {
-    expect(computeStats([], legacy)).toEqual(legacy);
+  it('returns the legacy stats with a ten-bucket distribution when there are no database results', () => {
+    expect(computeStats([], legacy)).toEqual({
+      ...legacy,
+      distribution: [1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+    });
   });
 });

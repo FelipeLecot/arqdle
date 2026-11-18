@@ -1,4 +1,11 @@
-import type { Answer, GameStatus, GuessRecord, LegacyImportRequest, Stats } from '../shared/types';
+import {
+  MAX_GUESSES,
+  type Answer,
+  type GameStatus,
+  type GuessRecord,
+  type LegacyImportRequest,
+  type Stats,
+} from '../shared/types';
 import { emptyStats } from '../shared/stats';
 
 const PREFIX = 'arqdle:v1';
@@ -83,10 +90,13 @@ export function loadStats(): Stats {
   if (!raw) return emptyStats();
   try {
     const parsed = JSON.parse(raw) as Partial<Stats>;
-    const distribution =
-      Array.isArray(parsed.distribution) && parsed.distribution.length === 6
-        ? parsed.distribution.map((value) => (Number.isFinite(value) ? Number(value) : 0))
-        : emptyStats().distribution;
+    const rawDistribution = Array.isArray(parsed.distribution) ? parsed.distribution : null;
+    const distribution = rawDistribution
+      ? Array.from({ length: MAX_GUESSES }, (_, index) => {
+          const value = rawDistribution[index];
+          return Number.isFinite(value) ? Number(value) : 0;
+        })
+      : emptyStats().distribution;
     return {
       played: Number.isFinite(parsed.played) ? Number(parsed.played) : 0,
       wins: Number.isFinite(parsed.wins) ? Number(parsed.wins) : 0,

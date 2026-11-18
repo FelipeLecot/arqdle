@@ -1,4 +1,4 @@
-import type { GameStatus, Stats } from './types';
+import { MAX_GUESSES, type GameStatus, type Stats } from './types';
 
 export function emptyStats(): Stats {
   return {
@@ -7,7 +7,7 @@ export function emptyStats(): Stats {
     currentStreak: 0,
     maxStreak: 0,
     lastDay: null,
-    distribution: [0, 0, 0, 0, 0, 0],
+    distribution: Array.from({ length: MAX_GUESSES }, () => 0),
   };
 }
 

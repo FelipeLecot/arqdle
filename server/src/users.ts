@@ -1,5 +1,5 @@
 import crypto from 'node:crypto';
-import type { LegacyImportRequest, Me, Stats } from '../../shared/types';
+import { MAX_GUESSES, type LegacyImportRequest, type Me, type Stats } from '../../shared/types';
 import { compareBuilding } from './compare';
 import { config } from './config';
 import type { DailyResultRow, GameRow, GuessRow, OAuthAccountRow, UserRow } from './db-types';
@@ -90,7 +90,10 @@ function parseLegacyImport(payload: unknown): ParsedLegacyImport {
     const guessIds = body.daily.guesses
       .map((guess) => (guess && typeof guess.id === 'string' ? guess.id : null))
       .filter((id): id is string => typeof id === 'string' && id.length <= 120);
-    daily = { date: body.daily.date, guessIds: [...new Set(guessIds)].slice(0, 6) };
+    daily = {
+      date: body.daily.date,
+      guessIds: [...new Set(guessIds)].slice(0, MAX_GUESSES),
+    };
   }
 
   return { stats, daily };

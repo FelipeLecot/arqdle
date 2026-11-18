@@ -20,7 +20,7 @@ describe('daily stats', () => {
   it('resets the streak on a loss but keeps the maximum', () => {
     let stats = recordDailyResult(emptyStats(), 1, 'won', 2);
     stats = recordDailyResult(stats, 2, 'won', 4);
-    stats = recordDailyResult(stats, 3, 'lost', 6);
+    stats = recordDailyResult(stats, 3, 'lost', 10);
     expect(stats.played).toBe(3);
     expect(stats.wins).toBe(2);
     expect(stats.currentStreak).toBe(0);
@@ -33,6 +33,12 @@ describe('daily stats', () => {
     stats = recordDailyResult(stats, 3, 'won', 1);
     expect(stats.currentStreak).toBe(1);
     expect(stats.lastDay).toBe(3);
+  });
+
+  it('counts a win on the tenth attempt in the last bucket', () => {
+    const stats = recordDailyResult(emptyStats(), 1, 'won', 10);
+    expect(stats.distribution).toHaveLength(10);
+    expect(stats.distribution[9]).toBe(1);
   });
 
   it('does not count the same day twice', () => {

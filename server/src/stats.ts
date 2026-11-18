@@ -1,13 +1,20 @@
-import type { Stats } from '../../shared/types';
+import { MAX_GUESSES, type Stats } from '../../shared/types';
 import type { DailyResultRow } from './db-types';
 import { emptyStats } from '../../shared/stats';
 
+/** Stats saved before the switch to ten attempts have six buckets. */
+const LEGACY_DISTRIBUTION_LENGTH = 6;
+
 function distributionOf(value: unknown): number[] {
   const distribution = Array.isArray(value) ? value : [];
-  return Array.from({ length: 6 }, (_, index) => {
+  return Array.from({ length: MAX_GUESSES }, (_, index) => {
     const count = distribution[index];
     return Number.isInteger(count) && count >= 0 ? Number(count) : 0;
   });
+}
+
+function isValidDistributionLength(length: number): boolean {
+  return length === LEGACY_DISTRIBUTION_LENGTH || length === MAX_GUESSES;
 }
 
 export function isLegacyStats(value: unknown): value is Stats {
@@ -25,7 +32,7 @@ export function isLegacyStats(value: unknown): value is Stats {
     (stats.lastDay === null ||
       (Number.isInteger(stats.lastDay) && (stats.lastDay ?? 0) >= 1)) &&
     Array.isArray(stats.distribution) &&
-    stats.distribution.length === 6
+    isValidDistributionLength(stats.distribution.length)
   );
 }
 
@@ -44,7 +51,7 @@ export function computeStats(results: DailyResultRow[], legacy: Stats | null): S
   }
 
   const sorted = [...results].sort((a, b) => a.day_number - b.day_number);
-  const distribution = Array.from({ length: 6 }, () => 0);
+  const distribution = Array.from({ length: MAX_GUESSES }, () => 0);
   let played = 0;
   let wins = 0;
   let maxStreak = legacy?.maxStreak ?? 0;
@@ -60,7 +67,7 @@ export function computeStats(results: DailyResultRow[], legacy: Stats | null): S
     played += 1;
     if (result.status === 'won') {
       wins += 1;
-      distribution[Math.min(Math.max(result.attempts - 1, 0), 5)] += 1;
+      distribution[Math.min(Math.max(result.attempts - 1, 0), MAX_GUESSES - 1)] += 1;
       currentStreak =
         previousDay !== null && result.day_number === previousDay + 1
           ? currentStreak + 1

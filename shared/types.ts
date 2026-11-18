@@ -22,7 +22,7 @@ export const ATTRIBUTE_LABELS: Record<AttributeKey, string> = {
   architect: 'Architect',
 };
 
-export const MAX_GUESSES = 6;
+export const MAX_GUESSES = 10;
 
 export type Mode = 'daily' | 'practice';
 export type CellStatus = 'green' | 'yellow' | 'red';

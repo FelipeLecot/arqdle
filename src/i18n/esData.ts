@@ -1,4 +1,5 @@
 import { buildingExtraEs } from './esExtra';
+import { buildingIconsEs } from './esIcons';
 
 export interface BuildingCopyEs {
   name: string;
@@ -89,6 +90,19 @@ export const countriesEs: Record<string, string> = {
   Singapore: 'Singapur',
   Micronesia: 'Micronesia',
   'New Caledonia': 'Nueva Caledonia',
+  Iceland: 'Islandia',
+  Denmark: 'Dinamarca',
+  Ukraine: 'Ucrania',
+  Romania: 'Rumanía',
+  Uzbekistan: 'Uzbekistán',
+  Yemen: 'Yemen',
+  Lebanon: 'Líbano',
+  Panama: 'Panamá',
+  Ghana: 'Ghana',
+  Senegal: 'Senegal',
+  Israel: 'Israel',
+  Tonga: 'Tonga',
+  Bhutan: 'Bután',
 };
 
 export const continentsEs: Record<string, string> = {
@@ -126,6 +140,7 @@ export const stylesEs: Record<string, string> = {
   'Javanese Buddhist': 'Budista javanés',
   Khmer: 'Jemer',
   Maya: 'Maya',
+  Medieval: 'Medieval',
   Modernism: 'Movimiento moderno',
   Moorish: 'Morisco',
   Mughal: 'Mogol',
@@ -184,6 +199,14 @@ export const stylesEs: Record<string, string> = {
   'Micronesian': 'Micronesio',
   'Hawaiian Renaissance': 'Renacimiento hawaiano',
   Tudor: 'Tudor',
+  Polynesian: 'Polinesio',
+  Teotihuacano: 'Teotihuacano',
+  Colonial: 'Colonial',
+  Aksumite: 'Aksumita',
+  Sikh: 'Sij',
+  'Indo-Islamic': 'Indoislámico',
+  Timurid: 'Timurí',
+  Yemeni: 'Yemení',
 };
 
 export const formFamiliesEs: Record<string, string> = {
@@ -262,6 +285,11 @@ export const typesEs: Record<string, string> = {
   'Fortified village': 'Aldea fortificada',
   Monument: 'Monumento',
   Tower: 'Torre',
+  Canal: 'Canal',
+  Shrine: 'Santuario',
+  Madrasah: 'Madraza',
+  Trilithon: 'Trilito',
+  Obelisk: 'Obelisco',
 };
 
 export const usesEs: Record<string, string> = {
@@ -324,6 +352,9 @@ export const materialsEs: Record<string, string> = {
   Adobe: 'Adobe',
   Mudbrick: 'Ladrillo de barro',
   'Coral stone': 'Piedra coral',
+  Mosaic: 'Mosaico',
+  Cardboard: 'Cartón',
+  Terracotta: 'Terracota',
 };
 
 const buildingEsBase: Record<string, BuildingCopyEs> = {
@@ -937,4 +968,5 @@ const buildingEsBase: Record<string, BuildingCopyEs> = {
 export const buildingEs: Record<string, BuildingCopyEs> = {
   ...buildingEsBase,
   ...buildingExtraEs,
+  ...buildingIconsEs,
 };

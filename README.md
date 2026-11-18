@@ -2,10 +2,11 @@
 
 A Wordle-style daily architecture guessing game. Type a building name, pick it from
 the autocomplete list, and compare eight clues against the hidden building. Green is
-an exact match, yellow is close, and red is a miss. You get six guesses.
+an exact match, yellow is close, and red is a miss. You get ten guesses.
 
-The interface and building copy are available in English and Spanish. Use the
-`ES` / `EN` button in the header, or open `?lang=es`.
+The interface and building copy are available in English and Spanish. Spanish is
+the default. Use the `ES` / `EN` button in the header, or open `?lang=en` for
+English.
 
 Profiles, games, guesses, daily results and stats live in Postgres. Anonymous
 visitors get a database-backed guest profile. Google sign-in upgrades that guest, or
@@ -32,7 +33,7 @@ Open <http://localhost:5173>. The Vite dev server proxies API requests to the Ex
 server on port 3001.
 
 For an unlimited development game, switch to the **Practice** tab, or open
-<http://localhost:5173/?mode=practice>. Add `&lang=es` for Spanish.
+<http://localhost:5173/?mode=practice>. Add `&lang=en` for English.
 
 The Docker Compose file starts Postgres only. The app runs with `npm` so server and
 client changes reload quickly.
@@ -189,8 +190,9 @@ public building list and comparison results only.
 
 ## How the daily answer works
 
-The game ships 224 buildings in `server/src/data/`. The English dataset is bundled
-into the server only. Spanish display copy lives in `src/i18n/esData.ts`.
+The game ships 260 buildings in `server/src/data/`. The English dataset is bundled
+into the server only. Spanish display copy lives in `src/i18n/esData.ts`,
+`src/i18n/esExtra.ts` and `src/i18n/esIcons.ts`.
 
 - `server/src/daily.ts` computes the day number from `DAILY_EPOCH`.
 - The answer order is a deterministic shuffle seeded by `DAILY_SEED` and the cycle
@@ -238,7 +240,8 @@ Practice is unlimited, does not affect stats, and never picks today's daily answ
 
 Stats derive from `daily_results`. Wins, win rate, current streak, maximum streak and
 the guess distribution are computed from the user's finished daily games. Practice is
-ignored.
+ignored. The guess distribution has one bucket per attempt, up to ten. Legacy stats
+with six buckets are padded with zeros.
 
 On the first load after upgrading from the browser-only build, the client sends the
 old `localStorage` stats and the latest saved daily game to `POST /api/me/import`.
@@ -397,8 +400,10 @@ Use `yearNote` when a single year needs context.
 
 ## Data sources
 
-The catalog was assembled from public sources and checked building by building. The
-main sources are:
+The catalog was assembled from public sources and checked building by building. It
+is curated for global significance: the current set was compared with major landmark
+lists and Wikipedia language coverage, low-visibility entries were removed, and the
+most important missing landmarks were added. The main sources are:
 
 - Wikidata (CC0) for structured candidates and identifiers
 - Wikipedia and Wikimedia Commons for article titles, history and photos
@@ -416,15 +421,30 @@ materials and architect against an official or heritage source.
 Set `SITE_URL` before a production build. It fills the canonical URL, Open Graph and
 Twitter image URLs, OAuth defaults, and the JSON-LD site URL.
 
+The default static shell is Spanish. The server localizes it when the request has
+`?lang=en`, or when `Accept-Language` prefers English over Spanish:
+
+- title, description, canonical URL, Open Graph, Twitter card and JSON-LD
+- the social image: `og-image.png` for Spanish and `og-image-en.png` for English
+- the HTML fallback shown before React loads
+
+The page sends `Vary: Accept-Language` and `Cache-Control: no-cache` for the HTML
+shell. Make sure the CDN forwards query strings and respects revalidation for `/`.
+
 The build includes:
 
 - a descriptive title, meta description, keywords, robots meta, canonical link and
   English/Spanish `hreflang` alternates
-- Open Graph and Twitter card metadata with a 1200 × 630 social image
+- Open Graph and Twitter card metadata with a 1200 × 630 social image per language
 - JSON-LD for `WebSite` and `WebApplication`
 - a web app manifest and 192/512 px icons
 - a static HTML fallback with a readable heading and description for crawlers
 - `/robots.txt` and `/sitemap.xml`, generated from `SITE_URL` or the request origin
+
+The social images are rendered from `scripts/og-image.html`. Open the file with
+`?lang=es` or `?lang=en` in a headless browser and capture a 1200 × 630 screenshot
+after the fonts load. Replace `public/og-image.png` and `public/og-image-en.png`
+with the results.
 
 The server sets `trust proxy` so the request protocol is correct behind a reverse
 proxy.
@@ -472,7 +492,7 @@ recreates the schema before the database suite.
   PostgreSQL advisory lock, so two instances starting together do not apply the same
   migration twice.
 - Stats count daily games only. Practice results are ignored.
-- The daily answer is never sent before a win or the sixth wrong guess.
+- The daily answer is never sent before a win or the tenth wrong guess.
 
 ## Credits
 

@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Arqdle social image</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=block"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 1200px;
+        height: 630px;
+        margin: 0;
+        overflow: hidden;
+      }
+      body {
+        position: relative;
+        background: #fbfaf8;
+        color: #181818;
+        font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+          Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      .ring {
+        position: absolute;
+        top: -380px;
+        right: -240px;
+        width: 760px;
+        height: 760px;
+        border: 1.5px solid #e9e6e1;
+        border-radius: 50%;
+      }
+      .page {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        padding: 64px 72px 54px;
+      }
+      .top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+      }
+      .brand__mark {
+        width: 40px;
+        height: 40px;
+      }
+      .brand__name {
+        font-size: 19px;
+        font-weight: 700;
+        letter-spacing: 0.34em;
+      }
+      .edition {
+        color: #6d685f;
+        font-size: 11.5px;
+        font-weight: 600;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+      }
+      .main {
+        margin-top: 58px;
+      }
+      .eyebrow {
+        margin: 0;
+        color: #6d685f;
+        font-size: 12.5px;
+        font-weight: 700;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+      }
+      h1 {
+        margin: 30px 0 0;
+        font-size: 90px;
+        font-weight: 800;
+        letter-spacing: -0.055em;
+        line-height: 0.99;
+      }
+      h1 span {
+        display: block;
+        white-space: nowrap;
+      }
+      .lead {
+        margin: 38px 0 0;
+        color: #4d4841;
+        font-size: 24px;
+        font-weight: 400;
+        letter-spacing: -0.012em;
+      }
+      .bottom {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: auto;
+      }
+      .chips {
+        display: flex;
+        gap: 8px;
+      }
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        height: 41px;
+        padding: 0 20px;
+        border-radius: 3px;
+        color: #ffffff;
+        font-size: 16.5px;
+        font-weight: 650;
+      }
+      .chip--green {
+        background: #3d7a44;
+      }
+      .chip--yellow {
+        background: #ddb53a;
+        color: #181818;
+      }
+      .chip--red {
+        background: #b24740;
+      }
+      .languages {
+        color: #6d685f;
+        font-size: 14.5px;
+        font-weight: 500;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="ring" aria-hidden="true"></div>
+    <div class="page">
+      <div class="top">
+        <div class="brand">
+          <svg
+            class="brand__mark"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#181818"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M4 20V11a8 8 0 0 1 16 0v9" />
+            <path d="M9 20v-7a3 3 0 0 1 6 0v7" />
+            <path d="M2 20h20" />
+          </svg>
+          <span class="brand__name">ARQDLE</span>
+        </div>
+        <span class="edition" id="edition"></span>
+      </div>
+
+      <div class="main">
+        <p class="eyebrow" id="eyebrow"></p>
+        <h1>
+          <span id="line-1"></span>
+          <span id="line-2"></span>
+        </h1>
+        <p class="lead" id="lead"></p>
+      </div>
+
+      <div class="bottom">
+        <div class="chips">
+          <span class="chip chip--green" id="chip-1"></span>
+          <span class="chip chip--green" id="chip-2"></span>
+          <span class="chip chip--yellow" id="chip-3"></span>
+          <span class="chip chip--red" id="chip-4"></span>
+        </div>
+        <span class="languages" id="languages"></span>
+      </div>
+    </div>
+
+    <script>
+      const copy = {
+        es: {
+          edition: 'Diario · 01',
+          eyebrow: 'Juego diario de arquitectura',
+          line1: 'Adivina el edificio.',
+          line2: 'Un monumento a la vez.',
+          lead: 'Diez intentos. Ocho pistas. Un edificio nuevo cada día.',
+          chips: ['Europa', 'Italia', '1889', 'Gótico'],
+          languages: 'Español / English',
+        },
+        en: {
+          edition: 'Daily · 01',
+          eyebrow: 'Daily architecture guessing game',
+          line1: 'Guess the building.',
+          line2: 'One landmark at a time.',
+          lead: 'Ten guesses. Eight clues. A new building every day.',
+          chips: ['Europe', 'Italy', '1889', 'Gothic'],
+          languages: 'English / Español',
+        },
+      };
+
+      const params = new URLSearchParams(window.location.search);
+      const lang = params.get('lang') === 'en' ? 'en' : 'es';
+      const text = copy[lang];
+      document.documentElement.lang = lang;
+      document.getElementById('edition').textContent = text.edition;
+      document.getElementById('eyebrow').textContent = text.eyebrow;
+      document.getElementById('line-1').textContent = text.line1;
+      document.getElementById('line-2').textContent = text.line2;
+      document.getElementById('lead').textContent = text.lead;
+      text.chips.forEach((chip, index) => {
+        document.getElementById(`chip-${index + 1}`).textContent = chip;
+      });
+      document.getElementById('languages').textContent = text.languages;
+
+      document.fonts.ready.then(() => {
+        document.body.dataset.ready = 'true';
+      });
+    </script>
+  </body>
+</html>

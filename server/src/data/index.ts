@@ -7,6 +7,7 @@ import { asia } from './asia';
 import { asiaExtra } from './asia-extra';
 import { europe } from './europe';
 import { europeExtra } from './europe-extra';
+import { iconBuildings } from './icons';
 import { moreBuildings } from './more';
 import { antarctica, oceania } from './oceania';
 import { antarcticaExtra, oceaniaExtra } from './oceania-extra';
@@ -27,6 +28,7 @@ export const buildings: Building[] = [
   ...antarctica,
   ...antarcticaExtra,
   ...moreBuildings,
+  ...iconBuildings,
 ].sort((a, b) => a.name.localeCompare(b.name, 'en'));
 
 const byId = new Map<string, Building>();

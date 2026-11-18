@@ -34,7 +34,7 @@ const en = {
   pageTitle: 'Arqdle — Daily Architecture Guessing Game',
   pageTitleDaily: 'Arqdle #{number} — Daily Architecture Guessing Game',
   metaDescription:
-    'Arqdle is a free daily architecture guessing game. Guess the building in six tries from clues about country, era, style, type, materials, architect and more. Play in English or Spanish.',
+    'Arqdle is a free daily architecture guessing game. Guess the building in ten tries from clues about country, era, style, type, materials, architect and more. Play in English or Spanish.',
   building: 'Building',
   submittedGuesses: 'Submitted guesses',
   emptyLine1: 'Your guesses appear here, one row at a time.',
@@ -81,7 +81,7 @@ const en = {
   newDailyReady: 'New daily ready.',
   loadNewDaily: 'Load new daily',
   howToIntro:
-    'Guess the hidden building in six tries. Type a name, choose it from the list, and compare eight clues.',
+    'Guess the hidden building in ten tries. Type a name, choose it from the list, and compare eight clues.',
   exampleResult: 'Example result row',
   ruleGreen: 'Green means an exact match.',
   ruleYellow:
@@ -166,7 +166,7 @@ const es: Record<TranslationKey, string> = {
   pageTitle: 'Arqdle — Juego diario de adivinanzas de arquitectura',
   pageTitleDaily: 'Arqdle n.º {number} — Juego diario de adivinanzas de arquitectura',
   metaDescription:
-    'Arqdle es un juego diario de arquitectura. Adivina el edificio en seis intentos con pistas sobre país, época, estilo, tipo, materiales, arquitecto y más. Disponible en inglés y español.',
+    'Arqdle es un juego diario de arquitectura. Adivina el edificio en diez intentos con pistas sobre país, época, estilo, tipo, materiales, arquitecto y más. Disponible en inglés y español.',
   building: 'Edificio',
   submittedGuesses: 'Intentos enviados',
   emptyLine1: 'Tus intentos aparecen aquí, una fila a la vez.',
@@ -213,7 +213,7 @@ const es: Record<TranslationKey, string> = {
   newDailyReady: 'Nuevo diario disponible.',
   loadNewDaily: 'Cargar nuevo diario',
   howToIntro:
-    'Adivina el edificio oculto en seis intentos. Escribe un nombre, elígelo de la lista y compara ocho pistas.',
+    'Adivina el edificio oculto en diez intentos. Escribe un nombre, elígelo de la lista y compara ocho pistas.',
   exampleResult: 'Ejemplo de resultado',
   ruleGreen: 'Verde significa coincidencia exacta.',
   ruleYellow:

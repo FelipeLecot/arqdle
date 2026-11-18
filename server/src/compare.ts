@@ -44,6 +44,8 @@ const MATERIAL_FAMILIES: Record<string, string> = {
   'coral stone': 'stone',
   'composite panels': 'synthetic',
   plastic: 'synthetic',
+  cardboard: 'synthetic',
+  mosaic: 'ceramic',
 };
 
 export function normalize(value: string): string {

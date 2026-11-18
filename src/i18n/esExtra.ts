@@ -110,14 +110,6 @@ export const buildingExtraEs: Record<string, BuildingCopyEs> = {
     fact:
       'La tumba de Vasco da Gama está en la iglesia, cerca de la entrada del monasterio.',
   },
-  'berlin-cathedral': {
-    name: 'Catedral de Berlín',
-    city: 'Berlín',
-    blurb:
-      'Una catedral protestante con una gran cúpula de cobre en la Isla de los Museos.',
-    fact:
-      'Su cripta Hohenzollern contiene más de 90 tumbas y memoriales de la familia real prusiana.',
-  },
   elbphilharmonie: {
     name: 'Filarmónica del Elba',
     city: 'Hamburgo',
@@ -248,14 +240,6 @@ export const buildingExtraEs: Record<string, BuildingCopyEs> = {
     fact:
       'Sus colores amarillo y rojo se restauraron a finales del siglo XX para recuperar el esquema original.',
   },
-  'casa-da-musica': {
-    name: 'Casa da Música',
-    city: 'Oporto',
-    blurb:
-      'Una sala de conciertos de hormigón con una forma facetada e irregular, construida para el año de Oporto como Capital Europea de la Cultura.',
-    fact:
-      'La sala principal tiene elementos acústicos ajustables y capacidad para 1.238 personas.',
-  },
   'dancing-house': {
     name: 'Casa Danzante',
     city: 'Praga',
@@ -306,15 +290,6 @@ export const buildingExtraEs: Record<string, BuildingCopyEs> = {
       'Un museo de arte moderno en una antigua central eléctrica de la orilla sur del Támesis.',
     fact:
       'La Sala de Turbinas mide 152 m de largo y antes albergaba la maquinaria de generación eléctrica.',
-  },
-  'matthias-church': {
-    name: 'Iglesia de Matías',
-    city: 'Budapest',
-    yearNote: 'Reconstruida en su forma actual en el siglo XIX',
-    blurb:
-      'Una iglesia gótica en el Castillo de Buda, con un tejado de rombos y una alta torre.',
-    fact:
-      'En la iglesia se coronaron reyes húngaros, incluido Carlos I en 1309.',
   },
   'statue-of-liberty': {
     name: 'Estatua de la Libertad',
@@ -458,14 +433,6 @@ export const buildingExtraEs: Record<string, BuildingCopyEs> = {
     fact:
       'El edificio se ha asentado de forma desigual sobre el suelo blando del antiguo lago y ha necesitado refuerzos.',
   },
-  'museo-soumaya': {
-    name: 'Museo Soumaya',
-    city: 'Ciudad de México',
-    blurb:
-      'Un museo curvo revestido de plata en Ciudad de México, que alberga la colección de arte de Carlos Slim.',
-    fact:
-      'Su fachada está formada por unos 16.000 paneles hexagonales de aluminio.',
-  },
   'tikal-temple-i': {
     name: 'Templo I de Tikal',
     city: 'Tikal',
@@ -473,14 +440,6 @@ export const buildingExtraEs: Record<string, BuildingCopyEs> = {
       'Un templo funerario maya en Tikal, que se alza sobre la selva con una pirámide escalonada y empinada.',
     fact:
       'Se construyó para el gobernante Jasaw Chan K\u2019awiil I y contiene su tumba.',
-  },
-  'havana-cathedral': {
-    name: 'Catedral de La Habana',
-    city: 'La Habana',
-    blurb:
-      'Una catedral barroca en La Habana Vieja, con una fachada asimétrica y dos campanarios desiguales.',
-    fact:
-      'Su fachada usa piedra coral y tiene una hornacina central sobre la entrada.',
   },
   'el-morro-havana': {
     name: 'Castillo del Morro',
@@ -513,14 +472,6 @@ export const buildingExtraEs: Record<string, BuildingCopyEs> = {
       'Un museo futurista con forma de platillo volante en un acantilado sobre la bahía de Guanabara.',
     fact:
       'Una rampa roja curva sube hasta la entrada del museo, que se refleja en un estanque.',
-  },
-  'palacio-do-planalto': {
-    name: 'Palacio del Planalto',
-    city: 'Brasilia',
-    blurb:
-      'El lugar de trabajo oficial del presidente de Brasil, un palacio modernista en la Praça dos Três Poderes.',
-    fact:
-      'Sus finas columnas curvas y muros de vidrio se diseñaron para expresar apertura y ligereza.',
   },
   'abu-simbel': {
     name: 'Abu Simbel',
@@ -555,14 +506,6 @@ export const buildingExtraEs: Record<string, BuildingCopyEs> = {
       'La mayor mezquita de Marrakech, conocida por su alminar cuadrado y su posición junto a la medina.',
     fact:
       'Su alminar de 77 m inspiró la Giralda de Sevilla y la Torre Hassan de Rabat.',
-  },
-  'hassan-tower': {
-    name: 'Torre Hassan',
-    city: 'Rabat',
-    blurb:
-      'El alminar inacabado de una enorme mezquita iniciada por los almohades en Rabat.',
-    fact:
-      'La mezquita se abandonó antes de terminarse; solo quedan la torre y un bosque de columnas.',
   },
   'ait-benhaddou': {
     name: 'Aït Benhaddou',
@@ -644,22 +587,6 @@ export const buildingExtraEs: Record<string, BuildingCopyEs> = {
       'La sede del Gobierno de Sudáfrica, un complejo neoclásico simétrico en Meintjieskop.',
     fact:
       'Sus dos alas representan a las comunidades de habla inglesa y afrikáans de la antigua Unión.',
-  },
-  'cape-town-city-hall': {
-    name: 'Ayuntamiento de Ciudad del Cabo',
-    city: 'Ciudad del Cabo',
-    blurb:
-      'Un ayuntamiento neoclásico en Grand Parade, con torre del reloj y un pórtico frente a la plaza.',
-    fact:
-      'Nelson Mandela habló desde su balcón tras salir de prisión en 1990.',
-  },
-  'voortrekker-monument': {
-    name: 'Monumento Voortrekker',
-    city: 'Pretoria',
-    blurb:
-      'Un gran monumento de piedra en Pretoria que conmemora el Gran Trek de la década de 1830.',
-    fact:
-      'Un rayo de sol ilumina el cenotafio central cada año el 16 de diciembre.',
   },
   'basilica-our-lady-peace': {
     name: 'Basílica de Nuestra Señora de la Paz',
@@ -790,14 +717,6 @@ export const buildingExtraEs: Record<string, BuildingCopyEs> = {
       'Un palacio de arenisca rosa en Jaipur con una fachada de panal llena de ventanas y balcones.',
     fact:
       'Sus 953 ventanas permitían a las mujeres reales ver las fiestas de la calle sin ser vistas.',
-  },
-  'victoria-memorial': {
-    name: 'Victoria Memorial',
-    city: 'Calcuta',
-    blurb:
-      'Un museo de mármol en Calcuta construido en memoria de la reina Victoria, que combina formas indias y europeas.',
-    fact:
-      'El edificio está rodeado por 26 hectáreas de jardines y un gran estanque.',
   },
   'meenakshi-temple': {
     name: 'Templo Meenakshi',
@@ -959,14 +878,6 @@ export const buildingExtraEs: Record<string, BuildingCopyEs> = {
     fact:
       'El templo central de Shiva mide unos 47 m y está decorado con relieves del Ramayana.',
   },
-  'nijo-castle': {
-    name: 'Castillo Nijo',
-    city: 'Kioto',
-    blurb:
-      'Un castillo y complejo palaciego en Kioto, con biombos pintados, jardines y suelos ruiseñor.',
-    fact:
-      'Los pasillos del Palacio Ninomaru chirrían al caminar, como aviso temprano contra intrusos.',
-  },
   'national-palace-museum': {
     name: 'Museo Nacional del Palacio',
     city: 'Taipéi',
@@ -983,22 +894,6 @@ export const buildingExtraEs: Record<string, BuildingCopyEs> = {
     fact:
       'El edificio se asienta sobre los restos de un pa maorí, un asentamiento fortificado, en Auckland Domain.',
   },
-  'old-parliament-house-canberra': {
-    name: 'Antiguo Parlamento',
-    city: 'Canberra',
-    blurb:
-      'La antigua sede del Parlamento australiano, un edificio neoclásico discreto bajo Capital Hill.',
-    fact:
-      'Fue sede del Parlamento entre 1927 y 1988 y hoy es un museo de la democracia.',
-  },
-  'shrine-of-remembrance': {
-    name: 'Santuario del Recuerdo',
-    city: 'Melbourne',
-    blurb:
-      'Un monumento de guerra en Melbourne, diseñado como un templo griego en un gran parque.',
-    fact:
-      'Una pequeña abertura en el techo deja caer un rayo de sol sobre la Piedra del Recuerdo a las 11 de la mañana del 11 de noviembre.',
-  },
   'melbourne-cricket-ground': {
     name: 'Melbourne Cricket Ground',
     city: 'Melbourne',
@@ -1014,22 +909,6 @@ export const buildingExtraEs: Record<string, BuildingCopyEs> = {
       'Un pabellón de exposiciones del siglo XIX en Melbourne, con una gran cúpula y una fachada monumental.',
     fact:
       'Fue el primer edificio de Australia declarado Patrimonio de la Humanidad por la UNESCO.',
-  },
-  'sydney-town-hall': {
-    name: 'Ayuntamiento de Sídney',
-    city: 'Sídney',
-    blurb:
-      'Un ayuntamiento de arenisca en el centro de Sídney, con torre del reloj y una gran sala de conciertos.',
-    fact:
-      'La Sala del Centenario contiene uno de los órganos de tubos más grandes del mundo.',
-  },
-  'dunedin-railway-station': {
-    name: 'Estación de Ferrocarril de Dunedin',
-    city: 'Dunedin',
-    blurb:
-      'Una estación de ferrocarril ricamente decorada en Dunedin, con base de basalto oscuro y pisos superiores de piedra de Oamaru.',
-    fact:
-      'Se la suele llamar el edificio más fotografiado de Nueva Zelanda.',
   },
   'nan-madol': {
     name: 'Nan Madol',
@@ -1072,38 +951,6 @@ export const buildingExtraEs: Record<string, BuildingCopyEs> = {
     fact:
       'Está a unos 2.835 m de altitud y se asienta sobre un hielo de casi 3 km de espesor.',
   },
-  'cusco-cathedral': {
-    name: 'Catedral del Cusco',
-    city: 'Cusco',
-    blurb:
-      'Una catedral colonial en la Plaza de Armas del Cusco, construida en parte con piedras de estructuras incas.',
-    fact:
-      'Alberga una famosa pintura de la Última Cena que incluye un cuy en la mesa.',
-  },
-  'lima-cathedral': {
-    name: 'Catedral de Lima',
-    city: 'Lima',
-    blurb:
-      'La catedral de la Plaza Mayor de Lima, reconstruida varias veces tras terremotos.',
-    fact:
-      'La tumba del conquistador Francisco Pizarro está en la catedral.',
-  },
-  'san-francisco-lima': {
-    name: 'Monasterio de San Francisco',
-    city: 'Lima',
-    blurb:
-      'Un monasterio y una iglesia barrocos en Lima, con claustros pintados y una amplia cripta.',
-    fact:
-      'Su biblioteca conserva miles de libros y manuscritos antiguos.',
-  },
-  'quito-cathedral': {
-    name: 'Catedral de Quito',
-    city: 'Quito',
-    blurb:
-      'Una catedral colonial en la Plaza de la Independencia de Quito, con un interior muy decorado.',
-    fact:
-      'Su torre resultó dañada por terremotos y se reconstruyó en el siglo XX.',
-  },
   'la-compania-quito': {
     name: 'Iglesia de la Compañía de Jesús',
     city: 'Quito',
@@ -1111,14 +958,6 @@ export const buildingExtraEs: Record<string, BuildingCopyEs> = {
       'Una iglesia jesuita en Quito cuyo interior está cubierto de pan de oro y decoración pintada.',
     fact:
       'Su fachada está tallada en piedra volcánica y es una de las más ricas del barroco sudamericano.',
-  },
-  'cartagena-cathedral': {
-    name: 'Catedral de Cartagena',
-    city: 'Cartagena',
-    blurb:
-      'Una catedral colonial en la ciudad amurallada de Cartagena, con una sólida fachada de piedra y un interior sencillo.',
-    fact:
-      'Está junto a la Plaza de la Proclamación, dentro de las antiguas fortificaciones.',
   },
   'castillo-san-felipe': {
     name: 'Castillo San Felipe de Barajas',
@@ -1144,22 +983,6 @@ export const buildingExtraEs: Record<string, BuildingCopyEs> = {
     fact:
       'Su balcón se usa para discursos ante la multitud de la plaza.',
   },
-  'palacio-legislativo': {
-    name: 'Palacio Legislativo',
-    city: 'Montevideo',
-    blurb:
-      'La sede del Parlamento uruguayo, un edificio neoclásico con una alta cúpula central.',
-    fact:
-      'Tardó décadas en terminarse y es uno de los edificios parlamentarios más grandes de Sudamérica.',
-  },
-  'teatro-solis': {
-    name: 'Teatro Solís',
-    city: 'Montevideo',
-    blurb:
-      'El histórico teatro de Montevideo en la Plaza Independencia, restaurado a principios del siglo XXI.',
-    fact:
-      'Se inauguró en 1856 y es el teatro más antiguo de Uruguay.',
-  },
   'palacio-salvo': {
     name: 'Palacio Salvo',
     city: 'Montevideo',
@@ -1167,14 +990,6 @@ export const buildingExtraEs: Record<string, BuildingCopyEs> = {
       'Una torre art déco en la Plaza Independencia, que fue el edificio más alto de Sudamérica.',
     fact:
       'Tiene una forma de faro y un pequeño faro en la cima.',
-  },
-  'santiago-chile-cathedral': {
-    name: 'Catedral Metropolitana de Santiago',
-    city: 'Santiago',
-    blurb:
-      'La catedral de la Plaza de Armas de Santiago, con una fachada barroca y una larga historia colonial.',
-    fact:
-      'Ha sobrevivido a varios terremotos e incendios, incluido uno importante en 1863.',
   },
   'la-moneda': {
     name: 'Palacio de La Moneda',
@@ -1207,14 +1022,6 @@ export const buildingExtraEs: Record<string, BuildingCopyEs> = {
       'El estadio de fútbol más famoso de Brasil, construido para el Mundial de 1950 en Río de Janeiro.',
     fact:
       'Llegó a albergar a casi 200.000 espectadores y se renovó para el Mundial de 2014.',
-  },
-  'sucre-cathedral': {
-    name: 'Catedral de Sucre',
-    city: 'Sucre',
-    blurb:
-      'Una catedral barroca en la Plaza 25 de Mayo de Sucre, con fachada blanca y torre central.',
-    fact:
-      'Sucre es la capital constitucional de Bolivia y su centro histórico es Patrimonio de la Humanidad.',
   },
   'san-francisco-la-paz': {
     name: 'Basílica de San Francisco',

@@ -2,7 +2,7 @@ import crypto from 'node:crypto';
 import { once } from 'node:events';
 import type { Server } from 'node:http';
 import { afterAll, beforeAll, beforeEach, describe, expect, it } from 'vitest';
-import type { GameView, Me, Stats } from '../shared/types';
+import { MAX_GUESSES, type GameView, type Me, type Stats } from '../shared/types';
 
 const hasDatabase = Boolean(process.env.TEST_DATABASE_URL);
 const describeDatabase = hasDatabase ? describe : describe.skip;
@@ -76,7 +76,7 @@ async function loseDaily(client: TestClient): Promise<GameView> {
   const target = daily.todayDailySelection();
   const game = await client.json<GameView>('/api/games/daily');
   let current = game;
-  for (const id of wrongBuildings(target.building.id, 6)) {
+  for (const id of wrongBuildings(target.building.id, MAX_GUESSES)) {
     current = await client.guess(game.id, id);
   }
   return current;
@@ -170,7 +170,7 @@ describeDatabase('database-backed API', () => {
     expect(profile.profile.stats.played).toBe(1);
     expect(profile.profile.stats.wins).toBe(1);
     expect(profile.profile.stats.currentStreak).toBe(1);
-    expect(profile.profile.stats.distribution).toEqual([0, 1, 0, 0, 0, 0]);
+    expect(profile.profile.stats.distribution).toEqual([0, 1, 0, 0, 0, 0, 0, 0, 0, 0]);
 
     const reloaded = await client.json<GameView>('/api/games/daily');
     expect(reloaded.id).toBe(game.id);
@@ -178,12 +178,12 @@ describeDatabase('database-backed API', () => {
     expect(reloaded.guesses).toHaveLength(2);
   });
 
-  it('loses after six wrong guesses and records the result', async () => {
+  it('loses after ten wrong guesses and records the result', async () => {
     const client = new TestClient();
     const target = daily.todayDailySelection();
     const result = await loseDaily(client);
     expect(result.status).toBe('lost');
-    expect(result.attempts).toBe(6);
+    expect(result.attempts).toBe(MAX_GUESSES);
     expect(result.answer?.id).toBe(target.building.id);
 
     const profile = await me(client);
@@ -246,7 +246,7 @@ describeDatabase('database-backed API', () => {
     expect(imported.profile.stats.played).toBe(5);
     expect(imported.profile.stats.wins).toBe(4);
     expect(imported.profile.stats.currentStreak).toBe(day > 1 ? 3 : 1);
-    expect(imported.profile.stats.distribution).toEqual([1, 2, 1, 0, 0, 0]);
+    expect(imported.profile.stats.distribution).toEqual([1, 2, 1, 0, 0, 0, 0, 0, 0, 0]);
 
     const game = await client.json<GameView>('/api/games/daily');
     expect(game.status).toBe('won');
@@ -288,7 +288,7 @@ describeDatabase('database-backed API', () => {
     expect(merged.profile.email).toBe(identity.email);
     expect(merged.profile.stats.played).toBe(1);
     expect(merged.profile.stats.wins).toBe(1);
-    expect(merged.profile.stats.distribution).toEqual([1, 0, 0, 0, 0, 0]);
+    expect(merged.profile.stats.distribution).toEqual([1, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
 
     const game = await first.json<GameView>('/api/games/daily');
     expect(game.status).toBe('won');
@@ -317,7 +317,7 @@ describeDatabase('database-backed API', () => {
     await oauth.signInWithGoogleIdentity(identity, secondProfile.profile.id);
 
     const merged = await me(first);
-    expect(merged.profile.stats.distribution).toEqual([1, 0, 0, 0, 0, 0]);
+    expect(merged.profile.stats.distribution).toEqual([1, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
     const game = await first.json<GameView>('/api/games/daily');
     expect(game.attempts).toBe(1);
   });
