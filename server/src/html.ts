@@ -39,7 +39,7 @@ export function resolveHtmlLang(
   return best?.lang ?? 'es';
 }
 
-function safeOrigin(value: string): string {
+export function safeOrigin(value: string): string {
   try {
     const url = new URL(value);
     if (url.protocol !== 'http:' && url.protocol !== 'https:') return '';

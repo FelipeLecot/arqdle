@@ -421,7 +421,27 @@ describeDatabase('database-backed API', () => {
 
     const sitemap = await client.request('/sitemap.xml');
     expect(sitemap.status).toBe(200);
-    expect(await sitemap.text()).toContain('<urlset');
+    const sitemapText = await sitemap.text();
+    expect(sitemapText).toContain('<urlset');
+    expect(sitemapText).toContain('/legal/terms');
+    expect(sitemapText).toContain('/legal/en/privacy');
+
+    const terms = await client.request('/legal/terms');
+    expect(terms.status).toBe(200);
+    expect(terms.headers.get('cache-control')).toBe(
+      process.env.NODE_ENV === 'production' ? 'public, max-age=2592000' : 'no-cache',
+    );
+    expect(terms.headers.get('content-language')).toBe('es');
+    expect(await terms.text()).toContain('Términos del servicio');
+
+    const privacyEn = await client.request('/legal/en/privacy');
+    expect(privacyEn.status).toBe(200);
+    expect(privacyEn.headers.get('content-language')).toBe('en');
+    expect(await privacyEn.text()).toContain('Privacy Policy');
+
+    const redirect = await client.request('/terms', { redirect: 'manual' });
+    expect(redirect.status).toBe(301);
+    expect(redirect.headers.get('location')).toBe('/legal/terms');
   });
 
   it('disables Google sign-in when credentials are missing', async () => {

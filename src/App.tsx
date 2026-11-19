@@ -589,6 +589,15 @@ export function App() {
           </a>
           .
         </p>
+        <nav className="footer__legal" aria-label={t('legalNav')}>
+          <a href={lang === 'en' ? '/legal/en/terms' : '/legal/terms'}>
+            {t('termsOfService')}
+          </a>
+          <span aria-hidden="true">·</span>
+          <a href={lang === 'en' ? '/legal/en/privacy' : '/legal/privacy'}>
+            {t('privacyPolicy')}
+          </a>
+        </nav>
       </footer>
 
       <HowToPlay open={helpOpen} onClose={() => setHelpOpen(false)} />

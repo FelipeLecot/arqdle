@@ -18,6 +18,13 @@ import { getDailyGame, getPracticeGame, submitGuess } from './games';
 import { localizeHtml, resolveHtmlLang } from './html';
 import { requestOrigin, sameOriginOnly } from './http';
 import {
+  LEGAL_CACHE_CONTROL,
+  LEGAL_LAST_UPDATED,
+  LEGAL_ROUTES,
+  legalPath,
+  renderLegalPage,
+} from './legal';
+import {
   buildGoogleAuthorizationUrl,
   consumeOAuthState,
   createOAuthState,
@@ -258,6 +265,36 @@ app.get('/api/admin/reports/attempts.csv', async (req, res) => {
   res.type('text/csv; charset=utf-8').send(attemptsCsv(analytics));
 });
 
+app.get('/legal', (_req, res) => {
+  res.redirect(301, legalPath('terms', 'es'));
+});
+
+app.get('/terms', (_req, res) => {
+  res.redirect(301, legalPath('terms', 'es'));
+});
+
+app.get('/privacy', (_req, res) => {
+  res.redirect(301, legalPath('privacy', 'es'));
+});
+
+app.get('/en/terms', (_req, res) => {
+  res.redirect(301, legalPath('terms', 'en'));
+});
+
+app.get('/en/privacy', (_req, res) => {
+  res.redirect(301, legalPath('privacy', 'en'));
+});
+
+for (const route of LEGAL_ROUTES) {
+  app.get(route.path, (req, res) => {
+    // Only the production CDN should keep these for 30 days. In development a
+    // long browser cache would hide edits.
+    res.setHeader('Cache-Control', config.isProduction ? LEGAL_CACHE_CONTROL : 'no-cache');
+    res.setHeader('Content-Language', route.lang);
+    res.type('html').send(renderLegalPage(route.page, route.lang, requestOrigin(req)));
+  });
+}
+
 app.get('/robots.txt', (req, res) => {
   const origin = requestOrigin(req);
   res.type('text/plain').send(
@@ -268,15 +305,43 @@ app.get('/robots.txt', (req, res) => {
 app.get('/sitemap.xml', (req, res) => {
   const origin = requestOrigin(req);
   const lastmod = new Date().toISOString().slice(0, 10);
+  const legalEntries = (['terms', 'privacy'] as const)
+    .map((page) => {
+      const es = `${origin}${legalPath(page, 'es')}`;
+      const en = `${origin}${legalPath(page, 'en')}`;
+      const alternates =
+        `    <xhtml:link rel="alternate" hreflang="es" href="${es}" />\n` +
+        `    <xhtml:link rel="alternate" hreflang="en" href="${en}" />\n` +
+        `    <xhtml:link rel="alternate" hreflang="x-default" href="${es}" />\n`;
+      return (
+        `  <url>\n` +
+        `    <loc>${es}</loc>\n` +
+        `    <lastmod>${LEGAL_LAST_UPDATED}</lastmod>\n` +
+        `    <changefreq>yearly</changefreq>\n` +
+        `    <priority>0.3</priority>\n` +
+        alternates +
+        `  </url>\n` +
+        `  <url>\n` +
+        `    <loc>${en}</loc>\n` +
+        `    <lastmod>${LEGAL_LAST_UPDATED}</lastmod>\n` +
+        `    <changefreq>yearly</changefreq>\n` +
+        `    <priority>0.3</priority>\n` +
+        alternates +
+        `  </url>\n`
+      );
+    })
+    .join('');
   res.type('application/xml').send(
     `<?xml version="1.0" encoding="UTF-8"?>\n` +
-      `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
+      `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" ` +
+      `xmlns:xhtml="http://www.w3.org/1999/xhtml">\n` +
       `  <url>\n` +
       `    <loc>${origin}/</loc>\n` +
       `    <lastmod>${lastmod}</lastmod>\n` +
       `    <changefreq>daily</changefreq>\n` +
       `    <priority>1.0</priority>\n` +
       `  </url>\n` +
+      legalEntries +
       `</urlset>\n`,
   );
 });

@@ -31,6 +31,9 @@ const en = {
   footerTagline: 'Arqdle · A daily architecture guessing game.',
   footerAttribution: 'Building facts and photos use Wikipedia and',
   footerCreditPrefix: 'Developed for Kimberly Salvo, with love,',
+  legalNav: 'Legal pages',
+  termsOfService: 'Terms of Service',
+  privacyPolicy: 'Privacy Policy',
   pageTitle: 'Arqdle — Daily Architecture Guessing Game',
   pageTitleDaily: 'Arqdle #{number} — Daily Architecture Guessing Game',
   metaDescription:
@@ -163,6 +166,9 @@ const es: Record<TranslationKey, string> = {
   footerTagline: 'Arqdle · Un juego diario de adivinanzas de arquitectura.',
   footerAttribution: 'Los datos y las fotos de los edificios proceden de Wikipedia y',
   footerCreditPrefix: 'Desarrollado para Kimberly Salvo, con amor,',
+  legalNav: 'Páginas legales',
+  termsOfService: 'Términos del servicio',
+  privacyPolicy: 'Política de privacidad',
   pageTitle: 'Arqdle — Juego diario de adivinanzas de arquitectura',
   pageTitleDaily: 'Arqdle n.º {number} — Juego diario de adivinanzas de arquitectura',
   metaDescription:

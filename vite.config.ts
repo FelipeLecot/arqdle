@@ -29,6 +29,11 @@ export default defineConfig(({ mode }) => {
       port: 5173,
       proxy: {
         '/api': `http://localhost:${apiPort}`,
+        '/legal': `http://localhost:${apiPort}`,
+        '/terms': `http://localhost:${apiPort}`,
+        '/privacy': `http://localhost:${apiPort}`,
+        '/en/terms': `http://localhost:${apiPort}`,
+        '/en/privacy': `http://localhost:${apiPort}`,
       },
     },
     build: {

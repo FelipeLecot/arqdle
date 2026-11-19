@@ -1296,6 +1296,23 @@ a:hover {
   color: var(--ink);
 }
 
+.footer__legal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px 10px;
+  margin-top: 10px;
+  font-size: 10px;
+}
+
+.footer__legal a {
+  color: var(--ink);
+}
+
+.footer__legal span {
+  color: var(--line-strong);
+}
+
 /* --------------------------------------------------------------- modal */
 
 .modal {
