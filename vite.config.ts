@@ -13,6 +13,27 @@ export default defineConfig(({ mode }) => {
       ].join('\n    ')
     : '';
 
+  // Load Google Tag Manager only in production builds, so local development
+  // does not send analytics events. The standard loader pushes gtm.start and
+  // the gtm.js event that page-view triggers need. The container config loads GA4.
+  const analytics =
+    mode === 'production'
+      ? `<!-- Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+        var f = d.getElementsByTagName(s)[0];
+        var j = d.createElement(s);
+        var dl = l !== 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', 'GTM-WR9Z3FTC');
+    </script>
+    <!-- End Google Tag Manager -->`
+      : '';
+
   return {
     plugins: [
       react(),
@@ -21,7 +42,8 @@ export default defineConfig(({ mode }) => {
         transformIndexHtml(html) {
           return html
             .replaceAll('%SITE_URL%', siteUrl)
-            .replace('<!-- HREFLANG_LINKS -->', hreflangLinks);
+            .replace('<!-- HREFLANG_LINKS -->', hreflangLinks)
+            .replace('<!-- ANALYTICS -->', analytics);
         },
       },
     ],

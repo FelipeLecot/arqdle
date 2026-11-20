@@ -47,6 +47,14 @@ describe('legal pages', () => {
     expect(html).toContain('href="https://arqdle.com/legal/en/terms"');
   });
 
+  it('names the analytics tools in the privacy policy', () => {
+    for (const lang of ['es', 'en'] as const) {
+      const html = renderLegalPage('privacy', lang, 'https://arqdle.com');
+      expect(html).toContain('GTM-WR9Z3FTC');
+      expect(html).toContain('G-LMKYBP3V0R');
+    }
+  });
+
   it('falls back to relative URLs when the origin is invalid', () => {
     const html = renderLegalPage('terms', 'en', 'javascript:alert(1)');
     expect(html).toContain('href="/legal/terms"');

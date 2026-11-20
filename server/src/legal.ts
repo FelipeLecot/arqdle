@@ -137,7 +137,7 @@ const TERMS_EN = `
 
 const PRIVACY_ES = `
     <h2>1. Resumen</h2>
-    <p>Arqdle es un juego pequeño y gratuito. No muestra anuncios y no usa analíticas de terceros ni cookies de seguimiento. Esta política explica qué datos se guardan y para qué.</p>
+    <p>Arqdle es un juego pequeño y gratuito. No muestra anuncios. Usa Google Tag Manager para cargar etiquetas de medición. Esta política explica qué datos se guardan, qué datos pueden recopilarse y para qué.</p>
 
     <h2>2. Qué datos recopilamos</h2>
     <ul>
@@ -146,28 +146,29 @@ const PRIVACY_ES = `
       <li><strong>Datos de juego.</strong> Las partidas diarias y de práctica, los intentos, los resultados y las estadísticas se vinculan a tu perfil para que puedas continuar donde lo dejaste.</li>
       <li><strong>Cuenta de Google (opcional).</strong> Si inicias sesión con Google, recibimos tu identificador de Google, correo electrónico, nombre, URL de la foto de perfil e idioma. No recibimos ni guardamos tokens de acceso o de actualización de Google.</li>
       <li><strong>Datos técnicos.</strong> La limitación de solicitudes usa tu dirección IP o el ID de tu cuenta en memoria. La aplicación no guarda direcciones IP ni cadenas de agente de usuario en su base de datos. Los proveedores de alojamiento y CDN pueden procesar datos estándar de las solicitudes para entregar y proteger el servicio.</li>
+      <li><strong>Datos de analítica.</strong> El juego carga el contenedor de Google Tag Manager <code>GTM-WR9Z3FTC</code> en producción. El contenedor carga Google Analytics 4 (<code>G-LMKYBP3V0R</code>), que puede recopilar páginas vistas, interacciones, la página de referencia, la ubicación aproximada derivada de la IP y datos del dispositivo y del navegador, y puede guardar cookies de analítica. Los datos exactos dependen de las etiquetas activas en el contenedor.</li>
     </ul>
 
     <h2>3. Para qué los usamos</h2>
-    <p>Usamos estos datos para ejecutar el juego, guardar tu progreso y tus estadísticas, mantener tu cuenta disponible en varios dispositivos, prevenir abusos y generar informes agregados para el desarrollador. No vendemos datos personales.</p>
+    <p>Usamos estos datos para ejecutar el juego, guardar tu progreso y tus estadísticas, mantener tu cuenta disponible en varios dispositivos, prevenir abusos, entender cómo se usa el juego y generar informes agregados para el desarrollador. No vendemos datos personales.</p>
 
     <h2>4. Cookies y almacenamiento local</h2>
-    <p>El sitio usa una cookie esencial para la sesión. No usa cookies de publicidad ni de analítica. Tu navegador también guarda tu elección de idioma, si ya viste la introducción y una marca de importación única en el almacenamiento local. Los datos de partidas antiguas del navegador pueden permanecer hasta que borres los datos del sitio. Esa información permanece en tu dispositivo.</p>
+    <p>El juego usa una cookie esencial para la sesión. También carga Google Tag Manager, que puede guardar cookies de analítica según las etiquetas configuradas. No usamos cookies de analítica para mostrarte anuncios. Tu navegador también guarda tu elección de idioma, si ya viste la introducción y una marca de importación única en el almacenamiento local. Los datos de partidas antiguas del navegador pueden permanecer hasta que borres los datos del sitio. Esa información permanece en tu dispositivo.</p>
 
     <h2>5. Con quién compartimos datos</h2>
     <p>Solo compartimos datos con proveedores que ayudan a operar el servicio:</p>
     <ul>
       <li>AWS aloja la aplicación, la base de datos y la CDN.</li>
-      <li>Google gestiona el inicio de sesión solo si decides usarlo.</li>
+      <li>Google gestiona el inicio de sesión solo si decides usarlo. Google Tag Manager y Google Analytics procesan datos de uso según las políticas de Google.</li>
       <li>Wikimedia sirve las fotos de revelación. Cuando se carga una foto, tu navegador contacta con servidores de Wikimedia, que reciben datos estándar de la solicitud según sus propias políticas.</li>
     </ul>
     <p>No vendemos datos personales.</p>
 
     <h2>6. Conservación</h2>
-    <p>Las sesiones caducan a los 30 días. Los perfiles de invitado vacíos con más de 90 días se eliminan. El historial de partidas y los datos de la cuenta se conservan hasta que elimines tu cuenta. Los informes agregados pueden conservarse más tiempo, pero no muestran correos electrónicos ni intentos individuales.</p>
+    <p>Las sesiones caducan a los 30 días. Los perfiles de invitado vacíos con más de 90 días se eliminan. El historial de partidas y los datos de la cuenta se conservan hasta que elimines tu cuenta. Los informes agregados pueden conservarse más tiempo, pero no muestran correos electrónicos ni intentos individuales. La conservación de los datos de Google Analytics se configura en la propiedad de GA4 y se rige por las políticas de Google.</p>
 
     <h2>7. Tus opciones y derechos</h2>
-    <p>Puedes descargar tus datos en JSON desde el menú de cuenta. Puedes eliminar tu cuenta y los datos relacionados desde el mismo menú. Según dónde vivas, también puedes tener derecho a acceder, corregir, exportar u oponerte al tratamiento de tus datos. Para hacer una solicitud, contacta con el desarrollador a través de <a href="https://www.felipelecot.com" rel="noreferrer">felipelecot.com</a>.</p>
+    <p>Puedes descargar tus datos en JSON desde el menú de cuenta. Puedes eliminar tu cuenta y los datos relacionados desde el mismo menú. Según dónde vivas, también puedes tener derecho a acceder, corregir, exportar u oponerte al tratamiento de tus datos. Puedes bloquear las cookies de analítica desde tu navegador o con una extensión; si bloqueas la cookie de sesión, el progreso de invitado no se guardará. Para hacer una solicitud, contacta con el desarrollador a través de <a href="https://www.felipelecot.com" rel="noreferrer">felipelecot.com</a>.</p>
 
     <h2>8. Menores</h2>
     <p>El servicio no está dirigido a menores de 13 años. No uses Arqdle si tienes menos de 13 años. Si crees que un menor ha proporcionado datos personales, contáctanos para eliminarlos.</p>
@@ -180,7 +181,7 @@ const PRIVACY_ES = `
 
 const PRIVACY_EN = `
     <h2>1. Overview</h2>
-    <p>Arqdle is a small, free game. It does not show ads and does not use third-party analytics or tracking cookies. This policy explains what is stored and why.</p>
+    <p>Arqdle is a small, free game. It does not show ads. It uses Google Tag Manager to load measurement tags. This policy explains what is stored, what may be collected, and why.</p>
 
     <h2>2. What we collect</h2>
     <ul>
@@ -189,28 +190,29 @@ const PRIVACY_EN = `
       <li><strong>Game data.</strong> Daily and practice games, guesses, results, and stats are linked to your profile so you can continue where you left off.</li>
       <li><strong>Google account (optional).</strong> If you sign in with Google, we receive your Google subject identifier, email address, name, profile picture URL, and locale. We do not receive or store Google access or refresh tokens.</li>
       <li><strong>Technical data.</strong> Rate limiting uses your IP address or account ID in memory. The app does not write IP addresses or user-agent strings to its database. Hosting and CDN providers may process standard request data to deliver and protect the service.</li>
+      <li><strong>Analytics data.</strong> The game loads the Google Tag Manager container <code>GTM-WR9Z3FTC</code> in production. The container loads Google Analytics 4 (<code>G-LMKYBP3V0R</code>), which may collect page views, interactions, the referring page, approximate location derived from your IP address, and device and browser data, and may set analytics cookies. The exact data depends on the tags enabled in the container.</li>
     </ul>
 
     <h2>3. How we use it</h2>
-    <p>We use this data to run the game, save your progress and stats, keep your account available across devices, prevent abuse, and produce aggregate reports for the developer. We do not sell personal data.</p>
+    <p>We use this data to run the game, save your progress and stats, keep your account available across devices, prevent abuse, understand how the game is used, and produce aggregate reports for the developer. We do not sell personal data.</p>
 
     <h2>4. Cookies and local storage</h2>
-    <p>The site uses one essential cookie for the session. It does not use advertising or analytics cookies. Your browser also stores your language choice, whether you have seen the intro, and a one-time import marker in local storage. Old browser-only game data may remain until you clear site data. That information stays on your device.</p>
+    <p>The game uses one essential cookie for the session. It also loads Google Tag Manager, which may set analytics cookies depending on the tags configured in the container. We do not use analytics cookies to show you ads. Your browser also stores your language choice, whether you have seen the intro, and a one-time import marker in local storage. Old browser-only game data may remain until you clear site data. That information stays on your device.</p>
 
     <h2>5. Sharing</h2>
     <p>We share data only with providers that help run the service:</p>
     <ul>
       <li>AWS hosts the application, database, and CDN.</li>
-      <li>Google handles sign-in only if you choose to use it.</li>
+      <li>Google handles sign-in only if you choose to use it. Google Tag Manager and Google Analytics process usage data under Google's policies.</li>
       <li>Wikimedia serves reveal photos. When a photo loads, your browser contacts Wikimedia servers, which receive standard request data under their own policies.</li>
     </ul>
     <p>We do not sell personal data.</p>
 
     <h2>6. Retention</h2>
-    <p>Sessions expire after 30 days. Empty guest profiles older than 90 days are deleted. Game history and account data are kept until you delete your account. Aggregate reports may be kept longer, but they do not expose emails or individual guesses.</p>
+    <p>Sessions expire after 30 days. Empty guest profiles older than 90 days are deleted. Game history and account data are kept until you delete your account. Aggregate reports may be kept longer, but they do not expose emails or individual guesses. Google Analytics retention is configured in the GA4 property and governed by Google's policies.</p>
 
     <h2>7. Your choices and rights</h2>
-    <p>You can download your data as JSON from the account menu. You can delete your account and related data from the same menu. Depending on where you live, you may also have the right to access, correct, export, or object to the processing of your data. To make a request, contact the developer through <a href="https://www.felipelecot.com" rel="noreferrer">felipelecot.com</a>.</p>
+    <p>You can download your data as JSON from the account menu. You can delete your account and related data from the same menu. Depending on where you live, you may also have the right to access, correct, export, or object to the processing of your data. You can block analytics cookies in your browser or with an extension; if you block the session cookie, guest progress will not be saved. To make a request, contact the developer through <a href="https://www.felipelecot.com" rel="noreferrer">felipelecot.com</a>.</p>
 
     <h2>8. Children</h2>
     <p>The service is not directed to children under 13. Do not use Arqdle if you are under 13. If you believe a child has provided personal data, contact us so we can remove it.</p>

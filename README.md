@@ -256,6 +256,9 @@ import and for the “how to play” flag.
 
 ## Analytics for posts
 
+These first-party analytics are private and separate from the Google Tag Manager
+container used for usage measurement.
+
 Analytics are private. Access requires either a signed-in Google account listed in
 `ADMIN_EMAILS`, or `Authorization: Bearer $ADMIN_TOKEN`.
 
@@ -488,8 +491,9 @@ The public policy is at <https://arqdle.com/legal/privacy> (Spanish) and
 <https://arqdle.com/legal/en/privacy> (English). Update `server/src/legal.ts`
 when data handling changes.
 
-- Guests are anonymous database rows. The app does not store IP addresses or
-  user-agent strings.
+- Guests are anonymous database rows. The app database does not store IP addresses
+  or user-agent strings. Google Tag Manager and GA4 run in the browser and send
+  usage data to Google.
 - Session tokens are stored as hashes. The cookie is HttpOnly and Secure in
   production.
 - Google sign-in stores the Google subject, email, name, picture URL and locale. It
@@ -499,6 +503,11 @@ when data handling changes.
 - Only aggregate analytics are available, and only to configured admins.
 - `npm run db:cleanup-guests` removes guest profiles older than
   `GUEST_RETENTION_DAYS` that have no games or results.
+
+The production client injects Google Tag Manager container `GTM-WR9Z3FTC`. Its
+current GA4 tag uses measurement ID `G-LMKYBP3V0R`. GTM is not loaded in
+development or on the static legal pages. Update `server/src/legal.ts` when tags
+or purposes change.
 
 ## Notes
 
