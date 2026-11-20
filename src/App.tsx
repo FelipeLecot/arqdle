@@ -44,6 +44,7 @@ interface GameState {
   submitError: string | null;
   game: GameView | null;
   submitting: boolean;
+  revealPending: boolean;
 }
 
 interface GameController {
@@ -60,7 +61,15 @@ function emptyGame(): GameState {
     submitError: null,
     game: null,
     submitting: false,
+    revealPending: false,
   };
+}
+
+function prefetchAnswerImage(game: GameView | null): void {
+  const src = game?.answer?.image?.src;
+  if (!src || typeof window === 'undefined') return;
+  const image = new window.Image();
+  image.src = src;
 }
 
 function useGame(mode: Mode, enabled: boolean): GameController {
@@ -69,6 +78,7 @@ function useGame(mode: Mode, enabled: boolean): GameController {
   const stateRef = useRef(state);
   const startedRef = useRef(false);
   const requestRef = useRef(0);
+  const revealTimerRef = useRef<number | null>(null);
   stateRef.current = state;
 
   const apply = useCallback((next: GameState) => {
@@ -76,8 +86,18 @@ function useGame(mode: Mode, enabled: boolean): GameController {
     setState(next);
   }, []);
 
+  const clearRevealTimer = useCallback(() => {
+    if (revealTimerRef.current !== null) {
+      window.clearTimeout(revealTimerRef.current);
+      revealTimerRef.current = null;
+    }
+  }, []);
+
+  useEffect(() => () => clearRevealTimer(), [clearRevealTimer]);
+
   const load = useCallback(
     async (newGame: boolean, excludeId?: string) => {
+      clearRevealTimer();
       const requestId = requestRef.current + 1;
       requestRef.current = requestId;
       apply({ ...emptyGame(), phase: 'loading' });
@@ -88,12 +108,14 @@ function useGame(mode: Mode, enabled: boolean): GameController {
             ? await loadDailyGame()
             : await loadPracticeGame(newGame, excludeId);
         if (requestRef.current !== requestId) return;
+        prefetchAnswerImage(game);
         apply({
           phase: 'ready',
           error: null,
           submitError: null,
           game,
           submitting: false,
+          revealPending: false,
         });
       } catch (error) {
         if (requestRef.current !== requestId) return;
@@ -104,7 +126,7 @@ function useGame(mode: Mode, enabled: boolean): GameController {
         });
       }
     },
-    [apply, lang, mode],
+    [apply, clearRevealTimer, lang, mode],
   );
 
   useEffect(() => {
@@ -137,12 +159,33 @@ function useGame(mode: Mode, enabled: boolean): GameController {
         const updated = await submitGameGuess(gameId, buildingId);
         const latest = stateRef.current;
         if (latest.game?.id !== gameId) return false;
+        const finished = updated.status !== 'playing' && Boolean(updated.answer);
+        clearRevealTimer();
+        if (finished) prefetchAnswerImage(updated);
         apply({
           ...latest,
           submitting: false,
           submitError: null,
           game: updated,
+          revealPending: finished,
         });
+
+        if (finished) {
+          const reduceMotion =
+            typeof window.matchMedia === 'function' &&
+            window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          const delay = reduceMotion ? 120 : 950;
+          revealTimerRef.current = window.setTimeout(() => {
+            revealTimerRef.current = null;
+            const currentState = stateRef.current;
+            if (
+              currentState.game?.id === gameId &&
+              currentState.game.status !== 'playing'
+            ) {
+              apply({ ...currentState, revealPending: false });
+            }
+          }, delay);
+        }
         return true;
       } catch (error) {
         const latest = stateRef.current;
@@ -164,7 +207,7 @@ function useGame(mode: Mode, enabled: boolean): GameController {
         return false;
       }
     },
-    [apply, lang, load, t],
+    [apply, clearRevealTimer, lang, load, t],
   );
 
   const retry = useCallback(() => {
@@ -225,6 +268,18 @@ export function App() {
   const daily = useGame('daily', bootstrapDone);
   const practice = useGame('practice', bootstrapDone && mode === 'practice');
   const game = mode === 'daily' ? daily : practice;
+  const revealPending = game.state.revealPending;
+  const guessCount = game.state.game?.guesses.length ?? 0;
+
+  useEffect(() => {
+    if (!revealPending) return;
+    const reduceMotion =
+      typeof window.matchMedia === 'function' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    document
+      .getElementById('last-guess')
+      ?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' });
+  }, [revealPending, guessCount]);
 
   const [options, setOptions] = useState<BuildingOption[]>([]);
   const [optionsError, setOptionsError] = useState<string | null>(null);
@@ -457,7 +512,7 @@ export function App() {
             disabled={current.phase !== 'ready'}
             onOpenChange={setSuggestionsOpen}
           />
-        ) : view.answer ? (
+        ) : view.answer && !current.revealPending ? (
           <RevealPanel
             answer={view.answer}
             status={view.status === 'won' ? 'won' : 'lost'}
@@ -470,7 +525,7 @@ export function App() {
             onPlayPractice={() => handleModeChange('practice')}
             onNewDaily={handleNewDaily}
           />
-        ) : (
+        ) : view.answer ? null : (
           <div className="finished-card">
             <p>{t('finishedGame')}</p>
             <button

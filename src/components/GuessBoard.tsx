@@ -50,7 +50,13 @@ export function GuessBoard({ guesses }: GuessBoardProps) {
       ) : (
         <div className="board-rows">
           {guesses.map((guess, rowIndex) => (
-            <div className="guess-row" key={`${guess.id}-${rowIndex}`}>
+            <div
+              className={`guess-row${
+                rowIndex === guesses.length - 1 ? ' guess-row--last' : ''
+              }${guess.correct ? ' guess-row--correct' : ''}`}
+              id={rowIndex === guesses.length - 1 ? 'last-guess' : undefined}
+              key={`${guess.id}-${rowIndex}`}
+            >
               <div className="guess-name">
                 <span className="guess-name__index" aria-hidden="true">
                   {rowIndex + 1}

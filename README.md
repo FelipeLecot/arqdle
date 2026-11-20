@@ -236,6 +236,9 @@ For **Built**, the tile shows the guessed year and century plus an arrow pointin
 the answer: `↓ older` or `↑ newer`. The first century BC and the first century AD are
 treated as neighbouring centuries.
 
+The final guess reveals its eight clue tiles one by one. The answer panel opens after
+the row finishes, so the result is visible before the reveal.
+
 Practice is unlimited, does not affect stats, and never picks today's daily answer.
 
 ## Stats and legacy import

@@ -45,8 +45,14 @@ export function RevealPanel({
   useEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
+    const reduceMotion =
+      typeof window.matchMedia === 'function' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     section.focus({ preventScroll: true });
-    section.scrollIntoView({ block: 'start', behavior: 'auto' });
+    section.scrollIntoView({
+      block: 'start',
+      behavior: reduceMotion ? 'auto' : 'smooth',
+    });
   }, [answer.id, status]);
 
   return (
