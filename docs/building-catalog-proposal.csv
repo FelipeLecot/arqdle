@@ -1,0 +1,339 @@
+id,priority,continent,name,city,country,country_code,year,style,type,architect,signals,note
+carthage,A,Africa,Carthage,Tunis,Tunisia,TN,-814,Phoenician/Roman,City,Unknown,G; U,Harbour city of the Phoenicians and Romans
+leptis-magna,A,Africa,Leptis Magna,Khoms,Libya,LY,-600,Ancient Roman,City,Unknown,G; U; N,Severan marble city
+mortuary-temple-of-hatshepsut,A,Africa,Mortuary Temple of Hatshepsut,Luxor,Egypt,EG,-1479,Ancient Egyptian,Temple,Unknown,G; U,Terraced temple at Deir el-Bahari
+philae-temple,A,Africa,Philae Temple,Aswan,Egypt,EG,-280,Ancient Egyptian,Temple,Unknown,G; U,Isis temple moved to Agilkia
+stone-town,A,Africa,Stone Town,Zanzibar City,Tanzania,TZ,1800,Swahili,Historic city,Unknown,G; U; N,Swahili trading town of carved doors
+bou-inania-madrasa,B,Africa,Bou Inania Madrasa,Fes,Morocco,MA,1356,Marinid,Madrasa,Unknown,G; U,Marinid tilework and carved cedar
+cairo-citadel,B,Africa,Cairo Citadel,Cairo,Egypt,EG,1183,Ayyubid,Citadel,Unknown,G; U,Saladin's fortress above Cairo
+casbah-of-algiers,B,Africa,Casbah of Algiers,Algiers,Algeria,DZ,1516,Ottoman,Citadel,Unknown,G; U; N,Ottoman medina above the bay
+chefchaouen,B,Africa,Chefchaouen,Chefchaouen,Morocco,MA,1471,Moorish,Historic town,Unknown,G; R,Blue-painted Rif mountain town
+constitutional-court,B,Africa,Constitutional Court,Johannesburg,South Africa,ZA,2004,Contemporary,Courthouse,OMM Design Workshop,A; R; N,Court built from the old prison
+cyrene,B,Africa,Cyrene,Shahhat,Libya,LY,-630,Ancient Greek,City,Unknown,G; U; N,Greek colony in Cyrenaica
+dougga,B,Africa,Dougga,Teboursouk,Tunisia,TN,-200,Numidian/Roman,City,Unknown,G; U,Best-preserved Numidian town
+edfu-temple,B,Africa,Edfu Temple,Edfu,Egypt,EG,-57,Ptolemaic,Temple,Unknown,G; U,Best-preserved Egyptian temple
+egyptian-museum,B,Africa,Egyptian Museum,Cairo,Egypt,EG,1902,Neoclassical,Museum,Marcel Dourgnon,G; R,Tutankhamun collection
+elmina-castle,B,Africa,Elmina Castle,Elmina,Ghana,GH,1482,Portuguese,Castle,Unknown,G; U; N,Oldest European building in sub-Saharan Africa
+fort-jesus,B,Africa,Fort Jesus,Mombasa,Kenya,KE,1593,Portuguese,Fortress,Unknown,G; U; N,Portuguese fort on the Indian Ocean
+harar-jugol,B,Africa,Harar Jugol,Harar,Ethiopia,ET,1200,Harari,Walled city,Unknown,G; U,Walled Islamic city
+lamu-old-town,B,Africa,Lamu Old Town,Lamu,Kenya,KE,1370,Swahili,Historic town,Unknown,G; U; N,Oldest Swahili settlement
+osun-osogbo-sacred-grove,B,Africa,Osun-Osogbo Sacred Grove,Osogbo,Nigeria,NG,1400,Yoruba,Sacred grove,Unknown,G; U; N,Yoruba shrines in a forest
+robben-island,B,Africa,Robben Island,Cape Town,South Africa,ZA,1600,Colonial,Prison island,Unknown,G; U; N,Nelson Mandela's prison
+royal-palaces-of-abomey,B,Africa,Royal Palaces of Abomey,Abomey,Benin,BJ,1650,Dahomey,Palace complex,Unknown,G; U; N,Palaces of the kings of Dahomey
+timgad,B,Africa,Timgad,Batna,Algeria,DZ,100,Ancient Roman,City,Unknown,G; U; N,Grid-planned Roman colony
+valley-of-the-kings,B,Africa,Valley of the Kings,Luxor,Egypt,EG,-1500,Ancient Egyptian,Necropolis,Unknown,G; U,Rock-cut tombs of the pharaohs
+volubilis,B,Africa,Volubilis,Meknes,Morocco,MA,-300,Ancient Roman,City,Unknown,G; U,Roman mosaics in the olive belt
+aapravasi-ghat,C,Africa,Aapravasi Ghat,Port Louis,Mauritius,MU,1849,Colonial,Immigration depot,Unknown,G; U; N,Arrival point of indentured labourers
+cape-town-city-hall,C,Africa,Cape Town City Hall,Cape Town,South Africa,ZA,1905,Neoclassical,City hall,Henry Austin Reid,R; N,Where Mandela gave his first speech
+djemila,C,Africa,Djemila,Sétif,Algeria,DZ,100,Ancient Roman,City,Unknown,G; U; N,Roman city in the highlands
+hassan-tower,C,Africa,Hassan Tower,Rabat,Morocco,MA,1199,Almohad,Minaret,Unknown,G; U,Unfinished Almohad minaret
+kano-city-walls,C,Africa,Kano City Walls,Kano,Nigeria,NG,1100,Hausa,Fortification,Unknown,R; N,Ancient mudbrick city walls
+maqam-echahid,C,Africa,Maqam Echahid,Algiers,Algeria,DZ,1982,Contemporary,Monument,Bachir Yellès,R; N,Independence monument
+rova-of-antananarivo,C,Africa,Rova of Antananarivo,Antananarivo,Madagascar,MG,1700,Merina,Palace,Unknown,G; R; N,Royal hill of Madagascar
+sao-filipe-church,C,Africa,São Filipe Church,Cidade Velha,Cape Verde,CV,1556,Portuguese Colonial,Church,Unknown,G; U; N,Oldest colonial church in the tropics
+tiya,C,Africa,Tiya,Tiya,Ethiopia,ET,1200,Ethiopian,Megalithic site,Unknown,G; U,Stelae with sword carvings
+voortrekker-monument,C,Africa,Voortrekker Monument,Pretoria,South Africa,ZA,1949,Art Deco,Monument,Gerard Moerdijk,R; N,Afrikaner granite monument
+ajanta-caves,A,Asia,Ajanta Caves,Aurangabad,India,IN,-200,Buddhist,Cave temples,Unknown,G; U,Buddhist paintings and rock-cut halls
+ayutthaya,A,Asia,Ayutthaya,Ayutthaya,Thailand,TH,1350,Siamese,Historic city,Unknown,G; U,Ruined Siamese capital
+azadi-tower,A,Asia,Azadi Tower,Tehran,Iran,IR,1971,Contemporary,Monument,Hossein Amanat,G; R,Tehran's gateway arch
+bagan,A,Asia,Bagan,Bagan,Myanmar,MM,1100,Buddhist,Temple city,Unknown,G; U; N,Plain of thousands of pagodas
+bayon,A,Asia,Bayon,Siem Reap,Cambodia,KH,1200,Khmer,Temple,Unknown,G; U; N,Smiling stone faces
+bulguksa,A,Asia,Bulguksa,Gyeongju,South Korea,KR,751,Korean Buddhist,Temple,Unknown,G; U; N,Silla temple of the Buddha land
+changdeokgung-palace,A,Asia,Changdeokgung Palace,Seoul,South Korea,KR,1405,Korean,Palace,Unknown,G; U; N,Joseon palace with a secret garden
+ellora-caves,A,Asia,Ellora Caves,Aurangabad,India,IN,600,Buddhist/Hindu/Jain,Cave temples,Unknown,G; U,Rock-cut monasteries and the Kailasa temple
+fatehpur-sikri,A,Asia,Fatehpur Sikri,Fatehpur Sikri,India,IN,1571,Mughal,Palace city,Unknown,G; U,Akbar's abandoned capital
+fushimi-inari-taisha,A,Asia,Fushimi Inari Taisha,Kyoto,Japan,JP,711,Shinto,Shrine,Unknown,G; R,Thousands of vermilion torii gates
+gardens-by-the-bay,A,Asia,Gardens by the Bay,Singapore,Singapore,SG,2012,Contemporary,Garden,Grant Associates,A; R; N,Supertrees and climate-controlled domes
+great-wall-of-china,A,Asia,Great Wall of China,Beijing,China,CN,1644,Ming,Fortification,Unknown,G; U,Longest fortification in the world
+gobekli-tepe,A,Asia,Göbekli Tepe,Şanlıurfa,Türkiye,TR,-9500,Neolithic,Sanctuary,Unknown,G; U,Oldest known monumental stone enclosure
+hampi,A,Asia,Hampi,Hampi,India,IN,1336,Vijayanagara,Historic city,Unknown,G; U,Capital of the Vijayanagara empire
+hoi-an-ancient-town,A,Asia,Hoi An Ancient Town,Hoi An,Vietnam,VN,1500,Vietnamese,Historic town,Unknown,G; U; N,Lantern-lit trading port
+khajuraho,A,Asia,Khajuraho,Khajuraho,India,IN,950,Chandela,Temple complex,Unknown,G; U,Sculpted nagara temples
+longmen-grottoes,A,Asia,Longmen Grottoes,Luoyang,China,CN,493,Buddhist,Cave temples,Unknown,G; U,Thousands of carved Buddhas
+masjid-al-haram,A,Asia,Masjid al-Haram,Mecca,Saudi Arabia,SA,700,Islamic,Mosque,Unknown,G; S; N,The Kaaba and the Great Mosque
+mogao-caves,A,Asia,Mogao Caves,Dunhuang,China,CN,366,Buddhist,Cave temples,Unknown,G; U,Buddhist murals on the Silk Road
+mohenjo-daro,A,Asia,Mohenjo-daro,Larkana,Pakistan,PK,-2500,Indus Valley,City,Unknown,G; U,Bronze Age planned city
+palmyra,A,Asia,Palmyra,Tadmur,Syria,SY,100,Ancient Roman,City,Unknown,G; U; N,Desert caravan city
+temple-of-the-tooth,A,Asia,Temple of the Tooth,Kandy,Sri Lanka,LK,1595,Kandyan,Temple,Unknown,G; U; N,Buddhist relic shrine
+ziggurat-of-ur,A,Asia,Ziggurat of Ur,Nasiriyah,Iraq,IQ,-2100,Sumerian,Ziggurat,Unknown,G; U; N,Mudbrick temple tower
+aleppo-citadel,B,Asia,Aleppo Citadel,Aleppo,Syria,SY,1200,Ayyubid,Citadel,Unknown,G; U; N,Hilltop citadel and entrance bridge
+ani,B,Asia,Ani,Kars,Türkiye,TR,1000,Armenian,City,Unknown,G; U,Ruined medieval Armenian capital
+aspendos-theatre,B,Asia,Aspendos Theatre,Serik,Türkiye,TR,155,Ancient Roman,Theatre,Zeno,G; R,Best-preserved Roman theatre in Asia Minor
+babylon,B,Asia,Babylon,Hillah,Iraq,IQ,-600,Babylonian,City,Unknown,G; U; N,Ishtar Gate and hanging gardens legend
+banaue-rice-terraces,B,Asia,Banaue Rice Terraces,Banaue,Philippines,PH,-1000,Ifugao,Terraces,Unknown,G; U; N,Terraces carved into the Cordilleras
+beijing-national-aquatics-center,B,Asia,Beijing National Aquatics Center,Beijing,China,CN,2008,Contemporary,Aquatics centre,PTW Architects,A; R,The Water Cube
+canton-tower,B,Asia,Canton Tower,Guangzhou,China,CN,2010,Contemporary,Tower,Mark Hemel; Barbara Kuit,A; R,Twisted lattice television tower
+charminar,B,Asia,Charminar,Hyderabad,India,IN,1591,Indo-Islamic,Monument,Unknown,G; R,Four minarets over the old city
+church-of-the-nativity,B,Asia,Church of the Nativity,Bethlehem,Palestine,PS,565,Byzantine,Church,Unknown,G; U; S; N,Birthplace of Jesus
+dambulla-cave-temple,B,Asia,Dambulla Cave Temple,Dambulla,Sri Lanka,LK,-100,Buddhist,Cave temple,Unknown,G; U; N,Painted cave temples
+diriyah,B,Asia,Diriyah,Riyadh,Saudi Arabia,SA,1446,Najdi,Palace district,Unknown,G; U; N,Birthplace of the Saudi state
+dongdaemun-design-plaza,B,Asia,Dongdaemun Design Plaza,Seoul,South Korea,KR,2014,Contemporary,Cultural centre,Zaha Hadid,A; R; N,Fluid silver landmark
+erdene-zuu-monastery,B,Asia,Erdene Zuu Monastery,Kharkhorin,Mongolia,MN,1585,Mongolian,Monastery,Unknown,G; U; N,Oldest surviving Buddhist monastery in Mongolia
+fujian-tulou,B,Asia,Fujian Tulou,Yongding,China,CN,1200,Hakka,Earth buildings,Unknown,G; U,Communal rammed-earth roundhouses
+galle-fort,B,Asia,Galle Fort,Galle,Sri Lanka,LK,1588,Portuguese/Dutch,Fortification,Unknown,G; U; N,Walled colonial port
+gateway-of-india,B,Asia,Gateway of India,Mumbai,India,IN,1924,Indo-Saracenic,Monument,George Wittet,G; R,Basalt arch facing the harbour
+geghard-monastery,B,Asia,Geghard Monastery,Goght,Armenia,AM,1215,Armenian,Monastery,Unknown,G; U; N,Monastery cut into rock
+gergeti-trinity-church,B,Asia,Gergeti Trinity Church,Kazbegi,Georgia,GE,1400,Georgian,Church,Unknown,G; R; N,Church below Mount Kazbek
+gur-e-amir,B,Asia,Gur-e-Amir,Samarkand,Uzbekistan,UZ,1404,Timurid,Mausoleum,Unknown,G; U; N,Tamerlane's tomb
+haeinsa-temple,B,Asia,Haeinsa Temple,Hapcheon,South Korea,KR,802,Korean Buddhist,Temple,Unknown,G; U; N,Home of the Tripitaka Koreana
+hanging-temple,B,Asia,Hanging Temple,Hunyuan,China,CN,491,Chinese,Temple,Unknown,G; R,Temple pinned to a cliff face
+hattusa,B,Asia,Hattusa,Boğazkale,Türkiye,TR,-1600,Hittite,City,Unknown,G; U,Hittite capital
+hiroshima-peace-memorial,B,Asia,Hiroshima Peace Memorial,Hiroshima,Japan,JP,1915,Industrial,Memorial,Jan Letzel,G; U,A-Bomb Dome
+independence-palace,B,Asia,Independence Palace,Ho Chi Minh City,Vietnam,VN,1966,Modernism,Palace,Ngô Viết Thụ,A; R; N,Presidential palace of South Vietnam
+india-gate,B,Asia,India Gate,New Delhi,India,IN,1931,Neoclassical,Memorial,Edwin Lutyens,G; R,War memorial on the Rajpath
+istiqlal-mosque,B,Asia,Istiqlal Mosque,Jakarta,Indonesia,ID,1978,Islamic,Mosque,Friedrich Silaban,G; R,Largest mosque in Southeast Asia
+itchan-kala,B,Asia,Itchan Kala,Khiva,Uzbekistan,UZ,1700,Khorezm,Fortified city,Unknown,G; U; N,Walled inner city
+jerash,B,Asia,Jerash,Jerash,Jordan,JO,100,Ancient Roman,City,Unknown,G; U; N,Colonnaded Roman provincial city
+kathmandu-durbar-square,B,Asia,Kathmandu Durbar Square,Kathmandu,Nepal,NP,1200,Newar,Palace complex,Unknown,G; U; N,Royal square of carved timber
+krak-des-chevaliers,B,Asia,Krak des Chevaliers,Homs,Syria,SY,1142,Crusader,Castle,Unknown,G; U; N,Crusader castle on a ridge
+kuwait-towers,B,Asia,Kuwait Towers,Kuwait City,Kuwait,KW,1979,Contemporary,Tower,Sune Lindström; Malene Bjørn,G; R; N,Blue-green Kuwaiti towers
+lahore-fort,B,Asia,Lahore Fort,Lahore,Pakistan,PK,1566,Mughal,Fortress,Unknown,G; U,Mughal fort and Shalimar link
+leshan-giant-buddha,B,Asia,Leshan Giant Buddha,Leshan,China,CN,803,Tang,Statue,Unknown,G; U,71 m Buddha carved into a cliff
+luang-prabang,B,Asia,Luang Prabang,Luang Prabang,Laos,LA,1350,Lao,Historic city,Unknown,G; U; N,Mekong confluence of temples and colonial houses
+mahabalipuram,B,Asia,Mahabalipuram,Mahabalipuram,India,IN,630,Pallava,Temple complex,Unknown,G; U,Shore temple and rock-cut chariots
+mandalay-palace,B,Asia,Mandalay Palace,Mandalay,Myanmar,MM,1857,Burmese,Palace,Unknown,G; R; N,Teak palace and moat
+masada,B,Asia,Masada,Masada,Israel,IL,-30,Herodian,Fortress,Unknown,G; U,Desert plateau fortress
+mehrangarh-fort,B,Asia,Mehrangarh Fort,Jodhpur,India,IN,1459,Rajput,Fortress,Unknown,G; R,Fort above the blue city
+meiji-shrine,B,Asia,Meiji Shrine,Tokyo,Japan,JP,1920,Japanese,Shrine,Itō Chūta,G; R,Shinto shrine in a forest
+minaret-of-jam,B,Asia,Minaret of Jam,Shahrak,Afghanistan,AF,1190,Ghurid,Minaret,Unknown,G; U; N,Brick minaret above a river gorge
+mount-nemrut,B,Asia,Mount Nemrut,Adıyaman,Türkiye,TR,-62,Commagene,Tomb-sanctuary,Unknown,G; U,Colossal heads on a mountain top
+my-son-sanctuary,B,Asia,My Son Sanctuary,Duy Xuyên,Vietnam,VN,400,Champa,Temple complex,Unknown,G; U; N,Hindu towers of the Champa kingdom
+mysore-palace,B,Asia,Mysore Palace,Mysore,India,IN,1912,Indo-Saracenic,Palace,Henry Irwin,G; R,Wodeyar palace lit by thousands of bulbs
+nijo-castle,B,Asia,Nijo Castle,Kyoto,Japan,JP,1603,Momoyama,Castle,Unknown,G; U,Shogun's palace with nightingale floors
+nikko-toshogu,B,Asia,Nikko Toshogu,Nikko,Japan,JP,1617,Japanese,Shrine,Unknown,G; U,Lavishly carved Tokugawa shrine
+osaka-castle,B,Asia,Osaka Castle,Osaka,Japan,JP,1583,Japanese,Castle,Unknown,G; R,Green-roofed castle and stone walls
+pasargadae,B,Asia,Pasargadae,Pasargadae,Iran,IR,-530,Achaemenid,Palace complex,Unknown,G; U,Tomb of Cyrus the Great
+pashupatinath-temple,B,Asia,Pashupatinath Temple,Kathmandu,Nepal,NP,400,Hindu,Temple,Unknown,G; U; N,Shiva temple on the Bagmati
+po-i-kalyan,B,Asia,Po-i-Kalyan,Bukhara,Uzbekistan,UZ,1127,Karakhanid,Mosque complex,Unknown,G; U; N,Kalyan minaret and mosque
+prophet-s-mosque,B,Asia,Prophet's Mosque,Medina,Saudi Arabia,SA,622,Islamic,Mosque,Unknown,G; S; N,Al-Masjid an-Nabawi
+punakha-dzong,B,Asia,Punakha Dzong,Punakha,Bhutan,BT,1637,Tibetan,Fortress-monastery,Unknown,G; R; N,Fortress at the river confluence
+raffles-hotel,B,Asia,Raffles Hotel,Singapore,Singapore,SG,1887,Colonial,Hotel,Swan & Maclaren,G; R; N,Colonial hotel and Singapore Sling
+ruins-of-st-paul-s,B,Asia,Ruins of St. Paul's,Macau,China,CN,1602,Baroque,Church facade,Unknown,G; U,Stone façade of a lost Jesuit church
+senso-ji,B,Asia,Senso-ji,Tokyo,Japan,JP,645,Japanese,Temple,Unknown,G; R,Tokyo's oldest temple
+seokguram-grotto,B,Asia,Seokguram Grotto,Gyeongju,South Korea,KR,774,Korean Buddhist,Cave temple,Unknown,G; U; N,Granite Buddha in a circular grotto
+shalimar-gardens,B,Asia,Shalimar Gardens,Lahore,Pakistan,PK,1642,Mughal,Garden,Unknown,G; U,Three terraced Mughal gardens
+si-o-se-pol,B,Asia,Si-o-se-pol,Isfahan,Iran,IR,1602,Safavid,Bridge,Unknown,G; R,Thirty-three-arch bridge
+sukhothai,B,Asia,Sukhothai,Sukhothai,Thailand,TH,1250,Siamese,Historic city,Unknown,G; U,Birthplace of Thai architecture
+sumela-monastery,B,Asia,Sumela Monastery,Trabzon,Türkiye,TR,386,Byzantine,Monastery,Unknown,G; R,Monastery on a cliff
+suzhou-classical-gardens,B,Asia,Suzhou Classical Gardens,Suzhou,China,CN,1100,Chinese,Garden,Unknown,G; U,Scholar gardens of the Jiangnan region
+svetitskhoveli-cathedral,B,Asia,Svetitskhoveli Cathedral,Mtskheta,Georgia,GE,1029,Georgian,Cathedral,Unknown,G; U; N,Georgian royal cathedral
+swayambhunath,B,Asia,Swayambhunath,Kathmandu,Nepal,NP,500,Buddhist,Stupa,Unknown,G; R; N,Monkey temple above the valley
+ta-prohm,B,Asia,Ta Prohm,Siem Reap,Cambodia,KH,1186,Khmer,Temple,Unknown,G; U; N,Temple swallowed by trees
+tanah-lot,B,Asia,Tanah Lot,Bali,Indonesia,ID,1500,Balinese,Temple,Unknown,G; R,Sea temple on a tidal rock
+temple-of-literature,B,Asia,Temple of Literature,Hanoi,Vietnam,VN,1070,Vietnamese,Temple,Unknown,G; R; N,Vietnam's first university
+tokyo-tower,B,Asia,Tokyo Tower,Tokyo,Japan,JP,1958,Modernist,Tower,Tachū Naitō,G; R,Red-and-white lattice tower
+u-bein-bridge,B,Asia,U Bein Bridge,Amarapura,Myanmar,MM,1851,Vernacular,Bridge,Unknown,G; R; N,Longest teak footbridge
+victoria-memorial,B,Asia,Victoria Memorial,Kolkata,India,IN,1921,Indo-Saracenic,Monument,William Emerson,G; R,Marble memorial to Queen Victoria
+vigan,B,Asia,Vigan,Vigan,Philippines,PH,1572,Spanish Colonial,Historic city,Unknown,G; U; N,Cobbled Spanish colonial street
+wat-pho,B,Asia,Wat Pho,Bangkok,Thailand,TH,1788,Thai,Temple,Unknown,G; R,Reclining Buddha and massage school
+wat-rong-khun,B,Asia,Wat Rong Khun,Chiang Rai,Thailand,TH,1997,Contemporary,Temple,Chalermchai Kositpipat,A; R,The White Temple
+western-wall,B,Asia,Western Wall,Jerusalem,Israel,IL,-19,Herodian,Retaining wall,Unknown,G; S,Remnant of the Second Temple
+yazd-old-city,B,Asia,Yazd Old City,Yazd,Iran,IR,1000,Persian,Historic city,Unknown,G; U,Windcatchers and mudbrick lanes
+yungang-grottoes,B,Asia,Yungang Grottoes,Datong,China,CN,460,Buddhist,Cave temples,Unknown,G; U,Northern Wei cave temples
+erbil-citadel,C,Asia,Erbil Citadel,Erbil,Iraq,IQ,-5000,Mesopotamian,Citadel,Unknown,G; U; N,Tell-based citadel inhabited for millennia
+shuri-castle,C,Asia,Shuri Castle,Naha,Japan,JP,1400,Ryukyuan,Palace,Unknown,G; U,Royal palace of the Ryukyu Kingdom
+30-st-mary-axe,A,Europe,30 St Mary Axe,London,United Kingdom,GB,2004,High-tech,Skyscraper,Norman Foster,G; A,The Gherkin
+anne-frank-house,A,Europe,Anne Frank House,Amsterdam,Netherlands,NL,1635,Canal house,House/museum,Unknown,G; R; N,Canal house and hiding place
+canterbury-cathedral,A,Europe,Canterbury Cathedral,Canterbury,United Kingdom,GB,1184,Romanesque/Gothic,Cathedral,William of Sens,G; U,Mother church of Anglicanism
+charles-bridge,A,Europe,Charles Bridge,Prague,Czechia,CZ,1402,Gothic,Bridge,Peter Parler,G; R,Statues and towers over the Vltava
+church-of-the-savior-on-blood,A,Europe,Church of the Savior on Blood,Saint Petersburg,Russia,RU,1907,Russian Revival,Church,Alfred Parland,G; R,Onion domes over the site of Alexander II's assassination
+chateau-de-chambord,A,Europe,Château de Chambord,Chambord,France,FR,1547,Renaissance,Palace,Unknown,G; U,Loire château with double-helix staircase
+cite-de-carcassonne,A,Europe,Cité de Carcassonne,Carcassonne,France,FR,1250,Medieval,Fortified city,Unknown,G; U,Double-walled medieval city restored by Viollet-le-Duc
+delphi,A,Europe,Delphi,Delphi,Greece,GR,-330,Ancient Greek,Sanctuary,Unknown,G; U,Sanctuary of Apollo and the Oracle
+dresden-frauenkirche,A,Europe,Dresden Frauenkirche,Dresden,Germany,DE,1743,Baroque,Church,George Bähr,G; U,Rebuilt after its destruction in the Second World War
+dubrovnik-city-walls,A,Europe,Dubrovnik City Walls,Dubrovnik,Croatia,HR,1450,Medieval,Fortification,Unknown,G; U; N,Complete circuit of medieval walls
+grand-place,A,Europe,Grand Place,Brussels,Belgium,BE,1695,Baroque,Square,Unknown,G; U; N,Guild halls around a cobbled square
+knossos,A,Europe,Knossos,Heraklion,Greece,GR,-1900,Minoan,Palace,Unknown,G; U,Bronze Age palace linked to the Minotaur myth
+les-invalides,A,Europe,Les Invalides,Paris,France,FR,1706,Baroque,Palace complex,Libéral Bruant; Jules Hardouin-Mansart,G,Napoleon's tomb under the gilded dome
+millau-viaduct,A,Europe,Millau Viaduct,Millau,France,FR,2004,Contemporary,Bridge,Michel Virlogeux; Norman Foster,G; A,World's tallest bridge pier; cable-stayed viaduct
+musee-d-orsay,A,Europe,Musée d'Orsay,Paris,France,FR,1900,Beaux-Arts,Museum,Victor Laloux,G; A,Former railway station; Impressionist collection
+mycenae,A,Europe,Mycenae,Mycenae,Greece,GR,-1350,Mycenaean,Citadel,Unknown,G; U,Lion Gate and Cyclopean walls
+palais-des-papes,A,Europe,Palais des Papes,Avignon,France,FR,1352,Gothic,Palace,Pierre Poisson; Jean de Louvres,G; U,Largest Gothic palace in Europe
+pompeii,A,Europe,Pompeii,Pompei,Italy,IT,79,Ancient Roman,City,Unknown,G; U,Roman city buried by Vesuvius
+royal-site-of-el-escorial,A,Europe,Royal Site of El Escorial,San Lorenzo de El Escorial,Spain,ES,1584,Renaissance,Palace/monastery,Juan de Herrera,G; U,Spanish royal monastery and palace
+sacre-coeur,A,Europe,Sacré-Cœur,Paris,France,FR,1914,Romanesque-Byzantine,Basilica,Paul Abadie,G,Paris hilltop landmark; white travertine dome
+sistine-chapel,A,Europe,Sistine Chapel,Vatican City,Vatican City,VA,1481,Renaissance,Chapel,Baccio Pontelli,G; A; N,Michelangelo's ceiling
+st-pancras-international,A,Europe,St Pancras International,London,United Kingdom,GB,1868,Gothic Revival,Railway station,George Gilbert Scott,G; R,Victorian railway cathedral
+st-isaac-s-cathedral,A,Europe,St. Isaac's Cathedral,Saint Petersburg,Russia,RU,1858,Neoclassical,Cathedral,Auguste de Montferrand,G; U,Gilded dome and colonnade
+st-stephen-s-cathedral,A,Europe,St. Stephen's Cathedral,Vienna,Austria,AT,1359,Gothic,Cathedral,Unknown,G; R,Vienna's stepped spire and coloured roof
+stari-most,A,Europe,Stari Most,Mostar,Bosnia and Herzegovina,BA,1566,Ottoman,Bridge,Mimar Hayruddin,G; U; N,Rebuilt Ottoman arch over the Neretva
+the-shard,A,Europe,The Shard,London,United Kingdom,GB,2012,Contemporary,Skyscraper,Renzo Piano,G; A,Tallest building in the United Kingdom
+valley-of-the-temples,A,Europe,Valley of the Temples,Agrigento,Italy,IT,-430,Ancient Greek,Temple complex,Unknown,G; U,Greek temples on a Sicilian ridge
+windsor-castle,A,Europe,Windsor Castle,Windsor,United Kingdom,GB,1070,Norman,Castle,Unknown,G; R,Oldest inhabited castle in the world
+york-minster,A,Europe,York Minster,York,United Kingdom,GB,1472,Gothic,Cathedral,Unknown,G; R,Largest Gothic cathedral in northern Europe
+zwinger,A,Europe,Zwinger,Dresden,Germany,DE,1728,Baroque,Palace,Matthäus Daniel Pöppelmann,G; U,Baroque festival palace and porcelain pavilions
+aachen-cathedral,B,Europe,Aachen Cathedral,Aachen,Germany,DE,805,Carolingian,Cathedral,Unknown,G; U,Charlemagne's palatine chapel
+amiens-cathedral,B,Europe,Amiens Cathedral,Amiens,France,FR,1269,Gothic,Cathedral,Robert de Luzarches,G; U,Tallest complete Gothic cathedral in France
+amsterdam-canal-ring,B,Europe,Amsterdam Canal Ring,Amsterdam,Netherlands,NL,1650,Dutch Golden Age,Canal district,Unknown,G; U; N,Concentric canals and gabled houses
+antwerp-central-station,B,Europe,Antwerp Central Station,Antwerp,Belgium,BE,1905,Eclectic,Railway station,Louis Delacenserie,G; R; N,Railway cathedral
+battersea-power-station,B,Europe,Battersea Power Station,London,United Kingdom,GB,1955,Industrial,Power station,Giles Gilbert Scott,G; R,Art Deco power station on the Thames
+belvedere,B,Europe,Belvedere,Vienna,Austria,AT,1716,Baroque,Palace,Johann Lukas von Hildebrandt,G; U,Klimt's The Kiss and the Upper Belvedere
+blenheim-palace,B,Europe,Blenheim Palace,Woodstock,United Kingdom,GB,1722,Baroque,Palace,John Vanbrugh; Nicholas Hawksmoor,G; U,Birthplace of Winston Churchill
+bolshoi-theatre,B,Europe,Bolshoi Theatre,Moscow,Russia,RU,1856,Neoclassical,Theatre,Joseph Bové,G; R,Russia's main opera and ballet stage
+bryggen,B,Europe,Bryggen,Bergen,Norway,NO,1702,Hanseatic,Wharf district,Unknown,G; U; N,Colourful Hanseatic wharf
+buda-castle,B,Europe,Buda Castle,Budapest,Hungary,HU,1265,Baroque,Castle,Unknown,G; U; N,Royal castle above the Danube
+burgos-cathedral,B,Europe,Burgos Cathedral,Burgos,Spain,ES,1260,Gothic,Cathedral,Unknown,G; U,Gothic cathedral on the Camino de Santiago
+castel-del-monte,B,Europe,Castel del Monte,Andria,Italy,IT,1240,Medieval,Castle,Unknown,G; U,Octagonal Hohenstaufen castle
+chateau-de-chenonceau,B,Europe,Château de Chenonceau,Chenonceaux,France,FR,1576,Renaissance,Palace,Philibert de l'Orme; Jean Bullant,G; U,Château spanning the River Cher
+dolmabahce-palace,B,Europe,Dolmabahçe Palace,Istanbul,Türkiye,TR,1856,Baroque,Palace,Garabet Balyan,G; R,Last Ottoman palace on the Bosphorus
+drottningholm-palace,B,Europe,Drottningholm Palace,Stockholm,Sweden,SE,1699,Baroque,Palace,Nicodemus Tessin the Elder,G; U; N,Royal palace and theatre
+fisherman-s-bastion,B,Europe,Fisherman's Bastion,Budapest,Hungary,HU,1902,Neo-Romanesque,Fortification,Frigyes Schulek,G; R; N,Terraces overlooking the Danube
+forth-bridge,B,Europe,Forth Bridge,Edinburgh,United Kingdom,GB,1890,Industrial,Bridge,Benjamin Baker; John Fowler,G; U,Cantilever railway bridge
+hadrian-s-wall,B,Europe,Hadrian's Wall,Hexham,United Kingdom,GB,128,Ancient Roman,Fortification,Unknown,G; U,Roman frontier across northern England
+hamburg-speicherstadt,B,Europe,Hamburg Speicherstadt,Hamburg,Germany,DE,1888,Historicist,Warehouse district,Unknown,G; U,Largest warehouse district in the world
+harpa,B,Europe,Harpa,Reykjavík,Iceland,IS,2011,Contemporary,Concert hall,Henning Larsen; Olafur Eliasson,A; R; N,Glass facade on the harbour
+heidelberg-castle,B,Europe,Heidelberg Castle,Heidelberg,Germany,DE,1300,Renaissance,Castle,Unknown,G; R,Romantic ruin above the Neckar
+herculaneum,B,Europe,Herculaneum,Ercolano,Italy,IT,79,Ancient Roman,City,Unknown,G; U,Better-preserved sister city of Pompeii
+jewish-museum-berlin,B,Europe,Jewish Museum Berlin,Berlin,Germany,DE,1999,Deconstructivism,Museum,Daniel Libeskind,G; A,Zigzag museum about Jewish life in Germany
+kinderdijk-windmills,B,Europe,Kinderdijk Windmills,Kinderdijk,Netherlands,NL,1740,Vernacular,Windmills,Unknown,G; U; N,Nineteen drainage windmills
+kronborg-castle,B,Europe,Kronborg Castle,Helsingør,Denmark,DK,1585,Renaissance,Castle,Unknown,G; U; N,Hamlet's Elsinore
+kyiv-pechersk-lavra,B,Europe,Kyiv Pechersk Lavra,Kyiv,Ukraine,UA,1051,Byzantine,Monastery,Unknown,G; U; N,Cave monastery and golden domes
+lake-bled-pilgrimage-church,B,Europe,Lake Bled Pilgrimage Church,Bled,Slovenia,SI,1690,Baroque,Church,Unknown,G; R; N,Island church with a mountain backdrop
+lloyd-s-building,B,Europe,Lloyd's Building,London,United Kingdom,GB,1986,High-tech,Office building,Richard Rogers,A; R,Inside-out insurance headquarters
+lviv-old-town,B,Europe,Lviv Old Town,Lviv,Ukraine,UA,1350,Renaissance/Baroque,Historic city,Unknown,G; U; N,Poland-Lithuania's eastern cultural capital
+mole-antonelliana,B,Europe,Mole Antonelliana,Turin,Italy,IT,1889,Eclectic,Tower/museum,Alessandro Antonelli,G; R,Turin's cinema museum and skyline symbol
+monte-carlo-casino,B,Europe,Monte Carlo Casino,Monaco,Monaco,MC,1878,Beaux-Arts,Casino,Charles Garnier,G; R; N,Belle Époque casino
+montserrat-monastery,B,Europe,Montserrat Monastery,Montserrat,Spain,ES,1592,Romanesque,Monastery,Unknown,G; R,Benedictine abbey on a serrated mountain
+newgrange,B,Europe,Newgrange,Slane,Ireland,IE,-3200,Neolithic,Passage tomb,Unknown,G; U; N,Older than Stonehenge and the Giza pyramids
+olympia,B,Europe,Olympia,Olympia,Greece,GR,-460,Ancient Greek,Sanctuary,Unknown,G; U,Birthplace of the Olympic Games
+ostankino-tower,B,Europe,Ostankino Tower,Moscow,Russia,RU,1967,Modernist,Tower,Nikolai Nikitin,A; R,Tallest freestanding structure in Europe
+palace-of-the-parliament,B,Europe,Palace of the Parliament,Bucharest,Romania,RO,1997,Neoclassical,Parliament,Anca Petrescu,G; R; N,One of the largest administrative buildings in the world
+palazzo-vecchio,B,Europe,Palazzo Vecchio,Florence,Italy,IT,1314,Gothic,Town hall,Arnolfo di Cambio,G; R,Florence's civic palace and tower
+peles-castle,B,Europe,Peleș Castle,Sinaia,Romania,RO,1914,Neo-Renaissance,Palace,Karel Liman,G; R; N,Carpathian royal palace
+reims-cathedral,B,Europe,Reims Cathedral,Reims,France,FR,1275,Gothic,Cathedral,Jean d'Orbais; Jean le Loup,G; U,Coronation church of the French kings
+rhodes-old-town,B,Europe,Rhodes Old Town,Rhodes,Greece,GR,1300,Medieval,Fortified city,Unknown,G; U,Knights Hospitaller walled city
+rila-monastery,B,Europe,Rila Monastery,Rila,Bulgaria,BG,1834,Bulgarian Revival,Monastery,Unknown,G; U; N,Frescoed monastery in the Rila mountains
+rock-of-cashel,B,Europe,Rock of Cashel,Cashel,Ireland,IE,1160,Romanesque/Gothic,Ecclesiastical complex,Unknown,G; U; N,Seat of the kings of Munster
+roman-baths,B,Europe,Roman Baths,Bath,United Kingdom,GB,70,Ancient Roman,Bath complex,Unknown,G; U,Best-preserved Roman baths in Britain
+salisbury-cathedral,B,Europe,Salisbury Cathedral,Salisbury,United Kingdom,GB,1258,Gothic,Cathedral,Elias of Dereham,G; U,Tallest cathedral spire in the United Kingdom
+sassi-di-matera,B,Europe,Sassi di Matera,Matera,Italy,IT,1000,Vernacular,Cave settlement,Unknown,G; U,Cave city cut into the tufa
+st-john-s-co-cathedral,B,Europe,St John's Co-Cathedral,Valletta,Malta,MT,1577,Baroque,Cathedral,Girolamo Cassar,G; U; N,Caravaggio paintings and gilded interior
+st-stephen-s-basilica,B,Europe,St. Stephen's Basilica,Budapest,Hungary,HU,1905,Neoclassical,Basilica,József Hild; Miklós Ybl,G; R; N,Budapest's domed basilica
+strasbourg-cathedral,B,Europe,Strasbourg Cathedral,Strasbourg,France,FR,1439,Gothic,Cathedral,Erwin von Steinbach,G; U,Pink sandstone cathedral; once the world's tallest building
+tallinn-old-town,B,Europe,Tallinn Old Town,Tallinn,Estonia,EE,1300,Medieval,Historic city,Unknown,G; U; N,Hanseatic walled old town
+theatre-of-epidaurus,B,Europe,Theatre of Epidaurus,Epidaurus,Greece,GR,-340,Ancient Greek,Theatre,Polykleitos the Younger,G; U,Famous for its near-perfect acoustics
+trulli-of-alberobello,B,Europe,Trulli of Alberobello,Alberobello,Italy,IT,1400,Vernacular,Houses,Unknown,G; U,Dry-stone houses with conical roofs
+turning-torso,B,Europe,Turning Torso,Malmö,Sweden,SE,2005,Contemporary,Skyscraper,Santiago Calatrava,A; R; N,Twisting residential tower
+ulm-minster,B,Europe,Ulm Minster,Ulm,Germany,DE,1890,Gothic,Church,Ulrich Ensingen,G; R,Tallest church in the world
+villa-d-este,B,Europe,Villa d'Este,Tivoli,Italy,IT,1572,Renaissance,Villa,Pirro Ligorio,G; U,Renaissance garden with gravity-fed fountains
+walls-of-avila,B,Europe,Walls of Ávila,Ávila,Spain,ES,1100,Romanesque,Fortification,Unknown,G; U,Best-preserved medieval walls in Spain
+warsaw-old-town,B,Europe,Warsaw Old Town,Warsaw,Poland,PL,1300,Historicist,Historic city,Unknown,G; U,Reconstructed after wartime destruction
+wartburg-castle,B,Europe,Wartburg Castle,Eisenach,Germany,DE,1067,Romanesque,Castle,Unknown,G; U,Luther's Bible translation and the singers' contest
+wieliczka-salt-mine,B,Europe,Wieliczka Salt Mine,Wieliczka,Poland,PL,1250,Medieval,Mine,Unknown,G; U,Underground chapels carved in salt
+cesky-krumlov,B,Europe,Český Krumlov,Český Krumlov,Czechia,CZ,1300,Renaissance,Historic city,Unknown,G; U,Castle and old town looped by the Vltava
+alcazar-of-toledo,C,Europe,Alcázar of Toledo,Toledo,Spain,ES,1540,Renaissance,Fortress/palace,Unknown,G; R,Fortress above the Tagus; Civil War siege site
+alexander-nevsky-cathedral,C,Europe,Alexander Nevsky Cathedral,Sofia,Bulgaria,BG,1912,Neo-Byzantine,Cathedral,Alexander Pomerantsev,G; R; N,Sofia's gold-domed cathedral
+arena-di-verona,C,Europe,Arena di Verona,Verona,Italy,IT,30,Ancient Roman,Amphitheatre,Unknown,G; U,Roman arena still used for opera
+belgrade-fortress,C,Europe,Belgrade Fortress,Belgrade,Serbia,RS,200,Ancient Roman/Medieval,Fortress,Unknown,R; N,Confluence of the Sava and Danube
+eden-project,C,Europe,Eden Project,St Blazey,United Kingdom,GB,2001,Contemporary,Biomes,Grimshaw Architects,A; R,Biomes in a former clay pit
+erasmus-bridge,C,Europe,Erasmus Bridge,Rotterdam,Netherlands,NL,1996,Contemporary,Bridge,Ben van Berkel,A; R; N,Single-pylon cable-stayed bridge
+galata-tower,C,Europe,Galata Tower,Istanbul,Türkiye,TR,1348,Genoese,Tower,Unknown,G; R,Medieval tower above the Golden Horn
+gravensteen,C,Europe,Gravensteen,Ghent,Belgium,BE,1180,Medieval,Castle,Unknown,G; R; N,Castle of the counts of Flanders
+kilmainham-gaol,C,Europe,Kilmainham Gaol,Dublin,Ireland,IE,1796,Georgian,Prison,John Trail,R; N,Prison of the Irish independence movement
+kotor-old-town,C,Europe,Kotor Old Town,Kotor,Montenegro,ME,1200,Medieval,Fortified city,Unknown,G; U; N,Walled town at the foot of the fjord
+nidaros-cathedral,C,Europe,Nidaros Cathedral,Trondheim,Norway,NO,1300,Gothic,Cathedral,Unknown,G; R; N,Northern Europe's westernmost Gothic cathedral
+peter-and-paul-fortress,C,Europe,Peter and Paul Fortress,Saint Petersburg,Russia,RU,1703,Petrine Baroque,Fortress,Domenico Trezzini,G; R,Birthplace of Saint Petersburg
+potemkin-stairs,C,Europe,Potemkin Stairs,Odesa,Ukraine,UA,1841,Neoclassical,Staircase,Franz Boffo,G; R; N,Odesa's seaward monumental staircase
+prague-astronomical-clock,C,Europe,Prague Astronomical Clock,Prague,Czechia,CZ,1410,Gothic,Clock tower,Mikuláš of Kadaň; Jan Šindel,G; R,Medieval clock on the Old Town Hall
+rialto-bridge,C,Europe,Rialto Bridge,Venice,Italy,IT,1591,Renaissance,Bridge,Antonio da Ponte,G; R,Stone arch over the Grand Canal
+riga-old-town,C,Europe,Riga Old Town,Riga,Latvia,LV,1300,Medieval/Art Nouveau,Historic city,Unknown,G; U; N,Hanseatic core and Art Nouveau district
+rosenborg-castle,C,Europe,Rosenborg Castle,Copenhagen,Denmark,DK,1624,Renaissance,Castle,Bertel Lange; Hans van Steenwinckel,G; R; N,Renaissance castle and crown jewels
+st-james-cathedral,C,Europe,St. James Cathedral,Šibenik,Croatia,HR,1536,Renaissance,Cathedral,Juraj Dalmatinac; Nikola Firentinac,G; U; N,Stone lace façade and dome
+suomenlinna,C,Europe,Suomenlinna,Helsinki,Finland,FI,1748,Enlightenment,Sea fortress,Augustin Ehrensvärd,G; U; N,Fortress across the harbour
+temple-of-poseidon-sounion,C,Europe,"Temple of Poseidon, Sounion",Sounion,Greece,GR,-440,Ancient Greek,Temple,Unknown,G; R,Cliff-top temple above the Aegean
+temppeliaukio-church,C,Europe,Temppeliaukio Church,Helsinki,Finland,FI,1969,Modernism,Church,Timo Suomalainen; Tuomo Suomalainen,A; R; N,Church quarried into solid rock
+trakai-island-castle,C,Europe,Trakai Island Castle,Trakai,Lithuania,LT,1400,Gothic,Castle,Unknown,G; R; N,Red-brick castle on a lake island
+uppsala-cathedral,C,Europe,Uppsala Cathedral,Uppsala,Sweden,SE,1435,Gothic,Cathedral,Unknown,G; R; N,Scandinavia's largest cathedral
+vilnius-old-town,C,Europe,Vilnius Old Town,Vilnius,Lithuania,LT,1400,Baroque,Historic city,Unknown,G; U; N,Baroque old town
+wilanow-palace,C,Europe,Wilanów Palace,Warsaw,Poland,PL,1696,Baroque,Palace,Augustyn Wincenty Locci,G; U,Polish royal summer palace
+apple-park,A,North America,Apple Park,Cupertino,United States,US,2017,Contemporary,Office campus,Norman Foster,A; R,Circular headquarters in a park
+basilica-of-our-lady-of-guadalupe,A,North America,Basilica of Our Lady of Guadalupe,Mexico City,Mexico,MX,1976,Contemporary,Basilica,Pedro Ramírez Vázquez,G; R,Modern basilica and pilgrimage site
+copan,A,North America,Copán,Copán Ruinas,Honduras,HN,400,Maya,City,Unknown,G; U; N,Maya sculptures and hieroglyphic stairway
+jefferson-memorial,A,North America,Jefferson Memorial,"Washington, D.C.",United States,US,1943,Neoclassical,Memorial,John Russell Pope,G; R,Rotunda and portico on the Tidal Basin
+old-havana,A,North America,Old Havana,Havana,Cuba,CU,1519,Colonial,Historic city,Unknown,G; U; N,Colonial plazas and fortifications
+rockefeller-center,A,North America,Rockefeller Center,New York City,United States,US,1939,Art Deco,Complex,Raymond Hood,G; R,Art Deco office cluster and Rockefeller Plaza
+st-patrick-s-cathedral,A,North America,St. Patrick's Cathedral,New York City,United States,US,1879,Gothic Revival,Cathedral,James Renwick Jr.,G; R,Fifth Avenue neo-Gothic cathedral
+supreme-court-building,A,North America,Supreme Court Building,"Washington, D.C.",United States,US,1935,Neoclassical,Courthouse,Cass Gilbert,G; R,Marble temple of American law
+alcatraz,B,North America,Alcatraz,San Francisco,United States,US,1859,Military,Prison,Unknown,G; R,Island fortress and federal prison
+antigua-guatemala,B,North America,Antigua Guatemala,Antigua Guatemala,Guatemala,GT,1543,Colonial,Historic city,Unknown,G; U; N,Colonial capital destroyed by earthquakes
+art-gallery-of-ontario,B,North America,Art Gallery of Ontario,Toronto,Canada,CA,2008,Contemporary,Museum,Frank Gehry,A; R,Gehry's sculptural renovation
+biltmore-estate,B,North America,Biltmore Estate,Asheville,United States,US,1895,Châteauesque,House,Richard Morris Hunt,G; R,Largest private house in the United States
+calakmul,B,North America,Calakmul,Campeche,Mexico,MX,500,Maya,City,Unknown,G; U,Maya superpower in the Calakmul reserve
+chapultepec-castle,B,North America,Chapultepec Castle,Mexico City,Mexico,MX,1785,Neoclassical,Palace,Unknown,G; R,Royal palace on Chapultepec Hill
+citadelle-laferriere,B,North America,Citadelle Laferrière,Milot,Haiti,HT,1820,Colonial,Fortress,Unknown,G; U; N,Mountain fortress of independent Haiti
+dulles-international-airport-terminal,B,North America,Dulles International Airport Terminal,Dulles,United States,US,1962,Modernism,Airport terminal,Eero Saarinen,A; R,Suspended roof and mobile lounges
+el-tajin,B,North America,El Tajín,Papantla,Mexico,MX,600,Totonac,City,Unknown,G; U,Pyramid of the Niches
+farnsworth-house,B,North America,Farnsworth House,Plano,United States,US,1951,International Style,House,Mies van der Rohe,A; R,Glass pavilion above the Fox River
+griffith-observatory,B,North America,Griffith Observatory,Los Angeles,United States,US,1935,Art Deco,Observatory,John C. Austin,G; R,Art Deco observatory above the city
+high-line,B,North America,High Line,New York City,United States,US,2009,Contemporary,Park,Diller Scofidio + Renfro,A; R,Elevated railway turned park
+hollywood-sign,B,North America,Hollywood Sign,Los Angeles,United States,US,1923,Contemporary,Sign,Unknown,G; R,Letters on Mount Lee
+john-hancock-center,B,North America,John Hancock Center,Chicago,United States,US,1969,Structural Expressionism,Skyscraper,"Skidmore, Owings & Merrill",A; R,X-braced supertall
+l-anse-aux-meadows,B,North America,L'Anse aux Meadows,L'Anse aux Meadows,Canada,CA,1000,Norse,Settlement,Unknown,G; U,Norse site in Newfoundland
+marina-city,B,North America,Marina City,Chicago,United States,US,1964,Modernism,Residential towers,Bertrand Goldberg,A; R,Twin corncob towers
+monte-alban,B,North America,Monte Albán,Oaxaca,Mexico,MX,-500,Zapotec,City,Unknown,G; U,Zapotec capital above the valley
+monticello,B,North America,Monticello,Charlottesville,United States,US,1809,Neoclassical,House,Thomas Jefferson,G; U,Jefferson's hilltop plantation house
+national-gallery-of-art,B,North America,National Gallery of Art,"Washington, D.C.",United States,US,1941,Neoclassical,Museum,John Russell Pope,G; R,West Building and I. M. Pei's East Building
+oculus,B,North America,Oculus,New York City,United States,US,2016,Contemporary,Transit hub,Santiago Calatrava,A; R,Ribbed white transit hall at Ground Zero
+panama-viejo,B,North America,Panama Viejo,Panama City,Panama,PA,1519,Colonial,City,Unknown,G; U; N,First European city on the Pacific
+rideau-canal,B,North America,Rideau Canal,Ottawa,Canada,CA,1832,Industrial,Canal,John By,G; U,Canal linking Ottawa to Lake Ontario
+royal-ontario-museum,B,North America,Royal Ontario Museum,Toronto,Canada,CA,1914,Eclectic,Museum,Unknown,G; R,Historic building with Libeskind's crystal
+salk-institute,B,North America,Salk Institute,La Jolla,United States,US,1965,Modernism,Research campus,Louis Kahn,A; R,Teak and concrete laboratories facing the Pacific
+san-juan-national-historic-site,B,North America,San Juan National Historic Site,San Juan,Puerto Rico,PR,1540,Spanish Colonial,Fortification,Unknown,G; U; N,El Morro and city walls
+santo-domingo-cathedral,B,North America,Santo Domingo Cathedral,Santo Domingo,Dominican Republic,DO,1512,Gothic/Plateresque,Cathedral,Unknown,G; U; N,First cathedral in the Americas
+seattle-central-library,B,North America,Seattle Central Library,Seattle,United States,US,2004,Contemporary,Library,OMA,A; R,Folded glass and steel library
+toronto-city-hall,B,North America,Toronto City Hall,Toronto,Canada,CA,1965,Modernism,City hall,Viljo Revell,G; R,Twin curved towers around a saucer
+tulum,B,North America,Tulum,Tulum,Mexico,MX,1200,Maya,City,Unknown,G; U,Cliff-top Maya port
+united-nations-headquarters,B,North America,United Nations Headquarters,New York City,United States,US,1952,International Style,Complex,Wallace Harrison,G; R,Glass Secretariat on the East River
+uxmal,B,North America,Uxmal,Uxmal,Mexico,MX,700,Maya,City,Unknown,G; U,Puuc-style Maya city
+willemstad,B,North America,Willemstad,Willemstad,Curaçao,CW,1634,Dutch Colonial,Historic city,Unknown,G; U; N,Pastel waterfront of the old port
+boston-city-hall,C,North America,Boston City Hall,Boston,United States,US,1968,Brutalism,City hall,Kallmann McKinnell & Knowles,A; R,Brutalist concrete civic centre
+johnson-wax-headquarters,C,North America,Johnson Wax Headquarters,Racine,United States,US,1939,Art Deco,Office building,Frank Lloyd Wright,A; R,Lily-pad columns and streamlined brick
+milwaukee-art-museum,C,North America,Milwaukee Art Museum,Milwaukee,United States,US,2001,Contemporary,Museum,Santiago Calatrava,A; R,Moving sunscreen wings on the lake
+salt-lake-temple,C,North America,Salt Lake Temple,Salt Lake City,United States,US,1893,Gothic Revival,Temple,Truman Angell,G; R,Mormon temple on Temple Square
+taliesin-west,C,North America,Taliesin West,Scottsdale,United States,US,1937,Organic,School,Frank Lloyd Wright,A; R,Wright's desert studio
+washington-national-cathedral,C,North America,Washington National Cathedral,"Washington, D.C.",United States,US,1990,Gothic Revival,Cathedral,George Frederick Bodley,G; R,Neo-Gothic cathedral on Mount St Alban
+flinders-street-station,A,Oceania,Flinders Street Station,Melbourne,Australia,AU,1909,Edwardian,Railway station,Fawcett & Ashworth,G; R,Melbourne's yellow cathedral of transit
+beehive,B,Oceania,Beehive,Wellington,New Zealand,NZ,1981,Modernism,Parliament,Basil Spence,G; R,Round government building
+dunedin-railway-station,B,Oceania,Dunedin Railway Station,Dunedin,New Zealand,NZ,1906,Edwardian,Railway station,George Troup,G; R,Gingerbread railway station
+federation-square,B,Oceania,Federation Square,Melbourne,Australia,AU,2002,Contemporary,Square,Lab Architecture,A; R,Angular civic square
+mona,B,Oceania,MONA,Hobart,Australia,AU,2011,Contemporary,Museum,Nonda Katsalidis,A; R,Museum carved into a cliff
+port-arthur,B,Oceania,Port Arthur,Port Arthur,Australia,AU,1830,Colonial,Penal settlement,Unknown,G; U,Convict ruins on Tasmania's coast
+queen-victoria-building,B,Oceania,Queen Victoria Building,Sydney,Australia,AU,1898,Romanesque Revival,Shopping arcade,George McRae,G; R,Sandstone arcade and stained glass
+sydney-tower,B,Oceania,Sydney Tower,Sydney,Australia,AU,1981,Contemporary,Tower,Donald Crone,G; R,Gold turret above the CBD
+christchurch-cathedral,C,Oceania,Christchurch Cathedral,Christchurch,New Zealand,NZ,1881,Gothic Revival,Cathedral,George Gilbert Scott,G; R,Earthquake-damaged cathedral
+old-parliament-house,C,Oceania,Old Parliament House,Canberra,Australia,AU,1927,Georgian,Parliament,John Smith Murdoch,G; R,Interwar provisional parliament
+shrine-of-remembrance,C,Oceania,Shrine of Remembrance,Melbourne,Australia,AU,1934,Neoclassical,Memorial,Hudson & Wardrop,G; R,War memorial above the city
+waitangi-treaty-grounds,C,Oceania,Waitangi Treaty Grounds,Waitangi,New Zealand,NZ,1840,Colonial,Treaty house,Unknown,G; R,Birthplace of modern New Zealand
+cusco-cathedral,A,South America,Cusco Cathedral,Cusco,Peru,PE,1654,Baroque,Cathedral,Unknown,G; U; N,Cathedral on the Inca plaza
+nazca-lines,A,South America,Nazca Lines,Nazca,Peru,PE,-500,Nazca,Geoglyphs,Unknown,G; U; N,Desert drawings seen from above
+ouro-preto,A,South America,Ouro Preto,Ouro Preto,Brazil,BR,1700,Colonial,Historic city,Unknown,G; U,Baroque gold-rush town
+quito-old-town,A,South America,Quito Old Town,Quito,Ecuador,EC,1534,Colonial,Historic city,Unknown,G; U; N,Andean colonial capital
+rio-de-janeiro-cathedral,A,South America,Rio de Janeiro Cathedral,Rio de Janeiro,Brazil,BR,1979,Modernism,Cathedral,Edgar Fonseca,G; R,Conical concrete cathedral
+sacsayhuaman,A,South America,Sacsayhuamán,Cusco,Peru,PE,1450,Inca,Fortress,Unknown,G; U; N,Megalithic zigzag walls
+tiwanaku,A,South America,Tiwanaku,Tiwanaku,Bolivia,BO,-300,Tiwanaku,City,Unknown,G; U; N,Gateway of the Sun and monoliths
+basilica-del-voto-nacional,B,South America,Basílica del Voto Nacional,Quito,Ecuador,EC,1924,Neo-Gothic,Basilica,Emilio Tarlier,G; R; N,Gothic basilica above Quito
+caral,B,South America,Caral,Supe,Peru,PE,-2600,Norte Chico,City,Unknown,G; U; N,Oldest city in the Americas
+chan-chan,B,South America,Chan Chan,Trujillo,Peru,PE,850,Chimú,City,Unknown,G; U; N,Largest adobe city in the world
+chiloe-churches,B,South America,Chiloé Churches,Chiloé,Chile,CL,1700,Chilote,Churches,Unknown,G; U,Wooden churches of Chiloé
+colonia-del-sacramento,B,South America,Colonia del Sacramento,Colonia del Sacramento,Uruguay,UY,1680,Colonial,Historic city,Unknown,G; U; N,Portuguese colonial grid
+cuenca,B,South America,Cuenca,Cuenca,Ecuador,EC,1557,Colonial,Historic city,Unknown,G; U; N,Colonial grid on an Inca site
+ibirapuera-park,B,South America,Ibirapuera Park,São Paulo,Brazil,BR,1954,Modernism,Park complex,Oscar Niemeyer,A; R,Niemeyer pavilions in a modernist park
+jesuit-missions-of-la-santisima-trinidad,B,South America,Jesuit Missions of La Santísima Trinidad,Encarnación,Paraguay,PY,1706,Colonial,Mission,Unknown,G; U; N,Jesuit mission ruins
+manaus-opera-house,B,South America,Manaus Opera House,Manaus,Brazil,BR,1896,Neo-Renaissance,Opera house,Celestial Sacardim,G; R,Rubber-boom opera house in the Amazon
+obelisco-de-buenos-aires,B,South America,Obelisco de Buenos Aires,Buenos Aires,Argentina,AR,1936,Modernism,Monument,Alberto Prebisch,G; R,White obelisk on Avenida 9 de Julio
+olinda,B,South America,Olinda,Olinda,Brazil,BR,1535,Colonial,Historic city,Unknown,G; U,Colonial hillside town
+ollantaytambo,B,South America,Ollantaytambo,Ollantaytambo,Peru,PE,1450,Inca,Town/fortress,Unknown,G; U; N,Inca terraces and temple hill
+palacio-do-planalto,B,South America,Palácio do Planalto,Brasília,Brazil,BR,1960,Modernism,Palace,Oscar Niemeyer,A; R,Presidential office palace
+pelourinho,B,South America,Pelourinho,Salvador,Brazil,BR,1600,Colonial,Historic district,Unknown,G; U,Colourful colonial centre
+potosi,B,South America,Potosí,Potosí,Bolivia,BO,1545,Colonial,Mining city,Unknown,G; U; N,Silver mountain and colonial mint
+recoleta-cemetery,B,South America,Recoleta Cemetery,Buenos Aires,Argentina,AR,1822,Eclectic,Cemetery,Unknown,G; R,Mausoleums of Argentine elites
+san-agustin-archaeological-park,B,South America,San Agustín Archaeological Park,San Agustín,Colombia,CO,100,San Agustín,Megalithic site,Unknown,G; U,Stone statues and tombs
+sucre,B,South America,Sucre,Sucre,Bolivia,BO,1538,Colonial,Historic city,Unknown,G; U; N,White colonial capital
+valparaiso,B,South America,Valparaíso,Valparaíso,Chile,CL,1800,Victorian,Historic city,Unknown,G; U,Hillside funiculars and colour
+villa-de-leyva,B,South America,Villa de Leyva,Villa de Leyva,Colombia,CO,1572,Colonial,Historic town,Unknown,G; U,Whitewashed colonial plaza
+costanera-center,C,South America,Costanera Center,Santiago,Chile,CL,2012,Contemporary,Skyscraper,César Pelli,A; R,Tallest building in South America
+palacio-barolo,C,South America,Palacio Barolo,Buenos Aires,Argentina,AR,1923,Art Nouveau,Office building,Mario Palanti,G; R,Dante-inspired tower
+paramaribo-historic-inner-city,C,South America,Paramaribo Historic Inner City,Paramaribo,Suriname,SR,1650,Dutch Colonial,Historic city,Unknown,G; U; N,Dutch colonial wooden buildings
+solis-theatre,C,South America,Solís Theatre,Montevideo,Uruguay,UY,1856,Neoclassical,Theatre,Unknown,G; R; N,Montevideo's main theatre
+st-george-s-cathedral,C,South America,St. George's Cathedral,Georgetown,Guyana,GY,1892,Gothic Revival,Cathedral,Arthur Blomfield,G; R; N,One of the tallest wooden churches
+tierradentro,C,South America,Tierradentro,Inzá,Colombia,CO,600,Tierradentro,Hypogea,Unknown,G; U,Painted underground tombs

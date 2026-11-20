@@ -11,6 +11,12 @@ import { iconBuildings } from './icons';
 import { moreBuildings } from './more';
 import { antarctica, oceania } from './oceania';
 import { antarcticaExtra, oceaniaExtra } from './oceania-extra';
+import { proposalAfrica } from './proposal-africa';
+import { proposalAsia } from './proposal-asia';
+import { proposalEurope } from './proposal-europe';
+import { proposalNorthAmerica } from './proposal-north-america';
+import { proposalOceania } from './proposal-oceania';
+import { proposalSouthAmerica } from './proposal-south-america';
 import { southAmericaExtra } from './south-america-extra';
 
 export const buildings: Building[] = [
@@ -29,6 +35,12 @@ export const buildings: Building[] = [
   ...antarcticaExtra,
   ...moreBuildings,
   ...iconBuildings,
+  ...proposalEurope,
+  ...proposalAsia,
+  ...proposalAfrica,
+  ...proposalNorthAmerica,
+  ...proposalSouthAmerica,
+  ...proposalOceania,
 ].sort((a, b) => a.name.localeCompare(b.name, 'en'));
 
 const byId = new Map<string, Building>();

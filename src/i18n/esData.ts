@@ -1,5 +1,12 @@
 import { buildingExtraEs } from './esExtra';
 import { buildingIconsEs } from './esIcons';
+import {
+  buildingProposalEs,
+  countriesEsExtra,
+  materialsEsExtra,
+  stylesEsExtra,
+  typesEsExtra,
+} from './esProposal';
 
 export interface BuildingCopyEs {
   name: string;
@@ -103,6 +110,7 @@ export const countriesEs: Record<string, string> = {
   Israel: 'Israel',
   Tonga: 'Tonga',
   Bhutan: 'Bután',
+  ...countriesEsExtra,
 };
 
 export const continentsEs: Record<string, string> = {
@@ -207,6 +215,7 @@ export const stylesEs: Record<string, string> = {
   'Indo-Islamic': 'Indoislámico',
   Timurid: 'Timurí',
   Yemeni: 'Yemení',
+  ...stylesEsExtra,
 };
 
 export const formFamiliesEs: Record<string, string> = {
@@ -290,6 +299,7 @@ export const typesEs: Record<string, string> = {
   Madrasah: 'Madraza',
   Trilithon: 'Trilito',
   Obelisk: 'Obelisco',
+  ...typesEsExtra,
 };
 
 export const usesEs: Record<string, string> = {
@@ -355,6 +365,7 @@ export const materialsEs: Record<string, string> = {
   Mosaic: 'Mosaico',
   Cardboard: 'Cartón',
   Terracotta: 'Terracota',
+  ...materialsEsExtra,
 };
 
 const buildingEsBase: Record<string, BuildingCopyEs> = {
@@ -969,4 +980,5 @@ export const buildingEs: Record<string, BuildingCopyEs> = {
   ...buildingEsBase,
   ...buildingExtraEs,
   ...buildingIconsEs,
+  ...buildingProposalEs,
 };

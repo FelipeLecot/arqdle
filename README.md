@@ -192,9 +192,9 @@ public building list and comparison results only.
 
 ## How the daily answer works
 
-The game ships 260 buildings in `server/src/data/`. The English dataset is bundled
+The game ships 598 buildings in `server/src/data/`. The English dataset is bundled
 into the server only. Spanish display copy lives in `src/i18n/esData.ts`,
-`src/i18n/esExtra.ts` and `src/i18n/esIcons.ts`.
+`src/i18n/esExtra.ts`, `src/i18n/esIcons.ts` and `src/i18n/esProposal.ts`.
 
 - `server/src/daily.ts` computes the day number from `DAILY_EPOCH`.
 - The answer order is a deterministic shuffle seeded by `DAILY_SEED` and the cycle
@@ -372,6 +372,7 @@ shared/types.ts         types and constants shared by client and server
 shared/stats.ts         legacy stats helpers
 tests/                  Vitest unit and database tests
 server/data/            optional daily schedule
+docs/                   catalog expansion proposal and CSV
 compose.yaml            development Postgres only
 ```
 
@@ -385,7 +386,13 @@ Buildings live in:
 - `server/src/data/asia.ts`
 - `server/src/data/oceania.ts`
 - `server/src/data/*-extra.ts`
+- `server/src/data/proposal-*.ts`
 - `server/src/data/more.ts`
+
+The 338 candidates from the catalog expansion proposal are now in
+`server/src/data/proposal-*.ts`. The research record is in
+`docs/building-catalog-proposal.md`, with a machine-readable version in
+`docs/building-catalog-proposal.csv`.
 
 Each entry implements `Building` in `server/src/types.ts`. Required fields include
 the name, city, country and ISO code, continent, signed year (negative for BC),
@@ -425,6 +432,10 @@ most important missing landmarks were added. The main sources are:
 Facts are written in our own words. Photos are fetched from Wikimedia and credited
 at reveal time. Before adding a building, verify its date, country, style, type,
 materials and architect against an official or heritage source.
+
+The 2026 expansion added 338 buildings from `docs/building-catalog-proposal.md`.
+The new entries live in `server/src/data/proposal-*.ts` and their Spanish copy in
+`src/i18n/esProposal.ts`.
 
 ## SEO and metadata
 
