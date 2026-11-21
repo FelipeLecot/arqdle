@@ -38,60 +38,6 @@ For an unlimited development game, switch to the **Practice** tab, or open
 The Docker Compose file starts Postgres only. The app runs with `npm` so server and
 client changes reload quickly.
 
-## Production
-
-```sh
-npm ci
-npm run build
-cp .env.example .env
-# Set DATABASE_URL to the EC2 Postgres instance and configure SSL.
-# Set SITE_URL, and add Google OAuth credentials if accounts are enabled.
-npm start
-```
-
-`npm start` sets `NODE_ENV=production`, runs pending SQL migrations, and serves the
-built client from `dist/client` plus the API from the same origin.
-
-The app does not need Docker in production. Point `DATABASE_URL` at the existing
-Postgres instance. Keep the database port closed to the public internet and allow
-only the application host through the security group.
-
-### Deploying to the shared cluster
-
-Production runs on the shared K3s cluster behind CloudFront at <https://arqdle.com>.
-
-- Pushing to `main` builds and publishes `shared-infra-prod-containers-ecr/arqdle:main-<sha>`
-  to ECR with GitHub Actions (`.github/workflows/deploy.yml`). The workflow uses
-  GitHub OIDC and assumes `github-arqdle-main`; no long-lived AWS keys are stored.
-  Add the `AWS_ROLE_ARN` repository secret before the first run.
-- The image is built for `linux/arm64`, matching the `t4g` K3s nodes.
-- Argo CD Image Updater writes the new tag into
-  `shared-argocd/charts/arqdle/values-prod.yaml`. Argo CD then runs the pre-deploy
-  migration Job (`node dist/server/migrate.js`) and rolls the Deployment.
-- `DB_AUTO_MIGRATE=false` in production. The migration Job is the only migrator.
-- The EC2 Postgres host has no TLS listener, so the cluster sets
-  `DATABASE_SSL=disable`. Traffic stays inside the VPC.
-- CloudFront caches `/assets/*` for a year, `/legal/*` for 30 days, and the
-  root images for a shorter window. `/api/*` is not cached, and the origin also
-  sends `Cache-Control: no-store` on API responses.
-- After changing legal copy, invalidate `/legal/*` in CloudFront. The path is
-  cached at the edge for 30 days.
-- The full runbook (certificate, DNS, secrets, first deploy) lives in
-  `shared-infra/docs/arqdle-setup.md`.
-
-### Production database checklist
-
-- Use a dedicated PostgreSQL role. It needs `CONNECT`, `USAGE` on schema `public`,
-  and `SELECT`, `INSERT`, `UPDATE`, `DELETE` on the application tables. The migration
-  runner also needs `CREATE` on the schema.
-- Use `DATABASE_SSL=verify-full` and `DATABASE_CA_CERT=/path/to/ca.pem` when the
-  provider gives you a CA. `require` encrypts the connection without verifying the
-  certificate.
-- Back up the database. A daily `pg_dump` plus provider snapshots is enough for this
-  app.
-- Run `npm run db:cleanup-guests` periodically to remove old empty guest profiles.
-- Keep `ADMIN_EMAILS` and `ADMIN_TOKEN` private. Analytics are never public.
-
 ## Environment variables
 
 | Variable | Default | Purpose |
@@ -215,7 +161,6 @@ Example schedule:
 ```
 
 Keys are dates in `PUZZLE_TIMEZONE`; values are building IDs from the dataset.
-Restart the server after editing the schedule.
 
 ## Rules
 
@@ -241,29 +186,18 @@ the row finishes, so the result is visible before the reveal.
 
 Practice is unlimited, does not affect stats, and never picks today's daily answer.
 
-## Stats and legacy import
+## Stats
 
 Stats derive from `daily_results`. Wins, win rate, current streak, maximum streak and
 the guess distribution are computed from the user's finished daily games. Practice is
 ignored. The guess distribution has one bucket per attempt, up to ten. Legacy stats
 with six buckets are padded with zeros.
 
-On the first load after upgrading from the browser-only build, the client sends the
-old `localStorage` stats and the latest saved daily game to `POST /api/me/import`.
-The server records the aggregate once and replays the current daily guesses against
-the stored answer. Historical per-day rows from before the database are not
-recreated; their totals are preserved in `users.legacy_stats`.
+## Analytics
 
-Local storage is no longer the source of truth. It is used only for the one-time
-import and for the “how to play” flag.
-
-## Analytics for posts
-
-These first-party analytics are private and separate from the Google Tag Manager
-container used for usage measurement.
-
-Analytics are private. Access requires either a signed-in Google account listed in
-`ADMIN_EMAILS`, or `Authorization: Bearer $ADMIN_TOKEN`.
+The admin reports are first-party analytics. They are separate from Google Tag
+Manager and GA4, which measure usage. Access requires either a signed-in Google
+account listed in `ADMIN_EMAILS`, or `Authorization: Bearer $ADMIN_TOKEN`.
 
 - `GET /api/admin/analytics?from=YYYY-MM-DD&to=YYYY-MM-DD` returns totals, daily rows,
   attempt distribution, top guessed buildings, top wrong guesses and signups by day.
@@ -332,6 +266,9 @@ a win or loss.
 
 The analytics and CSV endpoints are listed above. They return `404` when no admin
 access is configured, and `403` for a non-admin account.
+
+The app does not rate limit requests. Use Cloudflare or the reverse proxy in front of
+it.
 
 ## Photos
 
@@ -522,18 +459,6 @@ The production client injects Google Tag Manager container `GTM-WR9Z3FTC`. Its
 current GA4 tag uses measurement ID `G-LMKYBP3V0R`. GTM is not loaded in
 development or on the static legal pages. Update `server/src/legal.ts` when tags
 or purposes change.
-
-## Notes
-
-- `PUZZLE_SECRET` is no longer used. Saved browser games and stats are imported once;
-  after that the database is the source of truth.
-- Rate limits are in memory. A single app instance is assumed. For multiple
-  instances, move rate limiting to a shared store or the reverse proxy.
-- Running `npm start` applies migrations before listening. The runner takes a
-  PostgreSQL advisory lock, so two instances starting together do not apply the same
-  migration twice.
-- Stats count daily games only. Practice results are ignored.
-- The daily answer is never sent before a win or the tenth wrong guess.
 
 ## Credits
 

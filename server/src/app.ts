@@ -33,7 +33,6 @@ import {
   safeRedirect,
   signInWithGoogleIdentity,
 } from './oauth';
-import { rateLimit } from './rate-limit';
 import {
   attachSession,
   clearSessionCookie,
@@ -102,15 +101,10 @@ app.get('/api/me', ensureUser, async (req, res) => {
   res.json(await buildMe(req.user!));
 });
 
-app.post(
-  '/api/me/import',
-  rateLimit('import', 5, 60 * 60 * 1000),
-  ensureUser,
-  async (req, res) => {
-    const { user } = await importLegacy(req.user!, req.body);
-    res.json(await buildMe(user));
-  },
-);
+app.post('/api/me/import', ensureUser, async (req, res) => {
+  const { user } = await importLegacy(req.user!, req.body);
+  res.json(await buildMe(user));
+});
 
 app.get('/api/me/export', ensureUser, async (req, res) => {
   const data = await exportUserData(req.user!);
@@ -134,73 +128,64 @@ app.post('/api/auth/logout', async (req, res) => {
   res.json({ ok: true });
 });
 
-app.get(
-  '/api/auth/google/start',
-  rateLimit('auth-start', 20, 10 * 60 * 1000),
-  ensureUser,
-  async (req, res) => {
-    if (!isGoogleConfigured()) {
-      throw new ApiError(
-        503,
-        'google_not_configured',
-        'Google sign-in is not configured on this server.',
-      );
-    }
-    const { state, codeChallenge, nonce } = await createOAuthState(
-      req.user!.id,
-      typeof req.query.next === 'string' ? req.query.next : '/',
+app.get('/api/auth/google/start', ensureUser, async (req, res) => {
+  if (!isGoogleConfigured()) {
+    throw new ApiError(
+      503,
+      'google_not_configured',
+      'Google sign-in is not configured on this server.',
     );
-    res.redirect(302, buildGoogleAuthorizationUrl(state, codeChallenge, nonce));
-  },
-);
+  }
+  const { state, codeChallenge, nonce } = await createOAuthState(
+    req.user!.id,
+    typeof req.query.next === 'string' ? req.query.next : '/',
+  );
+  res.redirect(302, buildGoogleAuthorizationUrl(state, codeChallenge, nonce));
+});
 
-app.get(
-  '/api/auth/google/callback',
-  rateLimit('auth-callback', 30, 10 * 60 * 1000),
-  async (req, res) => {
-    if (!isGoogleConfigured()) {
-      throw new ApiError(
-        503,
-        'google_not_configured',
-        'Google sign-in is not configured on this server.',
-      );
-    }
+app.get('/api/auth/google/callback', async (req, res) => {
+  if (!isGoogleConfigured()) {
+    throw new ApiError(
+      503,
+      'google_not_configured',
+      'Google sign-in is not configured on this server.',
+    );
+  }
 
-    const state = typeof req.query.state === 'string' ? req.query.state : '';
-    const code = typeof req.query.code === 'string' ? req.query.code : '';
-    if (!state || !code) {
-      res.redirect('/?auth=error&reason=missing');
-      return;
-    }
+  const state = typeof req.query.state === 'string' ? req.query.state : '';
+  const code = typeof req.query.code === 'string' ? req.query.code : '';
+  if (!state || !code) {
+    res.redirect('/?auth=error&reason=missing');
+    return;
+  }
 
-    let stored;
-    try {
-      stored = await consumeOAuthState(state);
-    } catch (error) {
-      console.error('[auth] could not read state', (error as Error).message);
-      res.redirect('/?auth=error&reason=state');
-      return;
-    }
-    if (!stored) {
-      res.redirect('/?auth=error&reason=state');
-      return;
-    }
+  let stored;
+  try {
+    stored = await consumeOAuthState(state);
+  } catch (error) {
+    console.error('[auth] could not read state', (error as Error).message);
+    res.redirect('/?auth=error&reason=state');
+    return;
+  }
+  if (!stored) {
+    res.redirect('/?auth=error&reason=state');
+    return;
+  }
 
-    try {
-      const identity = await exchangeGoogleCode(code, stored.code_verifier, stored.nonce);
-      const user = await signInWithGoogleIdentity(identity, stored.user_id);
-      if (req.sessionToken) await deleteSessionByToken(req.sessionToken);
-      await rotateSessionForUser(res, user.id);
-      res.redirect(withAuthResult(stored.redirect_to ?? '/', 'ok'));
-    } catch (error) {
-      console.error(
-        '[auth] Google sign-in failed',
-        error instanceof Error ? error.message : error,
-      );
-      res.redirect(withAuthResult(stored.redirect_to ?? '/', 'error'));
-    }
-  },
-);
+  try {
+    const identity = await exchangeGoogleCode(code, stored.code_verifier, stored.nonce);
+    const user = await signInWithGoogleIdentity(identity, stored.user_id);
+    if (req.sessionToken) await deleteSessionByToken(req.sessionToken);
+    await rotateSessionForUser(res, user.id);
+    res.redirect(withAuthResult(stored.redirect_to ?? '/', 'ok'));
+  } catch (error) {
+    console.error(
+      '[auth] Google sign-in failed',
+      error instanceof Error ? error.message : error,
+    );
+    res.redirect(withAuthResult(stored.redirect_to ?? '/', 'error'));
+  }
+});
 
 app.get('/api/games/daily', ensureUser, async (req, res) => {
   res.json(await getDailyGame(req.user!.id));
@@ -212,21 +197,16 @@ app.get('/api/games/practice', ensureUser, async (req, res) => {
   res.json(await getPracticeGame(req.user!.id, { newGame, excludeId }));
 });
 
-app.post(
-  '/api/games/:gameId/guess',
-  rateLimit('guess', 120, 60 * 1000),
-  ensureUser,
-  async (req, res) => {
-    const body = req.body as { buildingId?: unknown } | null;
-    if (!body || typeof body.buildingId !== 'string' || body.buildingId.length > 120) {
-      throw new ApiError(400, 'invalid_request', 'A building id is required.');
-    }
-    const gameId = Array.isArray(req.params.gameId)
-      ? req.params.gameId[0]
-      : req.params.gameId;
-    res.json(await submitGuess(req.user!.id, gameId, body.buildingId));
-  },
-);
+app.post('/api/games/:gameId/guess', ensureUser, async (req, res) => {
+  const body = req.body as { buildingId?: unknown } | null;
+  if (!body || typeof body.buildingId !== 'string' || body.buildingId.length > 120) {
+    throw new ApiError(400, 'invalid_request', 'A building id is required.');
+  }
+  const gameId = Array.isArray(req.params.gameId)
+    ? req.params.gameId[0]
+    : req.params.gameId;
+  res.json(await submitGuess(req.user!.id, gameId, body.buildingId));
+});
 
 app.use('/api/admin', requireAdmin);
 

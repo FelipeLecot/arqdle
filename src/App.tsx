@@ -243,12 +243,7 @@ async function bootstrapProfile(): Promise<Me> {
         markLegacyImported();
         clearLegacyGames();
       } catch (error) {
-        if (
-          error instanceof ApiError &&
-          error.status >= 400 &&
-          error.status < 500 &&
-          error.code !== 'rate_limited'
-        ) {
+        if (error instanceof ApiError && error.status >= 400 && error.status < 500) {
           markLegacyImported();
         }
       }

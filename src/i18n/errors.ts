@@ -13,7 +13,6 @@ const ERROR_KEYS: Record<string, TranslationKey> = {
   game_over: 'errorGameOver',
   daily_closed: 'errorDailyClosed',
   database_unavailable: 'errorDatabaseUnavailable',
-  rate_limited: 'errorRateLimited',
   auth_failed: 'errorAuthFailed',
   google_not_configured: 'errorGoogleNotConfigured',
   not_admin: 'errorNotAdmin',
