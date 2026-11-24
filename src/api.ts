@@ -2,7 +2,6 @@ import type {
   ApiErrorBody,
   BuildingOption,
   GameView,
-  LegacyImportRequest,
   Me,
 } from '../shared/types';
 
@@ -65,13 +64,6 @@ export function loadBuildings(): Promise<BuildingOption[]> {
 
 export function loadMe(): Promise<Me> {
   return request<Me>('/api/me');
-}
-
-export function importLegacy(payload: LegacyImportRequest): Promise<Me> {
-  return request<Me>('/api/me/import', {
-    method: 'POST',
-    body: JSON.stringify(payload),
-  });
 }
 
 export function loadDailyGame(): Promise<GameView> {

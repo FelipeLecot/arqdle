@@ -120,17 +120,6 @@ export interface Me {
     googleEnabled: boolean;
     signInUrl: string;
   };
-  canImportLegacy: boolean;
-}
-
-export interface LegacyDailyGame {
-  date: string;
-  guesses: Array<{ id: string }>;
-}
-
-export interface LegacyImportRequest {
-  stats?: Stats;
-  daily?: LegacyDailyGame;
 }
 
 export interface ApiErrorBody {

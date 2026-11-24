@@ -10,7 +10,7 @@ export type LegalLang = HtmlLang;
  */
 export const LEGAL_CACHE_CONTROL = 'public, max-age=2592000';
 /** Keep LABELS.*.updatedDate in sync when this date changes. */
-export const LEGAL_LAST_UPDATED = '2026-11-19';
+export const LEGAL_LAST_UPDATED = '2026-11-24';
 
 const LEGAL_PATHS: Record<LegalPage, Record<LegalLang, string>> = {
   terms: { es: '/legal/terms', en: '/legal/en/terms' },
@@ -40,7 +40,7 @@ const LABELS = {
     terms: 'Términos del servicio',
     privacy: 'Política de privacidad',
     updatedLabel: 'Última actualización',
-    updatedDate: '19 de noviembre de 2026',
+    updatedDate: '24 de noviembre de 2026',
     back: 'Volver al juego',
     nav: 'Páginas legales',
     otherLangLabel: 'English',
@@ -52,7 +52,7 @@ const LABELS = {
     terms: 'Terms of Service',
     privacy: 'Privacy Policy',
     updatedLabel: 'Last updated',
-    updatedDate: 'November 19, 2026',
+    updatedDate: 'November 24, 2026',
     back: 'Back to the game',
     nav: 'Legal pages',
     otherLangLabel: 'Español',
@@ -153,7 +153,7 @@ const PRIVACY_ES = `
     <p>Usamos estos datos para ejecutar el juego, guardar tu progreso y tus estadísticas, mantener tu cuenta disponible en varios dispositivos, prevenir abusos, entender cómo se usa el juego y generar informes agregados para el desarrollador. No vendemos datos personales.</p>
 
     <h2>4. Cookies y almacenamiento local</h2>
-    <p>El juego usa una cookie esencial para la sesión. También carga Google Tag Manager, que puede guardar cookies de analítica según las etiquetas configuradas. No usamos cookies de analítica para mostrarte anuncios. Tu navegador también guarda tu elección de idioma, si ya viste la introducción y una marca de importación única en el almacenamiento local. Los datos de partidas antiguas del navegador pueden permanecer hasta que borres los datos del sitio. Esa información permanece en tu dispositivo.</p>
+    <p>El juego usa una cookie esencial para la sesión. También carga Google Tag Manager, que puede guardar cookies de analítica según las etiquetas configuradas. No usamos cookies de analítica para mostrarte anuncios. Tu navegador también guarda tu elección de idioma, y si ya viste la introducción en el almacenamiento local. Los datos de partidas antiguas del navegador pueden permanecer hasta que borres los datos del sitio. Esa información permanece en tu dispositivo.</p>
 
     <h2>5. Con quién compartimos datos</h2>
     <p>Solo compartimos datos con proveedores que ayudan a operar el servicio:</p>
@@ -197,7 +197,7 @@ const PRIVACY_EN = `
     <p>We use this data to run the game, save your progress and stats, keep your account available across devices, prevent abuse, understand how the game is used, and produce aggregate reports for the developer. We do not sell personal data.</p>
 
     <h2>4. Cookies and local storage</h2>
-    <p>The game uses one essential cookie for the session. It also loads Google Tag Manager, which may set analytics cookies depending on the tags configured in the container. We do not use analytics cookies to show you ads. Your browser also stores your language choice, whether you have seen the intro, and a one-time import marker in local storage. Old browser-only game data may remain until you clear site data. That information stays on your device.</p>
+    <p>The game uses one essential cookie for the session. It also loads Google Tag Manager, which may set analytics cookies depending on the tags configured in the container. We do not use analytics cookies to show you ads. Your browser also stores your language choice, and whether you have seen the intro in local storage. Old browser-only game data may remain until you clear site data. That information stays on your device.</p>
 
     <h2>5. Sharing</h2>
     <p>We share data only with providers that help run the service:</p>

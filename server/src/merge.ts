@@ -1,6 +1,6 @@
 import type pg from 'pg';
 import type { DailyResultRow, GameRow, UserRow } from './db-types';
-import { isBetterResult, isLegacyStats, mergeLegacyStats } from './stats';
+import { isBetterResult } from './stats';
 
 function keepGuestGame(
   guestGame: GameRow,
@@ -117,19 +117,6 @@ export async function mergeGuestIntoUser(
 
   // Guesses on moved games still point at the guest. Reassign before deleting it.
   await client.query('UPDATE guesses SET user_id = $1 WHERE user_id = $2', [targetId, guestId]);
-
-  const targetLegacy = isLegacyStats(target.legacy_stats) ? target.legacy_stats : null;
-  const guestLegacy = isLegacyStats(guest.legacy_stats) ? guest.legacy_stats : null;
-  const mergedLegacy = mergeLegacyStats(targetLegacy, guestLegacy);
-
-  await client.query(
-    `UPDATE users
-        SET legacy_stats = CASE WHEN $2::jsonb IS NULL THEN legacy_stats ELSE $2::jsonb END,
-            legacy_imported_at = COALESCE(legacy_imported_at, $3),
-            updated_at = now()
-      WHERE id = $1`,
-    [targetId, mergedLegacy ? JSON.stringify(mergedLegacy) : null, guest.legacy_imported_at],
-  );
 
   await client.query('DELETE FROM users WHERE id = $1', [guestId]);
 }

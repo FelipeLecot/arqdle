@@ -11,7 +11,6 @@ import {
   ApiError,
   deleteAccount,
   exportDataUrl,
-  importLegacy,
   loadBuildings,
   loadDailyGame,
   loadMe,
@@ -30,13 +29,7 @@ import { formatDateLabel, padDay } from './format';
 import { useI18n } from './i18n/I18nProvider';
 import { localizedErrorMessage } from './i18n/errors';
 import { buildShareText, copyText } from './share';
-import {
-  clearLegacyGames,
-  collectLegacyImport,
-  hasSeenIntro,
-  markIntroSeen,
-  markLegacyImported,
-} from './storage';
+import { hasSeenIntro, markIntroSeen } from './storage';
 
 interface GameState {
   phase: 'idle' | 'loading' | 'ready' | 'error';
@@ -233,25 +226,6 @@ function initialMode(): Mode {
 
 let bootstrapPromise: Promise<Me> | null = null;
 
-async function bootstrapProfile(): Promise<Me> {
-  let current = await loadMe();
-  if (current.canImportLegacy) {
-    const payload = collectLegacyImport();
-    if (payload) {
-      try {
-        current = await importLegacy(payload);
-        markLegacyImported();
-        clearLegacyGames();
-      } catch (error) {
-        if (error instanceof ApiError && error.status >= 400 && error.status < 500) {
-          markLegacyImported();
-        }
-      }
-    }
-  }
-  return current;
-}
-
 export function App() {
   const { lang, t } = useI18n();
   const [mode, setMode] = useState<Mode>(initialMode);
@@ -293,7 +267,7 @@ export function App() {
 
   useEffect(() => {
     let cancelled = false;
-    if (!bootstrapPromise) bootstrapPromise = bootstrapProfile();
+    if (!bootstrapPromise) bootstrapPromise = loadMe();
     void bootstrapPromise
       .then((profile) => {
         if (!cancelled) setMe(profile);

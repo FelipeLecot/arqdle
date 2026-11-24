@@ -2,7 +2,7 @@ import crypto from 'node:crypto';
 import { once } from 'node:events';
 import type { Server } from 'node:http';
 import { afterAll, beforeAll, beforeEach, describe, expect, it } from 'vitest';
-import { MAX_GUESSES, type GameView, type Me, type Stats } from '../shared/types';
+import { MAX_GUESSES, type GameView, type Me } from '../shared/types';
 
 const hasDatabase = Boolean(process.env.TEST_DATABASE_URL);
 const describeDatabase = hasDatabase ? describe : describe.skip;
@@ -129,7 +129,6 @@ describeDatabase('database-backed API', () => {
     const profile = await me(client);
     expect(profile.profile.kind).toBe('guest');
     expect(profile.profile.stats.played).toBe(0);
-    expect(profile.canImportLegacy).toBe(true);
     expect(profile.auth.googleEnabled).toBe(false);
 
     const game = await client.json<GameView>('/api/games/daily');
@@ -217,51 +216,6 @@ describeDatabase('database-backed API', () => {
     expect(profile.profile.stats.played).toBe(0);
   });
 
-  it('imports legacy stats and the current daily game once', async () => {
-    const client = new TestClient();
-    const target = daily.todayDailySelection();
-    const day = target.dayNumber;
-    const [wrong] = wrongBuildings(target.building.id, 1);
-    const legacy: Stats = {
-      played: 4,
-      wins: 3,
-      currentStreak: 2,
-      maxStreak: 2,
-      lastDay: day > 1 ? day - 1 : null,
-      distribution: [1, 1, 1, 0, 0, 0],
-    };
-
-    const imported = await client.json<Me>('/api/me/import', {
-      method: 'POST',
-      body: JSON.stringify({
-        stats: legacy,
-        daily: {
-          date: daily.todayDateKey(),
-          guesses: [{ id: wrong }, { id: target.building.id }],
-        },
-      }),
-    });
-
-    expect(imported.canImportLegacy).toBe(false);
-    expect(imported.profile.stats.played).toBe(5);
-    expect(imported.profile.stats.wins).toBe(4);
-    expect(imported.profile.stats.currentStreak).toBe(day > 1 ? 3 : 1);
-    expect(imported.profile.stats.distribution).toEqual([1, 2, 1, 0, 0, 0, 0, 0, 0, 0]);
-
-    const game = await client.json<GameView>('/api/games/daily');
-    expect(game.status).toBe('won');
-    expect(game.attempts).toBe(2);
-
-    const second = await client.json<Me>('/api/me/import', {
-      method: 'POST',
-      body: JSON.stringify({
-        stats: { ...legacy, played: 999, wins: 999, distribution: [0, 0, 0, 0, 0, 6] },
-      }),
-    });
-    expect(second.profile.stats.played).toBe(5);
-    expect(second.profile.stats.wins).toBe(4);
-  });
-
   it('merges a guest win into an existing Google account', async () => {
     const identity = {
       sub: 'google-sub-1',
@@ -335,6 +289,17 @@ describeDatabase('database-backed API', () => {
     expect(exported.profile.id).toBe(profile.profile.id);
     expect(exported.games).toHaveLength(1);
     expect(exported.dailyResults).toHaveLength(1);
+
+    const practice = await client.json<GameView>('/api/games/practice');
+    const withPractice = await client.json<{
+      games: Array<Record<string, unknown>>;
+    }>('/api/me/export');
+    const unfinished = withPractice.games.find((game) => game.id === practice.id);
+    expect(unfinished?.status).toBe('playing');
+    expect(unfinished).not.toHaveProperty('target_building_id');
+    expect(unfinished).not.toHaveProperty('target_snapshot');
+    const finished = withPractice.games.find((game) => game.id !== practice.id);
+    expect(finished?.target_building_id).toBe(daily.todayDailySelection().building.id);
 
     await client.json<{ ok: boolean }>('/api/me', { method: 'DELETE' });
     const next = await me(client);

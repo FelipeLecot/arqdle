@@ -40,12 +40,7 @@ import {
   ensureUser,
   rotateSessionForUser,
 } from './session';
-import {
-  buildMe,
-  deleteUser,
-  exportUserData,
-  importLegacy,
-} from './users';
+import { buildMe, deleteUser, exportUserData } from './users';
 
 export const app = express();
 
@@ -99,11 +94,6 @@ app.get('/api/buildings', (_req, res) => {
 
 app.get('/api/me', ensureUser, async (req, res) => {
   res.json(await buildMe(req.user!));
-});
-
-app.post('/api/me/import', ensureUser, async (req, res) => {
-  const { user } = await importLegacy(req.user!, req.body);
-  res.json(await buildMe(user));
 });
 
 app.get('/api/me/export', ensureUser, async (req, res) => {

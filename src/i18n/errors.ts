@@ -16,7 +16,6 @@ const ERROR_KEYS: Record<string, TranslationKey> = {
   auth_failed: 'errorAuthFailed',
   google_not_configured: 'errorGoogleNotConfigured',
   not_admin: 'errorNotAdmin',
-  invalid_import: 'errorInvalidImport',
   forbidden_origin: 'errorForbiddenOrigin',
 };
 

@@ -128,7 +128,6 @@ const en = {
   errorAuthFailed: 'Sign-in failed. Try again.',
   errorGoogleNotConfigured: 'Google sign-in is not configured on this server.',
   errorNotAdmin: 'This account cannot view analytics.',
-  errorInvalidImport: 'The saved progress could not be imported.',
   errorForbiddenOrigin: 'The request origin is not allowed.',
 } as const;
 
@@ -263,7 +262,6 @@ const es: Record<TranslationKey, string> = {
   errorAuthFailed: 'No se pudo iniciar sesión. Inténtalo de nuevo.',
   errorGoogleNotConfigured: 'Google no está configurado en este servidor.',
   errorNotAdmin: 'Esta cuenta no puede ver las analíticas.',
-  errorInvalidImport: 'No se pudo importar el progreso guardado.',
   errorForbiddenOrigin: 'El origen de la solicitud no está permitido.',
 };
 

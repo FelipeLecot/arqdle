@@ -124,7 +124,7 @@ Tables:
 
 | Table | Purpose |
 | --- | --- |
-| `users` | Guest and Google profiles, imported legacy stats, timestamps. |
+| `users` | Guest and Google profiles, timestamps. |
 | `oauth_accounts` | Google subject to local user link. |
 | `sessions` | Hashed session tokens and expiry. |
 | `oauth_states` | Short-lived OAuth state, PKCE verifier and nonce. |
@@ -190,8 +190,10 @@ Practice is unlimited, does not affect stats, and never picks today's daily answ
 
 Stats derive from `daily_results`. Wins, win rate, current streak, maximum streak and
 the guess distribution are computed from the user's finished daily games. Practice is
-ignored. The guess distribution has one bucket per attempt, up to ten. Legacy stats
-with six buckets are padded with zeros.
+ignored. The guess distribution has one bucket per attempt, up to ten.
+
+Progress from the old browser-only version is not imported. Migration
+`003_drop_legacy_import.sql` removed the old imported stats.
 
 ## Analytics
 
@@ -239,9 +241,8 @@ All API responses are JSON. Errors look like:
 
 - `GET /api/me` creates a guest session when needed and returns the profile, stats
   and whether Google sign-in is enabled.
-- `POST /api/me/import` imports legacy browser stats and the current daily game once.
 - `GET /api/me/export` downloads the profile, games, guesses and daily results as
-  JSON.
+  JSON. Unfinished games leave out `target_building_id` and `target_snapshot`.
 - `DELETE /api/me` deletes the profile and all related data.
 
 ### Games
@@ -289,7 +290,7 @@ src/                    React client
   components/           header, account menu, board, input, reveal, modals
   i18n/                 English/Spanish UI strings and Spanish building copy
   api.ts                API client
-  storage.ts            one-time legacy import and intro flag
+  storage.ts            old key rename and intro flag
   share.ts              emoji result text and clipboard
 server/src/             Express server
   data/                 building dataset (server-only)
@@ -297,7 +298,7 @@ server/src/             Express server
   daily.ts              deterministic daily selection and schedule
   puzzles.ts            daily puzzle snapshots and daily games
   games.ts              server-owned game state and guess submission
-  users.ts              profiles, stats, legacy import, export, delete
+  users.ts              profiles, stats, export, delete
   oauth.ts              Google OAuth and account linking
   merge.ts              transactional guest merge
   admin.ts              private analytics, CSV and auth guard
@@ -309,7 +310,7 @@ server/src/             Express server
   app.ts                routes and static file serving
 server/sql/             migrations and SQL reports
 shared/types.ts         types and constants shared by client and server
-shared/stats.ts         legacy stats helpers
+shared/stats.ts         stats helpers
 tests/                  Vitest unit and database tests
 server/data/            optional daily schedule
 docs/                   catalog expansion proposal and CSV
@@ -349,7 +350,7 @@ npm test
 
 The tests check unique IDs and names, valid enum values, known material names,
 self-comparison, daily selection, date handling, snapshots, stats, account merges,
-legacy import, legal page rendering, the HTTP API, and complete English and Spanish
+legal page rendering, the HTTP API, and complete English and Spanish
 translation coverage.
 
 Dates are completion, consecration, or opening dates, depending on the building.

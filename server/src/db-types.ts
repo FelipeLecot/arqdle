@@ -8,8 +8,6 @@ export interface UserRow {
   name: string | null;
   picture_url: string | null;
   locale: string | null;
-  legacy_stats: Stats | null;
-  legacy_imported_at: Date | null;
   created_at: Date;
   updated_at: Date;
   last_seen_at: Date;
