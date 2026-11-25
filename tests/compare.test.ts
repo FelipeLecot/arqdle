@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import {
   ATTRIBUTE_KEYS,
 } from '../shared/types';
-import { compareBuilding, centuryDistance, formatYear, isNearMiss, materialFamily } from '../server/src/compare';
+import { compareBuilding, centuryDistance, centuryLabel, formatYear, isNearMiss, materialFamily } from '../server/src/compare';
 import { buildings, getBuilding } from '../server/src/data';
 
 function building(id: string) {
@@ -20,8 +20,16 @@ describe('century comparison', () => {
   it('treats years in the same century as an exact age clue', () => {
     expect(centuryDistance(1889, 1930)).toBe(1);
     expect(centuryDistance(1889, 1890)).toBe(0);
-    expect(centuryDistance(2000, 2001)).toBe(1);
-    expect(centuryDistance(1, 100)).toBe(0);
+    expect(centuryDistance(2000, 2001)).toBe(0);
+    expect(centuryDistance(1, 99)).toBe(0);
+  });
+
+  it('uses 100-year blocks for modern centuries', () => {
+    expect(centuryDistance(1900, 1950)).toBe(0);
+    expect(centuryDistance(1899, 1900)).toBe(1);
+    expect(centuryDistance(1900, 2000)).toBe(1);
+    expect(centuryLabel(1900)).toBe('20th c.');
+    expect(centuryLabel(1950)).toBe('20th c.');
   });
 
   it('handles the BC and AD boundary', () => {
@@ -108,5 +116,11 @@ describe('building comparison', () => {
     expect(cells.every((cell) => cell.status === 'green')).toBe(true);
     expect(isNearMiss(cells, false)).toBe(true);
     expect(isNearMiss(cells, true)).toBe(false);
+  });
+
+  it('shows an equals sign when both years are in the same century', () => {
+    const cells = compareBuilding(building('delphi'), building('delos'));
+    expect(cells.find((cell) => cell.key === 'built')?.status).toBe('green');
+    expect(cells.find((cell) => cell.key === 'built')?.direction).toBe('same');
   });
 });

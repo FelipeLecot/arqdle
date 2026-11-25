@@ -26,7 +26,7 @@ export const MAX_GUESSES = 10;
 
 export type Mode = 'daily' | 'practice';
 export type CellStatus = 'green' | 'yellow' | 'red';
-export type Direction = 'older' | 'newer';
+export type Direction = 'older' | 'newer' | 'same';
 
 export interface GuessCell {
   key: AttributeKey;

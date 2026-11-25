@@ -86,8 +86,14 @@ export function GuessBoard({ guesses }: GuessBoardProps) {
                       {sub && <span className="tile__sub">{sub}</span>}
                       {cell.direction && (
                         <span className="tile__direction" aria-hidden="true">
-                          {cell.direction === 'older' ? '↓' : '↑'}{' '}
-                          {t(cell.direction === 'older' ? 'older' : 'newer')}
+                          {cell.direction === 'same'
+                            ? '='
+                            : cell.direction === 'older'
+                              ? '↓'
+                              : '↑'}{' '}
+                          {cell.direction === 'same'
+                            ? ''
+                            : t(cell.direction === 'older' ? 'older' : 'newer')}
                         </span>
                       )}
                       <span className="tile__mark" aria-hidden="true">

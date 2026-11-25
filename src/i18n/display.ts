@@ -176,7 +176,9 @@ export function localizedCellSub(cell: GuessCell, lang: Lang): string | undefine
 
 export function localizedDirection(direction: Direction, lang: Lang): string {
   if (lang === 'en') return direction;
-  return direction === 'older' ? 'más antigua' : 'más reciente';
+  if (direction === 'older') return 'más antigua';
+  if (direction === 'newer') return 'más reciente';
+  return 'misma época';
 }
 
 export function localizedCellNote(cell: GuessCell, lang: Lang): string {

@@ -180,8 +180,10 @@ Each guess compares these clues:
 | Architect | Same architect set | At least one shared architect | No overlap |
 
 For **Built**, the tile shows the guessed year and century plus an arrow pointing to
-the answer: `↓ older` or `↑ newer`. The first century BC and the first century AD are
-treated as neighbouring centuries.
+the answer: `↓ older` or `↑ newer`. When both years fall in the same century, the
+tile shows `=` instead. The first century BC and the first century AD are treated as
+neighbouring centuries. Century buckets use 100-year blocks, so 1900–1999 is the
+20th century and a 1900 building matches a 1950 building.
 
 The final guess reveals its eight clue tiles one by one. The answer panel opens after
 the row finishes, so the result is visible before the reveal.

@@ -89,13 +89,21 @@ function ordinal(value: number): string {
 }
 
 export function centuryLabel(year: number): string {
-  const century = Math.ceil(Math.abs(year) / 100);
+  const century = centuryNumber(year);
   return year < 0 ? `${ordinal(century)} c. BC` : `${ordinal(century)} c.`;
 }
 
+/**
+ * Game century buckets use 1900–1999 as the 20th century, so a 1900 building
+ * and a 1950 building match. BC keeps the conventional numbering.
+ */
+export function centuryNumber(year: number): number {
+  return year < 0 ? Math.ceil(Math.abs(year) / 100) : Math.floor(year / 100) + 1;
+}
+
 export function centuryDistance(a: number, b: number): number {
-  const first = { number: Math.ceil(Math.abs(a) / 100), era: a < 0 ? 'BC' : 'AD' };
-  const second = { number: Math.ceil(Math.abs(b) / 100), era: b < 0 ? 'BC' : 'AD' };
+  const first = { number: centuryNumber(a), era: a < 0 ? 'BC' : 'AD' };
+  const second = { number: centuryNumber(b), era: b < 0 ? 'BC' : 'AD' };
   if (first.era === second.era) return Math.abs(first.number - second.number);
   // The 1st century BC and the 1st century AD meet at the year 1.
   if (first.number === 1 && second.number === 1) return 1;
@@ -139,7 +147,7 @@ export function compareBuilding(target: Building, guess: Building): GuessCell[] 
   const centuries = centuryDistance(guess.year, target.year);
   const builtStatus: CellStatus = centuries === 0 ? 'green' : centuries === 1 ? 'yellow' : 'red';
   const direction: Direction | undefined =
-    target.year === guess.year ? undefined : target.year < guess.year ? 'older' : 'newer';
+    centuries === 0 ? 'same' : target.year < guess.year ? 'older' : 'newer';
 
   const styleStatus: CellStatus =
     normalize(guess.style) === normalize(target.style)
