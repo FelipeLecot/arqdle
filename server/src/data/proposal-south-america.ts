@@ -19,9 +19,9 @@ export const proposalSouthAmerica: Building[] = [
     materials: ['Stone', 'Marble', 'Stucco'],
     architects: ['Unknown'],
     blurb:
-      'Cusco Cathedral is a Baroque cathedral in Cusco, Peru, completed in 1654.',
+      'Cusco Cathedral is a Baroque cathedral on the Plaza de Armas, built on the foundations of an Inca palace.',
     fact:
-      'Cathedral on the Inca plaza.',
+      'Its colonial paintings include a Last Supper with a roasted guinea pig.',
     wikiTitle: 'Cusco Cathedral',
   },
   {
@@ -63,9 +63,9 @@ export const proposalSouthAmerica: Building[] = [
     materials: ['Stone', 'Brick', 'Wood'],
     architects: ['Unknown'],
     blurb:
-      'Ouro Preto is a historic city in Ouro Preto, Brazil, founded around 1700.',
+      'Ouro Preto is a Baroque gold-mining town in the hills of Minas Gerais, with steep streets and whitewashed churches.',
     fact:
-      'Baroque gold-rush town.',
+      'The soapstone facade of its Church of São Francisco de Assis was carved by Aleijadinho.',
     wikiTitle: 'Ouro Preto',
   },
   {
@@ -85,9 +85,9 @@ export const proposalSouthAmerica: Building[] = [
     materials: ['Stone', 'Brick', 'Wood'],
     architects: ['Unknown'],
     blurb:
-      'Quito Old Town is a historic city in Quito, Ecuador, founded around 1534.',
+      'Quito\'s historic centre is a dense Andean colonial city of gilded churches, monasteries and steep lanes.',
     fact:
-      'Andean colonial capital.',
+      'It was one of the first UNESCO World Heritage Sites, inscribed in 1978.',
     wikiTitle: 'Quito',
   },
   {
@@ -107,9 +107,9 @@ export const proposalSouthAmerica: Building[] = [
     architects: ['Edgar Fonseca'],
     heightM: 75.0,
     blurb:
-      'Rio de Janeiro Cathedral is a Modernism cathedral in Rio de Janeiro, Brazil, completed in 1979.',
+      'Rio de Janeiro Cathedral is a cone-shaped concrete cathedral with four stained-glass panels rising to a skylight.',
     fact:
-      'Conical concrete cathedral.',
+      'Its 75 m bell tower and conical nave were designed by Edgar Fonseca.',
     wikiTitle: 'Rio de Janeiro Cathedral',
   },
   {
@@ -152,9 +152,9 @@ export const proposalSouthAmerica: Building[] = [
     materials: ['Stone', 'Brick', 'Wood'],
     architects: ['Unknown'],
     blurb:
-      'Tiwanaku is a historic city in Tiwanaku, Bolivia, with origins around 300 BC.',
+      'Tiwanaku is a pre-Inca ceremonial city on the Altiplano, with monolithic gates and a sunken temple.',
     fact:
-      'Gateway of the Sun and monoliths.',
+      'The Gateway of the Sun is carved from a single block of andesite.',
     wikiTitle: 'Tiwanaku',
   },
   {
@@ -174,9 +174,9 @@ export const proposalSouthAmerica: Building[] = [
     architects: ['Emilio Tarlier'],
     heightM: 83.0,
     blurb:
-      'Basílica del Voto Nacional is a Gothic Revival basilica in Quito, Ecuador, completed in 1924.',
+      'The Basílica del Voto Nacional is a neo-Gothic basilica on a hill above Quito, covered in animal gargoyles.',
     fact:
-      'Gothic basilica above Quito.',
+      'Its gargoyles are modeled on Ecuadorian animals such as iguanas and armadillos.',
     wikiTitle: 'Basílica del Voto Nacional',
   },
   {
@@ -196,9 +196,9 @@ export const proposalSouthAmerica: Building[] = [
     materials: ['Stone', 'Brick', 'Wood'],
     architects: ['Unknown'],
     blurb:
-      'Caral is a historic city in Supe, Peru, with origins around 2600 BC.',
+      'Caral is a Preceramic city with platform mounds and sunken plazas, one of the oldest urban sites in the Americas.',
     fact:
-      'Oldest city in the Americas.',
+      'It flourished around 2600 BC, roughly contemporaneously with the pyramids of Egypt.',
     wikiTitle: 'Caral',
   },
   {
@@ -217,9 +217,9 @@ export const proposalSouthAmerica: Building[] = [
     materials: ['Stone', 'Brick', 'Wood'],
     architects: ['Unknown'],
     blurb:
-      'Chan Chan is a historic city in Trujillo, Peru, founded around 850.',
+      'Chan Chan is a vast adobe city on the Peruvian coast, the capital of the Chimú kingdom.',
     fact:
-      'Largest adobe city in the world.',
+      'Its royal compounds are decorated with friezes of fish, birds and geometric nets.',
     wikiTitle: 'Chan Chan',
   },
   {
@@ -260,9 +260,9 @@ export const proposalSouthAmerica: Building[] = [
     materials: ['Stone', 'Brick', 'Wood'],
     architects: ['Unknown'],
     blurb:
-      'Colonia del Sacramento is a historic city in Colonia del Sacramento, Uruguay, founded around 1680.',
+      'Colonia del Sacramento is a Portuguese colonial town of cobbled streets and low houses on the Río de la Plata.',
     fact:
-      'Portuguese colonial grid.',
+      'Its historic quarter is a UNESCO World Heritage Site.',
     wikiTitle: 'Colonia del Sacramento',
   },
   {
@@ -281,9 +281,9 @@ export const proposalSouthAmerica: Building[] = [
     materials: ['Stone', 'Brick', 'Wood'],
     architects: ['Unknown'],
     blurb:
-      'Cuenca is a historic city in Cuenca, Ecuador, founded around 1557.',
+      'Cuenca is an Andean city built on an Inca settlement, with colonial churches and riverside promenades.',
     fact:
-      'Colonial grid on an Inca site.',
+      'It is a UNESCO World Heritage Site and a historic centre of the Panama hat industry.',
     wikiTitle: 'Cuenca, Ecuador',
   },
   {
@@ -302,9 +302,9 @@ export const proposalSouthAmerica: Building[] = [
     materials: ['Stone', 'Brick', 'Wood'],
     architects: ['Oscar Niemeyer'],
     blurb:
-      'Ibirapuera Park is a Modernism park complex in São Paulo, Brazil, completed in 1954.',
+      'Ibirapuera Park is a modernist park complex in São Paulo with Niemeyer pavilions and a vast green lawn.',
     fact:
-      'Niemeyer pavilions in a modernist park.',
+      'Its Oca building and marquee were designed for the city\'s 400th anniversary in 1954.',
     wikiTitle: 'Ibirapuera Park',
   },
   {
@@ -323,9 +323,9 @@ export const proposalSouthAmerica: Building[] = [
     materials: ['Stone', 'Brick', 'Wood'],
     architects: ['Unknown'],
     blurb:
-      'Jesuit Missions of La Santísima Trinidad is a Colonial mission in Encarnación, Paraguay, completed in 1706.',
+      'La Santísima Trinidad is a ruined Jesuit mission with a central plaza and a carved stone church in Paraguay.',
     fact:
-      'Jesuit mission ruins.',
+      'It is a UNESCO World Heritage Site and one of the best-preserved Jesuit reductions.',
     wikiTitle: 'La Santísima Trinidad de Paraná',
   },
   {
@@ -344,9 +344,9 @@ export const proposalSouthAmerica: Building[] = [
     materials: ['Concrete', 'Glass', 'Steel'],
     architects: ['Celestial Sacardim'],
     blurb:
-      'Manaus Opera House is a Neo-Renaissance opera house in Manaus, Brazil, completed in 1896.',
+      'The Amazon Theatre is a Neo-Renaissance opera house in Manaus, built during the rubber boom.',
     fact:
-      'Rubber-boom opera house in the Amazon.',
+      'Its dome is covered with 36,000 ceramic tiles in the colors of the Brazilian flag.',
     wikiTitle: 'Amazon Theatre',
   },
   {
@@ -366,9 +366,9 @@ export const proposalSouthAmerica: Building[] = [
     architects: ['Alberto Prebisch'],
     heightM: 67.5,
     blurb:
-      'Obelisco de Buenos Aires is a Modernism monument in Buenos Aires, Argentina, completed in 1936.',
+      'The Obelisk of Buenos Aires is a white concrete monument marking the first foundation of the city.',
     fact:
-      'White obelisk on Avenida 9 de Julio.',
+      'It was built in 1936 in 31 days for the city\'s 400th anniversary.',
     wikiTitle: 'Obelisco de Buenos Aires',
   },
   {
@@ -387,9 +387,9 @@ export const proposalSouthAmerica: Building[] = [
     materials: ['Stone', 'Brick', 'Wood'],
     architects: ['Unknown'],
     blurb:
-      'Olinda is a historic city in Olinda, Brazil, founded around 1535.',
+      'Olinda is a colonial hill town of colorful houses and Baroque churches above the Atlantic coast.',
     fact:
-      'Colonial hillside town.',
+      'Its historic centre is a UNESCO World Heritage Site.',
     wikiTitle: 'Olinda',
   },
   {
@@ -429,9 +429,9 @@ export const proposalSouthAmerica: Building[] = [
     materials: ['Stone', 'Brick', 'Marble'],
     architects: ['Oscar Niemeyer'],
     blurb:
-      'Palácio do Planalto is a Modernism palace in Brasília, Brazil, completed in 1960.',
+      'The Palácio do Planalto is the Brazilian president\'s office, a modernist palace with a colonnade and a reflecting pool.',
     fact:
-      'Presidential office palace.',
+      'Its access ramp leads to a ceremonial plaza on the roof.',
     wikiTitle: 'Palácio do Planalto',
   },
   {
@@ -450,9 +450,9 @@ export const proposalSouthAmerica: Building[] = [
     materials: ['Stone', 'Brick', 'Wood'],
     architects: ['Unknown'],
     blurb:
-      'Pelourinho is a historic district in Salvador, Brazil, founded around 1600.',
+      'Pelourinho is Salvador\'s historic centre, a grid of colonial churches, mansions and cobbled squares.',
     fact:
-      'Colourful colonial centre.',
+      'It is a UNESCO World Heritage Site and the heart of Afro-Brazilian culture.',
     wikiTitle: 'Historic Center of Salvador',
   },
   {
@@ -471,9 +471,9 @@ export const proposalSouthAmerica: Building[] = [
     materials: ['Stone', 'Brick', 'Wood'],
     architects: ['Unknown'],
     blurb:
-      'Potosí is a historic mining city in Potosí, Bolivia, founded around 1545.',
+      'Potosí is a colonial mining city at the foot of Cerro Rico, once the world\'s largest silver producer.',
     fact:
-      'Silver mountain and colonial mint.',
+      'Its National Mint is one of the largest colonial buildings in South America.',
     wikiTitle: 'Potosí',
   },
   {
@@ -534,9 +534,9 @@ export const proposalSouthAmerica: Building[] = [
     materials: ['Stone', 'Brick', 'Wood'],
     architects: ['Unknown'],
     blurb:
-      'Sucre is a historic city in Sucre, Bolivia, founded around 1538.',
+      'Sucre is Bolivia\'s white colonial capital, with churches and convents in a high Andean valley.',
     fact:
-      'White colonial capital.',
+      'It is a UNESCO World Heritage Site and the birthplace of Bolivian independence.',
     wikiTitle: 'Sucre',
   },
   {
@@ -555,9 +555,9 @@ export const proposalSouthAmerica: Building[] = [
     materials: ['Stone', 'Brick', 'Wood'],
     architects: ['Unknown'],
     blurb:
-      'Valparaíso is a historic city in Valparaíso, Chile, founded around 1800.',
+      'Valparaíso is a port city of steep hills, funiculars and brightly painted houses above the Pacific.',
     fact:
-      'Hillside funiculars and colour.',
+      'Its historic quarter is a UNESCO World Heritage Site.',
     wikiTitle: 'Valparaíso',
   },
   {
@@ -576,9 +576,9 @@ export const proposalSouthAmerica: Building[] = [
     materials: ['Stone', 'Brick', 'Wood'],
     architects: ['Unknown'],
     blurb:
-      'Villa de Leyva is a historic town in Villa de Leyva, Colombia, founded around 1572.',
+      'Villa de Leyva is a colonial town of whitewashed houses around a huge cobbled plaza.',
     fact:
-      'Whitewashed colonial plaza.',
+      'Its plaza is one of the largest colonial squares in the Americas.',
     wikiTitle: 'Villa de Leyva',
   },
   {
@@ -598,9 +598,9 @@ export const proposalSouthAmerica: Building[] = [
     architects: ['César Pelli'],
     heightM: 300.0,
     blurb:
-      'Costanera Center is a Contemporary skyscraper in Santiago, Chile, completed in 2012.',
+      'The Gran Torre Costanera is a 300 m glass tower in Santiago\'s Costanera Center complex.',
     fact:
-      'Tallest building in South America.',
+      'It is the tallest building in South America.',
     wikiTitle: 'Gran Torre Costanera',
   },
   {
@@ -641,9 +641,9 @@ export const proposalSouthAmerica: Building[] = [
     materials: ['Stone', 'Brick', 'Wood'],
     architects: ['Unknown'],
     blurb:
-      'Paramaribo Historic Inner City is a historic city in Paramaribo, Suriname, founded around 1650.',
+      'Paramaribo\'s historic centre is a Caribbean town of Dutch colonial wooden buildings and palm-lined squares.',
     fact:
-      'Dutch colonial wooden buildings.',
+      'It is a UNESCO World Heritage Site.',
     wikiTitle: 'Paramaribo',
   },
   {
@@ -662,9 +662,9 @@ export const proposalSouthAmerica: Building[] = [
     materials: ['Concrete', 'Glass', 'Steel'],
     architects: ['Carlo Zucchi'],
     blurb:
-      'Solís Theatre is a Neoclassical theatre in Montevideo, Uruguay, completed in 1856.',
+      'The Solís Theatre is Montevideo\'s main theatre, a neoclassical hall with a gilded interior.',
     fact:
-      'Montevideo\'s main theatre.',
+      'It was restored and reopened in 2004.',
     wikiTitle: 'Solís Theatre',
   },
   {
@@ -683,9 +683,9 @@ export const proposalSouthAmerica: Building[] = [
     materials: ['Wood', 'Stone', 'Limestone', 'Stained glass'],
     architects: ['Arthur Blomfield'],
     blurb:
-      'St. George\'s Cathedral is a Gothic Revival cathedral in Georgetown, Guyana, completed in 1892.',
+      'St. George\'s Cathedral is a Gothic Revival wooden cathedral in Georgetown, Guyana.',
     fact:
-      'One of the tallest wooden churches.',
+      'It is one of the tallest wooden churches in the world, at about 43 m.',
     wikiTitle: 'St. George\'s Cathedral, Georgetown',
   },
   {

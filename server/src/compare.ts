@@ -46,6 +46,14 @@ const MATERIAL_FAMILIES: Record<string, string> = {
   plastic: 'synthetic',
   cardboard: 'synthetic',
   mosaic: 'ceramic',
+  tezontle: 'stone',
+  cantera: 'stone',
+  sillar: 'stone',
+  'volcanic rock': 'stone',
+  halite: 'stone',
+  earth: 'earth',
+  grass: 'timber',
+  bamboo: 'timber',
 };
 
 export function normalize(value: string): string {

@@ -138,9 +138,10 @@ public building list and comparison results only.
 
 ## How the daily answer works
 
-The game ships 598 buildings in `server/src/data/`. The English dataset is bundled
+The game ships 823 buildings in `server/src/data/`. The English dataset is bundled
 into the server only. Spanish display copy lives in `src/i18n/esData.ts`,
-`src/i18n/esExtra.ts`, `src/i18n/esIcons.ts` and `src/i18n/esProposal.ts`.
+`src/i18n/esExtra.ts`, `src/i18n/esIcons.ts`, `src/i18n/esProposal.ts`,
+`src/i18n/esLatam*.ts` and `src/i18n/esGlobal.ts`.
 
 - `server/src/daily.ts` computes the day number from `DAILY_EPOCH`.
 - The answer order is a deterministic shuffle seeded by `DAILY_SEED` and the cycle
@@ -313,7 +314,7 @@ shared/types.ts         types and constants shared by client and server
 shared/stats.ts         stats helpers
 tests/                  Vitest unit and database tests
 server/data/            optional daily schedule
-docs/                   catalog expansion proposal and CSV
+docs/                   catalog expansion proposals and research records
 compose.yaml            development Postgres only
 ```
 
@@ -328,7 +329,14 @@ Buildings live in:
 - `server/src/data/oceania.ts`
 - `server/src/data/*-extra.ts`
 - `server/src/data/proposal-*.ts`
+- `server/src/data/latam-*.ts`
+- `server/src/data/global-gaps.ts`
 - `server/src/data/more.ts`
+
+Spanish copy for the Latin America and global gap batches lives in
+`src/i18n/esLatam.ts`, `src/i18n/esLatamMexico.ts`,
+`src/i18n/esLatamCentral.ts`, `src/i18n/esLatamCaribbean.ts`,
+`src/i18n/esLatamSouth.ts` and `src/i18n/esGlobal.ts`.
 
 The 338 candidates from the catalog expansion proposal are now in
 `server/src/data/proposal-*.ts`. The research record is in
@@ -377,6 +385,12 @@ materials and architect against an official or heritage source.
 The 2026 expansion added 338 buildings from `docs/building-catalog-proposal.md`.
 The new entries live in `server/src/data/proposal-*.ts` and their Spanish copy in
 `src/i18n/esProposal.ts`.
+
+A later November 2026 expansion added 225 buildings: 155 in Latin America and the
+Caribbean, plus 70 global gap-fillers. The research record is in
+`docs/latin-america-expansion.md`, with a machine-readable version in
+`docs/latin-america-expansion.csv`. The new entries live in
+`server/src/data/latam-*.ts` and `server/src/data/global-gaps.ts`.
 
 ## SEO and metadata
 

@@ -7,7 +7,12 @@ import { asia } from './asia';
 import { asiaExtra } from './asia-extra';
 import { europe } from './europe';
 import { europeExtra } from './europe-extra';
+import { globalGaps } from './global-gaps';
 import { iconBuildings } from './icons';
+import { latamCaribbean } from './latam-caribbean';
+import { latamCentralAmerica } from './latam-central-america';
+import { latamMexico } from './latam-mexico';
+import { latamSouthAmerica } from './latam-south-america';
 import { moreBuildings } from './more';
 import { antarctica, oceania } from './oceania';
 import { antarcticaExtra, oceaniaExtra } from './oceania-extra';
@@ -41,6 +46,11 @@ export const buildings: Building[] = [
   ...proposalNorthAmerica,
   ...proposalSouthAmerica,
   ...proposalOceania,
+  ...latamMexico,
+  ...latamCentralAmerica,
+  ...latamCaribbean,
+  ...latamSouthAmerica,
+  ...globalGaps,
 ].sort((a, b) => a.name.localeCompare(b.name, 'en'));
 
 const byId = new Map<string, Building>();

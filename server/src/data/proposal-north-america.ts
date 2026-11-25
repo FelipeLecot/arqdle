@@ -40,9 +40,9 @@ export const proposalNorthAmerica: Building[] = [
     materials: ['Stone', 'Brick', 'Timber'],
     architects: ['Pedro Ramírez Vázquez'],
     blurb:
-      'Basilica of Our Lady of Guadalupe is a Contemporary basilica in Mexico City, Mexico, completed in 1976.',
+      'The Basilica of Our Lady of Guadalupe is a vast modern sanctuary on Tepeyac Hill, with a circular roof.',
     fact:
-      'Modern basilica and pilgrimage site.',
+      'Its cloak-shaped roof and curved walls were designed by Pedro Ramírez Vázquez.',
     wikiTitle: 'Basilica of Our Lady of Guadalupe',
   },
   {
@@ -62,9 +62,9 @@ export const proposalNorthAmerica: Building[] = [
     materials: ['Stone', 'Brick', 'Wood'],
     architects: ['Unknown'],
     blurb:
-      'Copán is a historic city in Copán Ruinas, Honduras, founded around 400.',
+      'Copán is a Maya city famous for its carved stelae, altars and the Hieroglyphic Stairway.',
     fact:
-      'Maya sculptures and hieroglyphic stairway.',
+      'Its Hieroglyphic Stairway has more than 2,000 glyphs.',
     wikiTitle: 'Copán',
   },
   {
@@ -104,9 +104,9 @@ export const proposalNorthAmerica: Building[] = [
     materials: ['Stone', 'Brick', 'Wood'],
     architects: ['Unknown'],
     blurb:
-      'Old Havana is a historic city in Havana, Cuba, founded around 1519.',
+      'Old Havana is a colonial port city of plazas, Baroque churches and fortifications around a sheltered bay.',
     fact:
-      'Colonial plazas and fortifications.',
+      'It is a UNESCO World Heritage Site and was founded in 1519.',
     wikiTitle: 'Old Havana',
   },
   {
@@ -210,9 +210,9 @@ export const proposalNorthAmerica: Building[] = [
     materials: ['Stone', 'Brick', 'Wood'],
     architects: ['Unknown'],
     blurb:
-      'Antigua Guatemala is a historic city in Antigua Guatemala, Guatemala, founded around 1543.',
+      'Antigua Guatemala is a colonial capital of low houses, ruined churches and cobbled streets beneath a volcano.',
     fact:
-      'Colonial capital destroyed by earthquakes.',
+      'It was the capital of Spanish Guatemala until an earthquake destroyed it in 1773.',
     wikiTitle: 'Antigua Guatemala',
   },
   {
@@ -273,9 +273,9 @@ export const proposalNorthAmerica: Building[] = [
     materials: ['Stone', 'Brick', 'Wood'],
     architects: ['Unknown'],
     blurb:
-      'Calakmul is a historic city in Campeche, Mexico, founded around 500.',
+      'Calakmul is a Maya city of towering pyramids set deep in the Calakmul Biosphere Reserve.',
     fact:
-      'Maya superpower in the Calakmul reserve.',
+      'It was one of the great rival superpowers of Tikal.',
     wikiTitle: 'Calakmul',
   },
   {
@@ -294,9 +294,9 @@ export const proposalNorthAmerica: Building[] = [
     materials: ['Stone', 'Brick', 'Marble'],
     architects: ['Carl Gangolf Kayser'],
     blurb:
-      'Chapultepec Castle is a Neoclassical palace in Mexico City, Mexico, completed in 1785.',
+      'Chapultepec Castle is a neoclassical palace on a hill above Mexico City, the former imperial residence.',
     fact:
-      'Royal palace on Chapultepec Hill.',
+      'It was the home of Emperor Maximilian and now houses the National Museum of History.',
     wikiTitle: 'Chapultepec Castle',
   },
   {
@@ -315,9 +315,9 @@ export const proposalNorthAmerica: Building[] = [
     materials: ['Stone', 'Brick'],
     architects: ['Unknown'],
     blurb:
-      'Citadelle Laferrière is a Colonial fortress in Milot, Haiti, completed in 1820.',
+      'The Citadelle Laferrière is a huge mountaintop fortress built after Haiti\'s independence.',
     fact:
-      'Mountain fortress of independent Haiti.',
+      'It was built between 1805 and 1820 to defend against a French invasion that never came.',
     wikiTitle: 'Citadelle Laferrière',
   },
   {
@@ -357,9 +357,9 @@ export const proposalNorthAmerica: Building[] = [
     materials: ['Stone', 'Brick', 'Wood'],
     architects: ['Unknown'],
     blurb:
-      'El Tajín is a historic city in Papantla, Mexico, founded around 600.',
+      'El Tajín is a Totonac city with stepped pyramids and the famous Pyramid of the Niches.',
     fact:
-      'Pyramid of the Niches.',
+      'Its Pyramid of the Niches has 365 niches, one for each day of the year.',
     wikiTitle: 'El Tajín',
   },
   {
@@ -526,9 +526,9 @@ export const proposalNorthAmerica: Building[] = [
     materials: ['Stone', 'Brick', 'Wood'],
     architects: ['Unknown'],
     blurb:
-      'Monte Albán is a historic city in Oaxaca, Mexico, with origins around 500 BC.',
+      'Monte Albán is a Zapotec capital on a flattened mountaintop above the Oaxaca Valley.',
     fact:
-      'Zapotec capital above the valley.',
+      'Its Danzantes reliefs show defeated and sacrificed captives.',
     wikiTitle: 'Monte Albán',
   },
   {
@@ -611,9 +611,9 @@ export const proposalNorthAmerica: Building[] = [
     materials: ['Stone', 'Brick', 'Wood'],
     architects: ['Unknown'],
     blurb:
-      'Panama Viejo is a historic city in Panama City, Panama, founded around 1519.',
+      'Panamá Viejo is the ruined first European city on the Pacific coast, founded in 1519.',
     fact:
-      'First European city on the Pacific.',
+      'It was destroyed by Henry Morgan\'s pirates in 1671.',
     wikiTitle: 'Panamá Viejo',
   },
   {
@@ -695,9 +695,9 @@ export const proposalNorthAmerica: Building[] = [
     materials: ['Stone', 'Brick'],
     architects: ['Unknown'],
     blurb:
-      'San Juan National Historic Site is a Colonial fortification in San Juan, Puerto Rico, completed in 1540.',
+      'The San Juan National Historic Site preserves El Morro, San Cristóbal and the city walls of Old San Juan.',
     fact:
-      'El Morro and city walls.',
+      'Its fortifications are a UNESCO World Heritage Site.',
     wikiTitle: 'San Juan National Historic Site',
   },
   {
@@ -717,9 +717,9 @@ export const proposalNorthAmerica: Building[] = [
     architects: ['Unknown'],
     heightM: 16.0,
     blurb:
-      'Santo Domingo Cathedral is a Gothic cathedral in Santo Domingo, Dominican Republic, completed in 1512.',
+      'Santo Domingo Cathedral is the first cathedral in the Americas, a Gothic and Renaissance building in the colonial city.',
     fact:
-      'First cathedral in the Americas.',
+      'It was begun in 1512 and completed in the 1540s.',
     wikiTitle: 'Cathedral of Santo Domingo',
   },
   {
@@ -781,9 +781,9 @@ export const proposalNorthAmerica: Building[] = [
     materials: ['Stone', 'Brick', 'Wood'],
     architects: ['Unknown'],
     blurb:
-      'Tulum is a historic city in Tulum, Mexico, founded around 1200.',
+      'Tulum is a Maya port on a cliff above the Caribbean, with a walled ceremonial centre.',
     fact:
-      'Cliff-top Maya port. It remains a landmark today.',
+      'It was one of the few Maya cities built directly on the coast.',
     wikiTitle: 'Tulum',
   },
   {
@@ -824,9 +824,9 @@ export const proposalNorthAmerica: Building[] = [
     materials: ['Stone', 'Brick', 'Wood'],
     architects: ['Unknown'],
     blurb:
-      'Uxmal is a historic city in Uxmal, Mexico, founded around 700.',
+      'Uxmal is a Maya city of Puuc-style buildings with carved facades and the Pyramid of the Magician.',
     fact:
-      'Puuc-style Maya city.',
+      'Its Pyramid of the Magician has an unusual oval base.',
     wikiTitle: 'Uxmal',
   },
   {
@@ -845,9 +845,9 @@ export const proposalNorthAmerica: Building[] = [
     materials: ['Stone', 'Brick', 'Wood'],
     architects: ['Unknown'],
     blurb:
-      'Willemstad is a historic city in Willemstad, Curaçao, founded around 1634.',
+      'Willemstad is a Caribbean port with a pastel waterfront and a historic inner city divided by a channel.',
     fact:
-      'Pastel waterfront of the old port.',
+      'Its historic centre is a UNESCO World Heritage Site.',
     wikiTitle: 'Willemstad',
   },
   {

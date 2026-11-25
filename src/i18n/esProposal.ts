@@ -102,9 +102,9 @@ export const buildingProposalEs: Record<string, BuildingCopyEs> = {
     name: 'Antigua Guatemala',
     city: 'Antigua Guatemala',
     blurb:
-      'Antigua Guatemala es un ejemplo de ciudad histórica de estilo colonial en Antigua Guatemala, Guatemala. Sus orígenes se remontan a 1543.',
+      'Antigua Guatemala es una capital colonial de casas bajas, iglesias en ruinas y calles empedradas bajo un volcán.',
     fact:
-      'Capital colonial destruida por terremotos.',
+      'Fue la capital de la Guatemala española hasta que un terremoto la destruyó en 1773.',
   },
   'antwerp-central-station': {
     name: 'Estación de Amberes-Centraal',
@@ -193,18 +193,18 @@ export const buildingProposalEs: Record<string, BuildingCopyEs> = {
     name: 'Basílica del Voto Nacional',
     city: 'Quito',
     blurb:
-      'Basílica del Voto Nacional es un ejemplo de basílica de estilo neogótico en Quito, Ecuador. Su construcción data de 1924.',
+      'La Basílica del Voto Nacional es una basílica neogótica en una colina sobre Quito, cubierta de gárgolas de animales.',
     fact:
-      'Basílica gótica sobre Quito.',
+      'Sus gárgolas representan animales ecuatorianos como iguanas y armadillos.',
   },
   'basilica-of-our-lady-of-guadalupe': {
     name: 'Basílica de Santa María de Guadalupe',
     city: 'Ciudad de México',
     yearNote: 'La basílica actual se abrió en 1976; el primer santuario data de 1531',
     blurb:
-      'Basílica de Santa María de Guadalupe es un ejemplo de basílica de estilo contemporáneo en Ciudad de México, México. Su construcción data de 1976.',
+      'La Basílica de Santa María de Guadalupe es un vasto santuario moderno en el cerro del Tepeyac, con una cubierta circular.',
     fact:
-      'Basílica moderna y centro de peregrinación.',
+      'Su cubierta en forma de manto y sus muros curvos fueron diseñados por Pedro Ramírez Vázquez.',
   },
   'battersea-power-station': {
     name: 'Battersea Power Station',
@@ -338,9 +338,9 @@ export const buildingProposalEs: Record<string, BuildingCopyEs> = {
     name: 'Calakmul',
     city: 'Campeche',
     blurb:
-      'Calakmul es un ejemplo de ciudad de estilo maya en Campeche, México. Sus orígenes se remontan a 500.',
+      'Calakmul es una ciudad maya de pirámides imponentes en lo profundo de la Reserva de la Biosfera de Calakmul.',
     fact:
-      'Superpotencia maya en la reserva de Calakmul.',
+      'Fue una de las grandes superpotencias rivales de Tikal.',
   },
   'canterbury-cathedral': {
     name: 'Catedral de Canterbury',
@@ -371,9 +371,9 @@ export const buildingProposalEs: Record<string, BuildingCopyEs> = {
     city: 'Supe',
     yearNote: 'Hacia 2600 a. C.',
     blurb:
-      'Caral es un ejemplo de ciudad de estilo precolombino en Supe, Perú. Sus orígenes se remontan a 2600 a. C.',
+      'Caral es una ciudad precerámica con plataformas y plazas hundidas, uno de los sitios urbanos más antiguos de América.',
     fact:
-      'Ciudad más antigua de América.',
+      'Floreció hacia 2600 a. C., más o menos al mismo tiempo que las pirámides de Egipto.',
   },
   'carthage': {
     name: 'Cartago',
@@ -412,9 +412,9 @@ export const buildingProposalEs: Record<string, BuildingCopyEs> = {
     name: 'Chan Chan',
     city: 'Trujillo',
     blurb:
-      'Chan Chan es un ejemplo de ciudad de estilo chimú en Trujillo, Perú. Sus orígenes se remontan a 850.',
+      'Chan Chan es una enorme ciudad de adobe en la costa peruana, capital del reino chimú.',
     fact:
-      'Ciudad de adobe más grande del mundo.',
+      'Sus recintos reales están decorados con frisos de peces, aves y redes geométricas.',
   },
   'changdeokgung-palace': {
     name: 'Changdeokgung',
@@ -428,9 +428,9 @@ export const buildingProposalEs: Record<string, BuildingCopyEs> = {
     name: 'Castillo de Chapultepec',
     city: 'Ciudad de México',
     blurb:
-      'Castillo de Chapultepec es un ejemplo de palacio de estilo neoclásico en Ciudad de México, México. Su construcción data de 1785.',
+      'El Castillo de Chapultepec es un palacio neoclásico en una colina sobre Ciudad de México, antigua residencia imperial.',
     fact:
-      'Palacio real en el cerro de Chapultepec.',
+      'Fue el hogar del emperador Maximiliano y hoy alberga el Museo Nacional de Historia.',
   },
   'charles-bridge': {
     name: 'Puente Carlos',
@@ -509,9 +509,9 @@ export const buildingProposalEs: Record<string, BuildingCopyEs> = {
     name: 'Ciudadela de Laferrière',
     city: 'Milot',
     blurb:
-      'Ciudadela de Laferrière es un ejemplo de fortaleza de estilo colonial en Milot, Haití. Su construcción data de 1820.',
+      'La Ciudadela de Laferrière es una enorme fortaleza en la cima de una montaña, construida tras la independencia de Haití.',
     fact:
-      'Fortaleza de montaña del Haití independiente.',
+      'Se construyó entre 1805 y 1820 para defender el país de una invasión francesa que nunca llegó.',
   },
   'cite-de-carcassonne': {
     name: 'Ciudadela de Carcasona',
@@ -525,9 +525,9 @@ export const buildingProposalEs: Record<string, BuildingCopyEs> = {
     name: 'Colonia del Sacramento',
     city: 'Colonia del Sacramento',
     blurb:
-      'Colonia del Sacramento es un ejemplo de ciudad histórica de estilo colonial en Colonia del Sacramento, Uruguay. Sus orígenes se remontan a 1680.',
+      'Colonia del Sacramento es un pueblo colonial portugués de calles empedradas y casas bajas junto al Río de la Plata.',
     fact:
-      'Trazado colonial portugués.',
+      'Su barrio histórico es Patrimonio de la Humanidad.',
   },
   'constitutional-court': {
     name: 'Tribunal Constitucional de Sudáfrica',
@@ -541,34 +541,34 @@ export const buildingProposalEs: Record<string, BuildingCopyEs> = {
     name: 'Copán',
     city: 'Copán Ruinas',
     blurb:
-      'Copán es un ejemplo de ciudad de estilo maya en Copán Ruinas, Honduras. Sus orígenes se remontan a 400.',
+      'Copán es una ciudad maya famosa por sus estelas talladas, sus altares y su Escalinata Jeroglífica.',
     fact:
-      'Esculturas mayas y escalera jeroglífica.',
+      'Su Escalinata Jeroglífica tiene más de 2.000 glifos.',
   },
   'costanera-center': {
     name: 'Gran Torre Costanera',
     city: 'Santiago',
     blurb:
-      'Gran Torre Costanera es un ejemplo de rascacielos de estilo contemporáneo en Santiago, Chile. Su construcción data de 2012.',
+      'La Gran Torre Costanera es una torre de vidrio de 300 m en el complejo Costanera Center de Santiago.',
     fact:
-      'Edificio más alto de Sudamérica.',
+      'Es el edificio más alto de Sudamérica.',
   },
   'cuenca': {
     name: 'Cuenca',
     city: 'Cuenca',
     blurb:
-      'Cuenca es un ejemplo de ciudad histórica de estilo colonial en Cuenca, Ecuador. Sus orígenes se remontan a 1557.',
+      'Cuenca es una ciudad andina construida sobre un asentamiento inca, con iglesias coloniales y paseos junto al río.',
     fact:
-      'Trazado colonial sobre un sitio inca.',
+      'Es Patrimonio de la Humanidad y un centro histórico de la industria del sombrero de Panamá.',
   },
   'cusco-cathedral': {
     name: 'Catedral del Cusco',
     city: 'Cusco',
     yearNote: 'Construida entre 1560 y 1654',
     blurb:
-      'Catedral del Cusco es un ejemplo de catedral de estilo barroco en Cusco, Perú. Su construcción data de 1654.',
+      'La Catedral del Cusco es una catedral barroca en la Plaza de Armas, construida sobre los cimientos de un palacio inca.',
     fact:
-      'Catedral en la plaza inca.',
+      'Sus pinturas coloniales incluyen una Última Cena con un cuy asado.',
   },
   'cyrene': {
     name: 'Cirene',
@@ -704,9 +704,9 @@ export const buildingProposalEs: Record<string, BuildingCopyEs> = {
     name: 'El Tajín',
     city: 'Papantla',
     blurb:
-      'El Tajín es un ejemplo de ciudad de estilo totonaco en Papantla, México. Sus orígenes se remontan a 600.',
+      'El Tajín es una ciudad totonaca con pirámides escalonadas y la famosa Pirámide de los Nichos.',
     fact:
-      'Pirámide de los Nichos.',
+      'Su Pirámide de los Nichos tiene 365 nichos, uno por cada día del año.',
   },
   'ellora-caves': {
     name: 'Cuevas de Ellora',
@@ -1046,9 +1046,9 @@ export const buildingProposalEs: Record<string, BuildingCopyEs> = {
     name: 'Parque do Ibirapuera',
     city: 'São Paulo',
     blurb:
-      'Parque do Ibirapuera es un ejemplo de complejo de parques de estilo movimiento moderno en São Paulo, Brasil. Su construcción data de 1954.',
+      'El Parque Ibirapuera es un complejo moderno de São Paulo con pabellones de Niemeyer y un gran césped.',
     fact:
-      'Pabellones de Niemeyer en un parque modernista.',
+      'Su edificio Oca y su marquesina se diseñaron para el 400.º aniversario de la ciudad, en 1954.',
   },
   'independence-palace': {
     name: 'Palacio de la Reunificación',
@@ -1102,9 +1102,9 @@ export const buildingProposalEs: Record<string, BuildingCopyEs> = {
     name: 'Misión jesuítica de La Santísima Trinidad de Paraná',
     city: 'Encarnación',
     blurb:
-      'Misión jesuítica de La Santísima Trinidad de Paraná es un ejemplo de misión de estilo colonial en Encarnación, Paraguay. Su construcción data de 1706.',
+      'La Santísima Trinidad es una misión jesuita en ruinas con una plaza central y una iglesia de piedra tallada en Paraguay.',
     fact:
-      'Ruinas de la misión jesuita.',
+      'Es Patrimonio de la Humanidad y una de las reducciones jesuitas mejor conservadas.',
   },
   'jewish-museum-berlin': {
     name: 'Museo Judío de Berlín',
@@ -1319,9 +1319,9 @@ export const buildingProposalEs: Record<string, BuildingCopyEs> = {
     name: 'Teatro Amazonas',
     city: 'Manaus',
     blurb:
-      'Teatro Amazonas es un ejemplo de ópera de estilo neorrenacentista en Manaus, Brasil. Su construcción data de 1896.',
+      'El Teatro Amazonas es una ópera neorrenacentista en Manaus, construida durante el auge del caucho.',
     fact:
-      'Ópera del auge del caucho en el Amazonas.',
+      'Su cúpula está cubierta con 36.000 tejas cerámicas con los colores de la bandera brasileña.',
   },
   'mandalay-palace': {
     name: 'Palacio de Mandalay',
@@ -1440,9 +1440,9 @@ export const buildingProposalEs: Record<string, BuildingCopyEs> = {
     name: 'Monte Albán',
     city: 'Oaxaca',
     blurb:
-      'Monte Albán es un ejemplo de ciudad de estilo zapoteco en Oaxaca, México. Sus orígenes se remontan a 500 a. C.',
+      'Monte Albán es una capital zapoteca en una cima aplanada sobre el valle de Oaxaca.',
     fact:
-      'Capital zapoteca sobre el valle.',
+      'Sus relieves de los Danzantes muestran cautivos derrotados y sacrificados.',
   },
   'monte-carlo-casino': {
     name: 'Casino de Montecarlo',
@@ -1569,9 +1569,9 @@ export const buildingProposalEs: Record<string, BuildingCopyEs> = {
     name: 'Obelisco de Buenos Aires',
     city: 'Buenos Aires',
     blurb:
-      'Obelisco de Buenos Aires es un ejemplo de monumento de estilo movimiento moderno en Buenos Aires, Argentina. Su construcción data de 1936.',
+      'El Obelisco de Buenos Aires es un monumento blanco de hormigón que marca la primera fundación de la ciudad.',
     fact:
-      'Obelisco blanco en la Avenida 9 de Julio.',
+      'Se construyó en 1936 en 31 días para el 400.º aniversario de la ciudad.',
   },
   'oculus': {
     name: 'Oculus',
@@ -1585,9 +1585,9 @@ export const buildingProposalEs: Record<string, BuildingCopyEs> = {
     name: 'La Habana Vieja',
     city: 'La Habana',
     blurb:
-      'La Habana Vieja es un ejemplo de ciudad histórica de estilo colonial en La Habana, Cuba. Sus orígenes se remontan a 1519.',
+      'La Habana Vieja es una ciudad portuaria colonial de plazas, iglesias barrocas y fortificaciones alrededor de una bahía protegida.',
     fact:
-      'Plazas coloniales y fortificaciones.',
+      'Es Patrimonio de la Humanidad y fue fundada en 1519.',
   },
   'old-parliament-house': {
     name: 'Old Parliament House',
@@ -1601,9 +1601,9 @@ export const buildingProposalEs: Record<string, BuildingCopyEs> = {
     name: 'Olinda',
     city: 'Olinda',
     blurb:
-      'Olinda es un ejemplo de ciudad histórica de estilo colonial en Olinda, Brasil. Sus orígenes se remontan a 1535.',
+      'Olinda es un pueblo colonial de casas coloridas e iglesias barrocas sobre la costa atlántica.',
     fact:
-      'Ciudad colonial en la ladera.',
+      'Su centro histórico es Patrimonio de la Humanidad.',
   },
   'ollantaytambo': {
     name: 'Ollantaytambo',
@@ -1649,9 +1649,9 @@ export const buildingProposalEs: Record<string, BuildingCopyEs> = {
     name: 'Ouro Preto',
     city: 'Ouro Preto',
     blurb:
-      'Ouro Preto es un ejemplo de ciudad histórica de estilo colonial en Ouro Preto, Brasil. Sus orígenes se remontan a 1700.',
+      'Ouro Preto es una ciudad barroca de la fiebre del oro en las colinas de Minas Gerais, con calles empinadas e iglesias blancas.',
     fact:
-      'Ciudad barroca de la fiebre del oro.',
+      'La fachada de esteatita de su Iglesia de San Francisco de Asís fue tallada por Aleijadinho.',
   },
   'palace-of-the-parliament': {
     name: 'Palacio del Parlamento Rumano',
@@ -1673,9 +1673,9 @@ export const buildingProposalEs: Record<string, BuildingCopyEs> = {
     name: 'Palacio de Planalto',
     city: 'Brasilia',
     blurb:
-      'Palacio de Planalto es un ejemplo de palacio de estilo movimiento moderno en Brasilia, Brasil. Su construcción data de 1960.',
+      'El Palacio de Planalto es la oficina del presidente de Brasil, un palacio moderno con columnata y estanque reflectante.',
     fact:
-      'Palacio de oficinas del presidente.',
+      'Su rampa de acceso lleva a una plaza ceremonial en la azotea.',
   },
   'palais-des-papes': {
     name: 'Palacio papal de Aviñón',
@@ -1706,17 +1706,17 @@ export const buildingProposalEs: Record<string, BuildingCopyEs> = {
     name: 'Panamá Viejo',
     city: 'Ciudad de Panamá',
     blurb:
-      'Panamá Viejo es un ejemplo de ciudad de estilo colonial en Ciudad de Panamá, Panamá. Sus orígenes se remontan a 1519.',
+      'Panamá Viejo es la primera ciudad europea en la costa del Pacífico, hoy en ruinas.',
     fact:
-      'Primera ciudad europea en el Pacífico.',
+      'Fue destruida por los piratas de Henry Morgan en 1671.',
   },
   'paramaribo-historic-inner-city': {
     name: 'Centro histórico de Paramaribo',
     city: 'Paramaribo',
     blurb:
-      'Centro histórico de Paramaribo es un ejemplo de ciudad histórica de estilo colonial en Paramaribo, Surinam. Sus orígenes se remontan a 1650.',
+      'El centro histórico de Paramaribo es una ciudad caribeña de edificios coloniales holandeses de madera y plazas con palmeras.',
     fact:
-      'Edificios coloniales holandeses de madera.',
+      'Es Patrimonio de la Humanidad.',
   },
   'pasargadae': {
     name: 'Pasargada',
@@ -1746,9 +1746,9 @@ export const buildingProposalEs: Record<string, BuildingCopyEs> = {
     name: 'Centro histórico de Salvador de Bahía',
     city: 'Salvador',
     blurb:
-      'Centro histórico de Salvador de Bahía es un ejemplo de distrito histórico de estilo colonial en Salvador, Brasil. Sus orígenes se remontan a 1600.',
+      'El Pelourinho es el centro histórico de Salvador, una cuadrícula de iglesias coloniales, casonas y plazas empedradas.',
     fact:
-      'Centro colonial de colores.',
+      'Es Patrimonio de la Humanidad y el corazón de la cultura afrobrasileña.',
   },
   'peter-and-paul-fortress': {
     name: 'Fortaleza de San Pedro y San Pablo',
@@ -1803,9 +1803,9 @@ export const buildingProposalEs: Record<string, BuildingCopyEs> = {
     name: 'Potosí',
     city: 'Potosí',
     blurb:
-      'Potosí es un ejemplo de ciudad minera de estilo colonial en Potosí, Bolivia. Sus orígenes se remontan a 1545.',
+      'Potosí es una ciudad minera colonial al pie del Cerro Rico, que fue el mayor productor de plata del mundo.',
     fact:
-      'Cerro de plata y casa de la moneda colonial.',
+      'Su Casa de la Moneda es uno de los edificios coloniales más grandes de Sudamérica.',
   },
   'prague-astronomical-clock': {
     name: 'Reloj astronómico de Praga',
@@ -1843,9 +1843,9 @@ export const buildingProposalEs: Record<string, BuildingCopyEs> = {
     name: 'Quito',
     city: 'Quito',
     blurb:
-      'Quito es un ejemplo de ciudad histórica de estilo colonial en Quito, Ecuador. Sus orígenes se remontan a 1534.',
+      'El centro histórico de Quito es una densa ciudad colonial andina de iglesias doradas, monasterios y callejones empinados.',
     fact:
-      'Capital colonial andina.',
+      'Fue uno de los primeros sitios inscritos como Patrimonio de la Humanidad, en 1978.',
   },
   'raffles-hotel': {
     name: 'Hotel Raffles',
@@ -1915,9 +1915,9 @@ export const buildingProposalEs: Record<string, BuildingCopyEs> = {
     name: 'Catedral de Río de Janeiro',
     city: 'Río de Janeiro',
     blurb:
-      'Catedral de Río de Janeiro es un ejemplo de catedral de estilo movimiento moderno en Río de Janeiro, Brasil. Su construcción data de 1979.',
+      'La Catedral de Río de Janeiro es una catedral cónica de hormigón con cuatro paneles de vidrieras que suben hacia un lucernario.',
     fact:
-      'Catedral cónica de hormigón.',
+      'Su campanario de 75 m y su nave cónica fueron diseñados por Edgar Fonseca.',
   },
   'robben-island': {
     name: 'Isla Robben',
@@ -2051,17 +2051,17 @@ export const buildingProposalEs: Record<string, BuildingCopyEs> = {
     name: 'Sitio Histórico Nacional de San Juan',
     city: 'San Juan',
     blurb:
-      'Sitio Histórico Nacional de San Juan es un ejemplo de fortificación de estilo colonial en San Juan, Puerto Rico. Su construcción data de 1540.',
+      'El Sitio Histórico Nacional de San Juan conserva El Morro, San Cristóbal y las murallas del Viejo San Juan.',
     fact:
-      'El Morro y las murallas de la ciudad.',
+      'Sus fortificaciones son Patrimonio de la Humanidad.',
   },
   'santo-domingo-cathedral': {
     name: 'Catedral primada de América',
     city: 'Santo Domingo',
     blurb:
-      'Catedral primada de América es un ejemplo de catedral de estilo gótico en Santo Domingo, República Dominicana. Su construcción data de 1512.',
+      'La Catedral de Santo Domingo es la primera catedral de América, un edificio gótico y renacentista en la ciudad colonial.',
     fact:
-      'Primera catedral de América.',
+      'Se inició en 1512 y se completó en la década de 1540.',
   },
   'sao-filipe-church': {
     name: 'Iglesia de São Filipe',
@@ -2148,17 +2148,17 @@ export const buildingProposalEs: Record<string, BuildingCopyEs> = {
     name: 'Teatro Solís',
     city: 'Montevideo',
     blurb:
-      'Teatro Solís es un ejemplo de teatro de estilo neoclásico en Montevideo, Uruguay. Su construcción data de 1856.',
+      'El Teatro Solís es el principal teatro de Montevideo, una sala neoclásica con interior dorado.',
     fact:
-      'Teatro principal de Montevideo.',
+      'Fue restaurado y reabierto en 2004.',
   },
   'st-george-s-cathedral': {
     name: 'Catedral de San Jorge',
     city: 'Georgetown',
     blurb:
-      'Catedral de San Jorge es un ejemplo de catedral de estilo neogótico en Georgetown, Guyana. Su construcción data de 1892.',
+      'La Catedral de San Jorge es una catedral de madera neogótica en Georgetown, Guyana.',
     fact:
-      'Una de las iglesias de madera más altas.',
+      'Es una de las iglesias de madera más altas del mundo, con unos 43 m.',
   },
   'st-isaac-s-cathedral': {
     name: 'Catedral de San Isaac',
@@ -2245,9 +2245,9 @@ export const buildingProposalEs: Record<string, BuildingCopyEs> = {
     name: 'Sucre',
     city: 'Sucre',
     blurb:
-      'Sucre es un ejemplo de ciudad histórica de estilo colonial en Sucre, Bolivia. Sus orígenes se remontan a 1538.',
+      'Sucre es la capital colonial blanca de Bolivia, con iglesias y conventos en un valle andino.',
     fact:
-      'Capital colonial blanca.',
+      'Es Patrimonio de la Humanidad y cuna de la independencia boliviana.',
   },
   'sukhothai': {
     name: 'Parque histórico de Sujotai',
@@ -2414,9 +2414,9 @@ export const buildingProposalEs: Record<string, BuildingCopyEs> = {
     city: 'Tiwanaku',
     yearNote: 'Fase formativa, hacia 300 a. C.',
     blurb:
-      'Tiahuanaco es un ejemplo de ciudad de estilo tiwanaku en Tiwanaku, Bolivia. Sus orígenes se remontan a 300 a. C.',
+      'Tiahuanaco es una ciudad ceremonial preincaica en el Altiplano, con puertas monolíticas y un templo hundido.',
     fact:
-      'Puerta del Sol y monolitos.',
+      'La Puerta del Sol está tallada en un solo bloque de andesita.',
   },
   'tiya': {
     name: 'Sitio arqueológico de las estelas grabadas de Tiya',
@@ -2462,9 +2462,9 @@ export const buildingProposalEs: Record<string, BuildingCopyEs> = {
     name: 'Tulum',
     city: 'Tulum',
     blurb:
-      'Tulum es un ejemplo de ciudad de estilo maya en Tulum, México. Sus orígenes se remontan a 1200.',
+      'Tulum es un puerto maya en un acantilado sobre el Caribe, con un centro ceremonial amurallado.',
     fact:
-      'Puerto maya sobre un acantilado.',
+      'Fue una de las pocas ciudades mayas construidas directamente en la costa.',
   },
   'turning-torso': {
     name: 'Turning Torso',
@@ -2510,9 +2510,9 @@ export const buildingProposalEs: Record<string, BuildingCopyEs> = {
     name: 'Uxmal',
     city: 'Uxmal',
     blurb:
-      'Uxmal es un ejemplo de ciudad de estilo maya en Uxmal, México. Sus orígenes se remontan a 700.',
+      'Uxmal es una ciudad maya de edificios de estilo Puuc con fachadas talladas y la Pirámide del Adivino.',
     fact:
-      'Ciudad maya de estilo Puuc.',
+      'Su Pirámide del Adivino tiene una base ovalada poco habitual.',
   },
   'valley-of-the-kings': {
     name: 'Valle de los Reyes',
@@ -2534,9 +2534,9 @@ export const buildingProposalEs: Record<string, BuildingCopyEs> = {
     name: 'Valparaíso',
     city: 'Valparaíso',
     blurb:
-      'Valparaíso es un ejemplo de ciudad histórica de estilo victoriano en Valparaíso, Chile. Sus orígenes se remontan a 1800.',
+      'Valparaíso es una ciudad portuaria de cerros empinados, funiculares y casas de colores sobre el Pacífico.',
     fact:
-      'Funiculares y color en las laderas.',
+      'Su barrio histórico es Patrimonio de la Humanidad.',
   },
   'victoria-memorial': {
     name: 'Victoria Memorial',
@@ -2566,9 +2566,9 @@ export const buildingProposalEs: Record<string, BuildingCopyEs> = {
     name: 'Villa de Leyva',
     city: 'Villa de Leyva',
     blurb:
-      'Villa de Leyva es un ejemplo de pueblo histórico de estilo colonial en Villa de Leyva, Colombia. Sus orígenes se remontan a 1572.',
+      'Villa de Leyva es un pueblo colonial de casas encaladas alrededor de una enorme plaza empedrada.',
     fact:
-      'Plaza colonial encalada.',
+      'Su plaza es una de las más grandes de América.',
   },
   'vilnius-old-town': {
     name: 'Centro histórico de Vilna',
@@ -2679,9 +2679,9 @@ export const buildingProposalEs: Record<string, BuildingCopyEs> = {
     name: 'Willemstad',
     city: 'Willemstad',
     blurb:
-      'Willemstad es un ejemplo de ciudad histórica de estilo colonial en Willemstad, Curazao. Sus orígenes se remontan a 1634.',
+      'Willemstad es un puerto caribeño con un frente marítimo pastel y un centro histórico dividido por un canal.',
     fact:
-      'Fachada pastel frente al puerto antiguo.',
+      'Su centro histórico es Patrimonio de la Humanidad.',
   },
   'windsor-castle': {
     name: 'Castillo de Windsor',

@@ -1,5 +1,13 @@
 import { buildingExtraEs } from './esExtra';
+import { buildingGlobalEs } from './esGlobal';
 import { buildingIconsEs } from './esIcons';
+import {
+  buildingLatamEs,
+  countriesEsLatam,
+  materialsEsLatam,
+  stylesEsLatam,
+  typesEsLatam,
+} from './esLatam';
 import {
   buildingProposalEs,
   countriesEsExtra,
@@ -111,6 +119,7 @@ export const countriesEs: Record<string, string> = {
   Tonga: 'Tonga',
   Bhutan: 'Bután',
   ...countriesEsExtra,
+  ...countriesEsLatam,
 };
 
 export const continentsEs: Record<string, string> = {
@@ -216,6 +225,7 @@ export const stylesEs: Record<string, string> = {
   Timurid: 'Timurí',
   Yemeni: 'Yemení',
   ...stylesEsExtra,
+  ...stylesEsLatam,
 };
 
 export const formFamiliesEs: Record<string, string> = {
@@ -300,6 +310,7 @@ export const typesEs: Record<string, string> = {
   Trilithon: 'Trilito',
   Obelisk: 'Obelisco',
   ...typesEsExtra,
+  ...typesEsLatam,
 };
 
 export const usesEs: Record<string, string> = {
@@ -366,6 +377,7 @@ export const materialsEs: Record<string, string> = {
   Cardboard: 'Cartón',
   Terracotta: 'Terracota',
   ...materialsEsExtra,
+  ...materialsEsLatam,
 };
 
 const buildingEsBase: Record<string, BuildingCopyEs> = {
@@ -981,4 +993,6 @@ export const buildingEs: Record<string, BuildingCopyEs> = {
   ...buildingExtraEs,
   ...buildingIconsEs,
   ...buildingProposalEs,
+  ...buildingLatamEs,
+  ...buildingGlobalEs,
 };
