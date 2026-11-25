@@ -4,7 +4,8 @@
 
 **Scope:** 225 new buildings. 155 cover Latin America and the Caribbean. 70 fill
 global gaps in countries, eras, styles and building types. The catalog grew from
-598 to **823** buildings.
+598 to **823** buildings with this batch. A one-off addition after the batch,
+Delos, brings the current total to **824**.
 
 ## Why this batch
 

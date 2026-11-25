@@ -1,6 +1,6 @@
 # Arqdle building catalog: comprehensive expansion proposal
 
-**Status:** implemented. All 338 candidates in this document were imported into the catalog. The game ships 823 buildings after the November 2026 Latin America and global gap expansion (see `docs/latin-america-expansion.md`). The blurbs and facts were rewritten from the editorial notes rather than copied from Wikipedia. The tables below remain as the research and provenance record.
+**Status:** implemented. All 338 candidates in this document were imported into the catalog. The game ships 824 buildings after the November 2026 Latin America and global gap expansion (see `docs/latin-america-expansion.md`). The blurbs and facts were rewritten from the editorial notes rather than copied from Wikipedia. The tables below remain as the research and provenance record.
 
 **Prepared:** 20 November 2026
 

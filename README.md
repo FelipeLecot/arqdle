@@ -139,7 +139,7 @@ public building list and comparison results only.
 
 ## How the daily answer works
 
-The game ships 823 buildings in `server/src/data/`. The English dataset is bundled
+The game ships 824 buildings in `server/src/data/`. The English dataset is bundled
 into the server only. Spanish display copy lives in `src/i18n/esData.ts`,
 `src/i18n/esExtra.ts`, `src/i18n/esIcons.ts`, `src/i18n/esProposal.ts`,
 `src/i18n/esLatam*.ts` and `src/i18n/esGlobal.ts`.

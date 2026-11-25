@@ -1039,4 +1039,13 @@ export const buildingExtraEs: Record<string, BuildingCopyEs> = {
     fact:
       'Es la sede de la Arquidiócesis Católica Romana de Asunción.',
   },
+  delos: {
+    name: 'Delos',
+    city: 'Delos',
+    yearNote: 'Santuario desarrollado hacia 400–300 a. C.',
+    blurb:
+      'Una pequeña isla del Egeo cubierta por las ruinas del santuario de Apolo y un puerto antiguo cosmopolita.',
+    fact:
+      'Es Patrimonio de la Humanidad y, según el mito, cuna de Apolo y Artemisa.',
+  },
 };

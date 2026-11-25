@@ -711,4 +711,26 @@ export const europeExtra: Building[] = [
     fact: 'A fire in 1993 destroyed much of the bridge and its painted panels; it was rebuilt.',
     wikiTitle: 'Kapellbrücke',
   },
+  {
+    id: 'delos',
+    name: 'Delos',
+    city: 'Delos',
+    country: 'Greece',
+    countryCode: 'GR',
+    continent: 'Europe',
+    year: -350,
+    yearNote: 'Sanctuary developed c. 400–300 BC',
+    style: 'Ancient Greek',
+    styleFamily: 'Ancient',
+    type: 'Sanctuary',
+    formFamily: 'Ceremonial',
+    use: 'Ceremonial',
+    materials: ['Marble', 'Stone', 'Limestone'],
+    architects: ['Unknown'],
+    blurb:
+      'A small Aegean island covered with the ruins of Apollo’s sanctuary and a cosmopolitan ancient port.',
+    fact:
+      'It is a UNESCO World Heritage Site and, in myth, the birthplace of Apollo and Artemis.',
+    wikiTitle: 'Delos',
+  },
 ];
