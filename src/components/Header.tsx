@@ -1,4 +1,5 @@
 import type { Me } from '../../shared/types';
+import { trackEvent } from '../analytics';
 import { useI18n } from '../i18n/I18nProvider';
 import { AccountMenu } from './AccountMenu';
 import { ArchMark, HelpIcon, StatsIcon } from './Icon';
@@ -33,7 +34,11 @@ export function Header({
           <button
             type="button"
             className="icon-button lang-button"
-            onClick={() => setLang(lang === 'en' ? 'es' : 'en')}
+            onClick={() => {
+              const next = lang === 'en' ? 'es' : 'en';
+              trackEvent('language_change', { language: next });
+              setLang(next);
+            }}
             aria-label={lang === 'en' ? t('switchToSpanish') : t('switchToEnglish')}
           >
             {lang === 'en' ? 'ES' : 'EN'}

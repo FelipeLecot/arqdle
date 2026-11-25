@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import type { Me } from '../../shared/types';
+import { trackEvent } from '../analytics';
 import { useI18n } from '../i18n/I18nProvider';
 
 interface AccountMenuProps {
@@ -70,7 +71,12 @@ export function AccountMenu({
   if (profile.kind === 'guest') {
     if (!auth.googleEnabled) return null;
     return (
-      <a className="account account--signin" href={auth.signInUrl} aria-label={t('signInWithGoogle')}>
+      <a
+        className="account account--signin"
+        href={auth.signInUrl}
+        aria-label={t('signInWithGoogle')}
+        onClick={() => trackEvent('sign_in_click')}
+      >
         <GoogleMark />
         <span>{t('signInWithGoogle')}</span>
       </a>
@@ -85,7 +91,12 @@ export function AccountMenu({
       <button
         type="button"
         className="account__trigger"
-        onClick={() => setOpen((value) => !value)}
+        onClick={() => {
+          setOpen((value) => {
+            if (!value) trackEvent('account_menu_open');
+            return !value;
+          });
+        }}
         aria-expanded={open}
         aria-haspopup="menu"
         aria-label={t('account')}
@@ -116,7 +127,10 @@ export function AccountMenu({
             className="account__item"
             role="menuitem"
             href={exportUrl}
-            onClick={() => setOpen(false)}
+            onClick={() => {
+              trackEvent('export_data_click');
+              setOpen(false);
+            }}
           >
             {t('exportData')}
           </a>
@@ -125,6 +139,7 @@ export function AccountMenu({
             className="account__item"
             role="menuitem"
             onClick={() => {
+              trackEvent('sign_out_click');
               setOpen(false);
               onSignOut();
             }}
@@ -136,6 +151,7 @@ export function AccountMenu({
             className="account__item account__item--danger"
             role="menuitem"
             onClick={() => {
+              trackEvent('delete_account_click');
               setOpen(false);
               onDeleteAccount();
             }}

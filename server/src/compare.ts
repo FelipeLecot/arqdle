@@ -64,6 +64,11 @@ export function materialFamily(material: string): string {
   return MATERIAL_FAMILIES[normalize(material)] ?? 'other';
 }
 
+/** A wrong guess that matches every clue, so the row looks like a win. */
+export function isNearMiss(cells: GuessCell[], correct: boolean): boolean {
+  return !correct && cells.every((cell) => cell.status === 'green');
+}
+
 export function formatYear(year: number): string {
   return year < 0 ? `${Math.abs(year)} BC` : String(year);
 }

@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import {
   ATTRIBUTE_KEYS,
 } from '../shared/types';
-import { compareBuilding, centuryDistance, formatYear, materialFamily } from '../server/src/compare';
+import { compareBuilding, centuryDistance, formatYear, isNearMiss, materialFamily } from '../server/src/compare';
 import { buildings, getBuilding } from '../server/src/data';
 
 function building(id: string) {
@@ -101,5 +101,12 @@ describe('building comparison', () => {
         expect(materialFamily(material), `${item.id}: ${material}`).not.toBe('other');
       }
     }
+  });
+
+  it('marks a wrong all-green guess as a near miss', () => {
+    const cells = compareBuilding(building('altun-ha'), building('caracol'));
+    expect(cells.every((cell) => cell.status === 'green')).toBe(true);
+    expect(isNearMiss(cells, false)).toBe(true);
+    expect(isNearMiss(cells, true)).toBe(false);
   });
 });

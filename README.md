@@ -1,8 +1,9 @@
 # Arqdle
 
-A Wordle-style daily architecture guessing game. Type a building name, pick it from
-the autocomplete list, and compare eight clues against the hidden building. Green is
-an exact match, yellow is close, and red is a miss. You get ten guesses.
+A Wordle-style daily architecture guessing game. Type a building name or an
+architect, pick it from the autocomplete list, and compare eight clues against the
+hidden building. Green is an exact match, yellow is close, and red is a miss. You
+get ten guesses.
 
 The interface and building copy are available in English and Spanish. Spanish is
 the default. Use the `ES` / `EN` button in the header, or open `?lang=en` for
@@ -185,6 +186,10 @@ treated as neighbouring centuries.
 The final guess reveals its eight clue tiles one by one. The answer panel opens after
 the row finishes, so the result is visible before the reveal.
 
+If every clue is green but the guess is not the hidden building, the row is marked
+**Close one!** and the game continues. This happens because the clue set can be
+identical for different buildings.
+
 Practice is unlimited, does not affect stats, and never picks today's daily answer.
 
 ## Stats
@@ -220,6 +225,41 @@ The reports cover daily win rates, guess popularity, attempt distributions and
 seven-day retention. No endpoint exposes emails, individual guesses, or a public
 analytics page.
 
+### GA4 events
+
+The client pushes custom events to the GTM data layer with
+`src/analytics.ts`. Tags and triggers for these events must be configured in the
+GTM container. No typed text, email address, or other personal data is sent.
+
+| Event | Key parameters |
+| --- | --- |
+| `guess_submit` | `mode`, `attempt`, `building_id` |
+| `guess_result` | `mode`, `attempt`, `building_id`, `correct`, `near_miss`, `status` |
+| `guess_error` | `mode`, `error_code` |
+| `guess_submit_invalid` | `mode`, `reason` |
+| `guess_type_start` | `mode` |
+| `guess_type_clear` | `mode` |
+| `guess_type_undo` | `mode` |
+| `guess_select` | `mode`, `building_id`, `method` |
+| `game_finish` | `mode`, `status`, `attempts` |
+| `language_change` | `language` |
+| `sign_in_click` | — |
+| `account_menu_open` | — |
+| `export_data_click` | — |
+| `sign_out_click` | — |
+| `delete_account_click` | — |
+| `stats_open` | — |
+| `help_open` | `source` |
+| `mode_change` | `mode` |
+| `new_practice_click` | `mode` |
+| `new_daily_click` | — |
+| `next_building_click` | `mode` |
+| `play_practice_click` | `mode` |
+| `share_click` | `mode` |
+| `result_link_click` | `link`, `mode` |
+
+`result_link_click` uses `link=wikipedia` or `link=commons`.
+
 ## API
 
 All API responses are JSON. Errors look like:
@@ -231,7 +271,9 @@ All API responses are JSON. Errors look like:
 ### Public
 
 - `GET /api/buildings` returns the autocomplete list: `id`, `name`, `hint`, `city`,
-  `country`, `countryCode`, and optional aliases. No attributes or answers.
+  `country`, `countryCode`, `architects`, and optional aliases. Architects are
+  included so the client can search by architect. No comparison cells or answers
+  are included.
 - `GET /api/health` returns server status, building count and database status.
 - `GET /robots.txt` and `GET /sitemap.xml`.
 - `GET /legal/terms` and `GET /legal/privacy` serve the Spanish legal pages.
@@ -291,6 +333,8 @@ src/                    React client
   components/           header, account menu, board, input, reveal, modals
   i18n/                 English/Spanish UI strings and Spanish building copy
   api.ts                API client
+  analytics.ts          GTM data-layer events
+  search.ts             autocomplete search and scoring
   storage.ts            old key rename and intro flag
   share.ts              emoji result text and clipboard
 server/src/             Express server

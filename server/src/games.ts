@@ -1,7 +1,7 @@
 import crypto from 'node:crypto';
 import type { GameView, GuessRecord } from '../../shared/types';
 import { toAnswer } from './answer';
-import { compareBuilding } from './compare';
+import { compareBuilding, isNearMiss } from './compare';
 import { config } from './config';
 import type { GameRow, GuessRow } from './db-types';
 import { getBuilding } from './data';
@@ -22,6 +22,7 @@ function guessRecords(rows: GuessRow[]): GuessRecord[] {
     name: row.building_name,
     cells: row.cells,
     correct: row.correct,
+    nearMiss: isNearMiss(row.cells, row.correct),
   }));
 }
 

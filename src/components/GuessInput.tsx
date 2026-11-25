@@ -1,17 +1,15 @@
 import { useEffect, useMemo, useRef, useState, type FormEvent, type KeyboardEvent } from 'react';
-import type { BuildingOption, GuessRecord } from '../../shared/types';
+import type { BuildingOption, GuessRecord, Mode } from '../../shared/types';
+import { trackEvent } from '../analytics';
 import { useI18n } from '../i18n/I18nProvider';
-import {
-  localizedAliases,
-  localizedBuildingName,
-  localizedCity,
-  localizedCountryName,
-} from '../i18n/display';
+import { localizedBuildingName } from '../i18n/display';
+import { normalize, optionHint, optionNames, scoreOption } from '../search';
 import { ArrowRightIcon } from './Icon';
 
 interface GuessInputProps {
   options: BuildingOption[];
   guesses: GuessRecord[];
+  mode: Mode;
   onSubmit: (buildingId: string) => Promise<boolean>;
   error: string | null;
   disabled?: boolean;
@@ -19,47 +17,10 @@ interface GuessInputProps {
   onOpenChange?: (open: boolean) => void;
 }
 
-function normalize(value: string): string {
-  return value
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/['’.,()]/g, '')
-    .replace(/-/g, ' ')
-    .replace(/\s+/g, ' ')
-    .toLowerCase()
-    .trim();
-}
-
-function optionNames(option: BuildingOption, lang: 'en' | 'es'): string[] {
-  return [
-    option.name,
-    localizedBuildingName(option.id, option.name, lang),
-    localizedBuildingName(option.id, option.name, 'es'),
-    ...(option.aliases ?? []),
-    ...localizedAliases(option.id, lang),
-    ...localizedAliases(option.id, 'es'),
-  ];
-}
-
-function optionHint(option: BuildingOption, lang: 'en' | 'es'): string {
-  if (!option.city || !option.country) return option.hint;
-  const city = localizedCity(option.id, option.city, lang);
-  const country = localizedCountryName(option.country, lang);
-  return city === country ? city : `${city}, ${country}`;
-}
-
-function scoreOption(option: BuildingOption, query: string, lang: 'en' | 'es'): number {
-  const names = optionNames(option, lang).map(normalize);
-  const hints = [optionHint(option, 'en'), optionHint(option, 'es')].map(normalize);
-  if (names.some((name) => name.startsWith(query))) return 0;
-  if (names.some((name) => name.includes(query))) return 1;
-  if (hints.some((hint) => hint.includes(query))) return 2;
-  return Number.POSITIVE_INFINITY;
-}
-
 export function GuessInput({
   options,
   guesses,
+  mode,
   onSubmit,
   error,
   disabled = false,
@@ -74,6 +35,8 @@ export function GuessInput({
   const [localError, setLocalError] = useState<string | null>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const typingRef = useRef(false);
+  const undoRef = useRef(false);
 
   const normalizedQuery = normalize(query);
   const results = useMemo(() => {
@@ -136,16 +99,40 @@ export function GuessInput({
     document.getElementById(`guess-option-${option.id}`)?.scrollIntoView({ block: 'nearest' });
   }, [activeIndex, open, results]);
 
-  function chooseOption(option: BuildingOption) {
+  function chooseOption(option: BuildingOption, method: 'click' | 'keyboard') {
+    trackEvent('guess_select', {
+      mode,
+      building_id: option.id,
+      method,
+    });
     setQuery(localizedBuildingName(option.id, option.name, lang));
     setSelectedId(option.id);
     setOpen(false);
     setActiveIndex(-1);
     setLocalError(null);
+    typingRef.current = false;
+    undoRef.current = false;
     inputRef.current?.focus();
   }
 
   function handleChange(value: string) {
+    if (!typingRef.current && value.trim()) {
+      typingRef.current = true;
+      trackEvent('guess_type_start', { mode });
+    } else if (typingRef.current && !value.trim()) {
+      typingRef.current = false;
+      trackEvent('guess_type_clear', { mode });
+    }
+    if (value.length > query.length) {
+      undoRef.current = false;
+    } else if (
+      value.length < query.length &&
+      value.trim() &&
+      !undoRef.current
+    ) {
+      undoRef.current = true;
+      trackEvent('guess_type_undo', { mode });
+    }
     setQuery(value);
     setSelectedId(null);
     setActiveIndex(-1);
@@ -173,10 +160,10 @@ export function GuessInput({
     if (event.key === 'Enter') {
       if (open && activeIndex >= 0 && results[activeIndex]) {
         event.preventDefault();
-        chooseOption(results[activeIndex]);
+        chooseOption(results[activeIndex], 'keyboard');
       } else if (!exactMatch && open && results[0]) {
         event.preventDefault();
-        chooseOption(results[0]);
+        chooseOption(results[0], 'keyboard');
       }
       return;
     }
@@ -200,10 +187,12 @@ export function GuessInput({
     if (!option) {
       setLocalError(t('chooseFromList'));
       setOpen(true);
+      trackEvent('guess_submit_invalid', { mode, reason: 'no_selection' });
       return;
     }
     if (guessedIds.has(option.id)) {
       setLocalError(t('alreadyGuessedError'));
+      trackEvent('guess_submit_invalid', { mode, reason: 'already_guessed' });
       return;
     }
 
@@ -214,6 +203,8 @@ export function GuessInput({
       setSelectedId(null);
       setOpen(false);
       setActiveIndex(-1);
+      typingRef.current = false;
+      undoRef.current = false;
     }
   }
 
@@ -274,7 +265,7 @@ export function GuessInput({
                     className={`suggestion${guessedIds.has(option.id) ? ' suggestion--used' : ''}`}
                     onMouseEnter={() => setActiveIndex(index)}
                     onMouseDown={(event) => event.preventDefault()}
-                    onClick={() => chooseOption(option)}
+                    onClick={() => chooseOption(option, 'click')}
                   >
                     <span className="suggestion__name">
                       {localizedBuildingName(option.id, option.name, lang)}

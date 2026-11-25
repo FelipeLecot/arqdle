@@ -87,6 +87,7 @@ app.get('/api/buildings', (_req, res) => {
     city: building.city,
     country: building.country,
     countryCode: building.countryCode,
+    architects: building.architects,
     aliases: building.aliases,
   }));
   res.json(options);

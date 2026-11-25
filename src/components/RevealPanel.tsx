@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import type { Answer, Mode } from '../../shared/types';
 import { flagEmoji, formatHeight } from '../format';
+import { trackEvent } from '../analytics';
 import { useI18n } from '../i18n/I18nProvider';
 import { localizedAnswerContent } from '../i18n/display';
 import { ArchMark, ArrowRightIcon, ShareIcon } from './Icon';
@@ -102,7 +103,14 @@ export function RevealPanel({
               {image.pageUrl ? (
                 <>
                   {' · '}
-                  <a href={image.pageUrl} target="_blank" rel="noreferrer">
+                  <a
+                    href={image.pageUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={() =>
+                      trackEvent('result_link_click', { link: 'commons', mode })
+                    }
+                  >
                     Wikimedia Commons
                   </a>
                 </>
@@ -167,15 +175,32 @@ export function RevealPanel({
               href={answer.wikiUrl}
               target="_blank"
               rel="noreferrer"
+              onClick={() =>
+                trackEvent('result_link_click', { link: 'wikipedia', mode })
+              }
             >
               {t('wikipedia')}
             </a>
             {mode === 'practice' ? (
-              <button type="button" className="button button--ghost" onClick={onNewPractice}>
+              <button
+                type="button"
+                className="button button--ghost"
+                onClick={() => {
+                  trackEvent('next_building_click', { mode });
+                  onNewPractice();
+                }}
+              >
                 {t('nextBuilding')} <ArrowRightIcon />
               </button>
             ) : (
-              <button type="button" className="button button--ghost" onClick={onPlayPractice}>
+              <button
+                type="button"
+                className="button button--ghost"
+                onClick={() => {
+                  trackEvent('play_practice_click', { mode });
+                  onPlayPractice();
+                }}
+              >
                 {t('playPractice')}
               </button>
             )}

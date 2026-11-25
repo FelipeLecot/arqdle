@@ -46,6 +46,8 @@ export interface GuessRecord {
   name: string;
   cells: GuessCell[];
   correct: boolean;
+  /** All clues matched, but the building is not the hidden answer. */
+  nearMiss?: boolean;
 }
 
 export interface AnswerImage {
@@ -85,6 +87,7 @@ export interface BuildingOption {
   city: string;
   country: string;
   countryCode: string;
+  architects?: string[];
   aliases?: string[];
 }
 

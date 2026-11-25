@@ -61,9 +61,12 @@ export function GuessBoard({ guesses }: GuessBoardProps) {
                 <span className="guess-name__index" aria-hidden="true">
                   {rowIndex + 1}
                 </span>
-                <span className="guess-name__text">
+                <div className="guess-name__text">
                   {localizedBuildingName(guess.id, guess.name, lang)}
-                </span>
+                  {guess.nearMiss && (
+                    <span className="guess-name__near-miss">{t('nearMiss')}</span>
+                  )}
+                </div>
               </div>
               <div className="guess-cells">
                 {guess.cells.map((cell, cellIndex) => {

@@ -53,7 +53,7 @@ const en = {
   older: 'older',
   newer: 'newer',
   guessInputLabel: 'Guess a building',
-  placeholder: 'Type a building name…',
+  placeholder: 'Type a building or architect…',
   loadingBuildings: 'Loading buildings…',
   guessButton: 'Guess',
   checking: 'Checking…',
@@ -65,6 +65,9 @@ const en = {
   suggestionsLabel: 'Building suggestions',
   solvedOne: 'Solved in 1 guess',
   solvedMany: 'Solved in {count} guesses',
+  nearMiss: 'Close one!',
+  nearMissHint:
+    'Close one! Every clue matches, but that is not the hidden building. Try a building with the same clues.',
   outOfGuesses: 'Out of guesses',
   theBuildingWas: 'The building was {name}',
   photo: 'Photo',
@@ -84,7 +87,7 @@ const en = {
   newDailyReady: 'New daily ready.',
   loadNewDaily: 'Load new daily',
   howToIntro:
-    'Guess the hidden building in ten tries. Type a name, choose it from the list, and compare eight clues.',
+    'Guess the hidden building in ten tries. Type a building name or an architect, choose a result from the list, and compare eight clues.',
   exampleResult: 'Example result row',
   ruleGreen: 'Green means an exact match.',
   ruleYellow:
@@ -186,7 +189,7 @@ const es: Record<TranslationKey, string> = {
   older: 'más antiguo',
   newer: 'más reciente',
   guessInputLabel: 'Adivina un edificio',
-  placeholder: 'Escribe el nombre de un edificio…',
+  placeholder: 'Escribe un edificio o arquitecto…',
   loadingBuildings: 'Cargando edificios…',
   guessButton: 'Adivinar',
   checking: 'Comprobando…',
@@ -198,6 +201,9 @@ const es: Record<TranslationKey, string> = {
   suggestionsLabel: 'Sugerencias de edificios',
   solvedOne: 'Resuelto en 1 intento',
   solvedMany: 'Resuelto en {count} intentos',
+  nearMiss: '¡Casi!',
+  nearMissHint:
+    '¡Casi! Todas las pistas coinciden, pero ese no es el edificio oculto. Prueba con un edificio con las mismas pistas.',
   outOfGuesses: 'Sin intentos',
   theBuildingWas: 'El edificio era {name}',
   photo: 'Foto',
@@ -217,7 +223,7 @@ const es: Record<TranslationKey, string> = {
   newDailyReady: 'Nuevo diario disponible.',
   loadNewDaily: 'Cargar nuevo diario',
   howToIntro:
-    'Adivina el edificio oculto en diez intentos. Escribe un nombre, elígelo de la lista y compara ocho pistas.',
+    'Adivina el edificio oculto en diez intentos. Escribe un edificio o un arquitecto, elige un resultado de la lista y compara ocho pistas.',
   exampleResult: 'Ejemplo de resultado',
   ruleGreen: 'Verde significa coincidencia exacta.',
   ruleYellow:

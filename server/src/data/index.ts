@@ -75,7 +75,12 @@ export function getBuildingByName(name: string): Building | undefined {
 }
 
 export function searchableNames(building: Building): string {
-  return [building.name, ...(building.aliases ?? []), building.city, building.country]
+  return [
+    building.name,
+    ...(building.aliases ?? []),
+    building.city,
+    ...building.architects.filter((name) => name.toLowerCase() !== 'unknown'),
+  ]
     .join(' ')
     .toLowerCase();
 }

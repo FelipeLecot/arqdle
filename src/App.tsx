@@ -18,6 +18,7 @@ import {
   signOut,
   submitGameGuess,
 } from './api';
+import { trackEvent } from './analytics';
 import { GuessBoard } from './components/GuessBoard';
 import { GuessInput } from './components/GuessInput';
 import { Header } from './components/Header';
@@ -147,12 +148,35 @@ function useGame(mode: Mode, enabled: boolean): GameController {
 
       const gameId = game.id;
       apply({ ...current, submitting: true, submitError: null });
+      trackEvent('guess_submit', {
+        mode,
+        attempt: game.guesses.length + 1,
+        building_id: buildingId,
+      });
 
       try {
         const updated = await submitGameGuess(gameId, buildingId);
         const latest = stateRef.current;
         if (latest.game?.id !== gameId) return false;
         const finished = updated.status !== 'playing' && Boolean(updated.answer);
+        const lastGuess = updated.guesses.at(-1);
+        if (lastGuess) {
+          trackEvent('guess_result', {
+            mode,
+            attempt: updated.guesses.length,
+            building_id: lastGuess.id,
+            correct: lastGuess.correct,
+            near_miss: Boolean(lastGuess.nearMiss),
+            status: updated.status,
+          });
+        }
+        if (finished) {
+          trackEvent('game_finish', {
+            mode,
+            status: updated.status,
+            attempts: updated.guesses.length,
+          });
+        }
         clearRevealTimer();
         if (finished) prefetchAnswerImage(updated);
         apply({
@@ -183,6 +207,10 @@ function useGame(mode: Mode, enabled: boolean): GameController {
       } catch (error) {
         const latest = stateRef.current;
         if (latest.game?.id !== gameId) return false;
+        trackEvent('guess_error', {
+          mode,
+          error_code: error instanceof ApiError ? error.code : 'network',
+        });
 
         if (
           error instanceof ApiError &&
@@ -200,7 +228,7 @@ function useGame(mode: Mode, enabled: boolean): GameController {
         return false;
       }
     },
-    [apply, clearRevealTimer, lang, load, t],
+    [apply, clearRevealTimer, lang, load, mode, t],
   );
 
   const retry = useCallback(() => {
@@ -328,6 +356,7 @@ export function App() {
     if (!readyForIntro || hasSeenIntro()) return;
     setHelpOpen(true);
     markIntroSeen();
+    trackEvent('help_open', { source: 'auto' });
   }, [readyForIntro]);
 
   useEffect(() => {
@@ -358,23 +387,32 @@ export function App() {
 
   const handleModeChange = (nextMode: Mode) => {
     if (nextMode === mode) return;
+    trackEvent('mode_change', { mode: nextMode });
     setMode(nextMode);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleNewPractice = () => {
+    trackEvent('new_practice_click', { mode: 'practice' });
     practice.startNew();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleNewDaily = () => {
+    trackEvent('new_daily_click');
     daily.retry();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleHelp = () => {
+    trackEvent('help_open', { source: 'header' });
     markIntroSeen();
     setHelpOpen(true);
+  };
+
+  const handleStats = () => {
+    trackEvent('stats_open');
+    setStatsOpen(true);
   };
 
   const handleSignOut = async () => {
@@ -399,6 +437,7 @@ export function App() {
   const handleShare = async () => {
     const current = game.state.game;
     if (!current?.answer) return;
+    trackEvent('share_click', { mode });
     const text = buildShareText(
       {
         mode,
@@ -470,11 +509,18 @@ export function App() {
 
         <GuessBoard guesses={view.guesses} />
 
+        {view.status === 'playing' && view.guesses.at(-1)?.nearMiss && (
+          <p className="near-miss-note" role="status">
+            {t('nearMissHint')}
+          </p>
+        )}
+
         {view.status === 'playing' ? (
           <GuessInput
             key={mode}
             options={options}
             guesses={view.guesses}
+            mode={mode}
             onSubmit={game.submit}
             error={optionsError ?? current.submitError}
             submitting={current.submitting}
@@ -514,7 +560,7 @@ export function App() {
     <div className="app">
       <Header
         onHelp={handleHelp}
-        onStats={() => setStatsOpen(true)}
+        onStats={handleStats}
         me={me}
         onSignOut={handleSignOut}
         onDeleteAccount={handleDeleteAccount}
